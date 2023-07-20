@@ -1,0 +1,51 @@
+.wrapper {
+	display: flex;
+	align-items: flex-end;
+	column-gap: 1rem;
+	width: 100%;
+
+	.message {
+		padding: 1rem;
+		max-width: 25rem;
+		border-radius: 5px;
+
+		background-color: var(--colors-ui-secondary);
+		color: var(--colors-text);
+		word-break: break-all;
+
+		position: relative;
+
+		&::before {
+			content: '';
+			height: 1.4rem;
+			width: 1.4rem;
+
+			border: 0.7rem solid transparent;
+			border-bottom: 0.7rem solid var(--colors-ui-secondary);
+
+			position: absolute;
+			left: -0.7rem;
+			bottom: 0;
+		}
+	}
+
+	.time {
+		font-size: var(--text-size-sm);
+		color: var(--colors-text-extra);
+	}
+}
+
+.iSender {
+	flex-direction: row-reverse;
+
+	.message {
+		align-self: flex-end;
+		background-color: var(--colors-bg);
+
+		&::before {
+			border-bottom: 0.7rem solid var(--colors-bg);
+			right: -0.7rem;
+			left: auto;
+		}
+	}
+}

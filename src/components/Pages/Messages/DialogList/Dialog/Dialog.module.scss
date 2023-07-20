@@ -1,0 +1,47 @@
+.dialog {
+	list-style-type: none;
+	position: relative;
+	transition: 0.5s;
+
+	&:hover {
+		background-color: var(--colors-item-hover);
+	}
+
+	.link {
+		display: flex;
+		align-items: center;
+		column-gap: 1rem;
+		padding: 0.7rem 1.5rem;
+		position: relative;
+
+		font-size: var(--text-size-sm);
+
+		.textBlock {
+			width: 100%;
+
+			.topLine {
+				display: flex;
+				justify-content: space-between;
+
+				.name {
+					font-weight: var(--text-weight-md);
+					margin-bottom: 0.5rem;
+				}
+
+				.date {}
+			}
+
+			.lastMessage {
+				max-width: 10.3rem;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
+		}
+	}
+
+	.activeLink {
+		color: #fff;
+		background-color: var(--colors-ui-main);
+	}
+}

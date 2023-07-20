@@ -1,0 +1,37 @@
+.wrapper {
+	height: calc(100vh - 7rem);
+	display: flex;
+	flex-direction: column;
+
+	.header {
+		display: flex;
+		justify-content: flex-end;
+		align-items: center;
+		column-gap: 2.5rem;
+
+		padding: 1rem 2rem;
+		border-bottom: var(--border);
+
+		.name {
+			font-size: var(--text-size-md);
+			font-weight: var(--text-weight-normal);
+		}
+
+		.menuIcon {
+			width: 1.5rem;
+			height: 1.5rem;
+			cursor: pointer;
+			transition: 0.3s;
+			color: var(--colors-ui-main);
+
+			&:hover {
+				opacity: 0.5;
+			}
+		}
+	}
+
+	.formWrapper {
+		border-top: var(--border);
+		padding: 2rem 0;
+	}
+}

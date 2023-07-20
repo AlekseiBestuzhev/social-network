@@ -1,0 +1,23 @@
+.wrapper {
+	width: 100%;
+
+
+	.title {
+		margin-bottom: 0.5rem;
+	}
+
+	.status {
+		width: 100%;
+		padding: 0.5rem;
+		border-radius: 0.5rem;
+
+		background-color: transparent;
+		color: var(--colors-text);
+		border: var(--border-2);
+		outline: none;
+
+		&:focus {
+			border-color: var(--colors-ui-main);
+		}
+	}
+}

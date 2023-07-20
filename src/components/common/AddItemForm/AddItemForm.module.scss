@@ -1,0 +1,47 @@
+.wrapper {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	column-gap: 2rem;
+
+	padding: 0 2rem;
+	width: 100%;
+
+	position: relative;
+
+	.textarea {
+		flex: 1 1 25rem;
+		border: none;
+		outline: none;
+		resize: none;
+		min-height: 2rem;
+		font-size: var(--text-size-normal);
+		color: var(--colors-text);
+		background-color: var(--colors-bg-extra);
+		border-bottom: 1px solid var(--colors-ui-main);
+
+		&::placeholder {
+			color: var(--colors-text);
+		}
+
+		&::-webkit-scrollbar {
+			width: 7px;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			border-radius: 3.5px;
+			background: #d9d9d9;
+		}
+
+		&::-webkit-scrollbar-thumb:hover {
+			background: #bcbcbc;
+		}
+
+	}
+
+	.errorMessage {
+		&::placeholder {
+			color: rgb(234, 58, 58);
+		}
+	}
+}

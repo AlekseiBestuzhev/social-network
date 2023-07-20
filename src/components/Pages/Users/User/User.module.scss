@@ -1,0 +1,42 @@
+.body {
+	display: flex;
+	column-gap: 4rem;
+	padding: 1.25rem 1.875rem;
+	list-style-type: none;
+	border-bottom: var(--border);
+
+	.imgBtn {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		row-gap: 0.5rem;
+	}
+
+	.info {
+		flex-grow: 1;
+		display: flex;
+		justify-content: space-between;
+
+		.nameStatus {
+			display: flex;
+			flex-direction: column;
+
+			.name {
+				color: var(--colors-text);
+				font-size: var(--text-size-large);
+				font-weight: var(--text-weight-md);
+			}
+
+			.status {
+				padding-top: 1rem;
+			}
+		}
+
+		.location {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-end;
+			justify-content: flex-end;
+		}
+	}
+}

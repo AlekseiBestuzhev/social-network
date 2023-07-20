@@ -1,0 +1,52 @@
+.sidebar {
+	position: fixed;
+	top: 6rem;
+
+	@media (max-width: 750px) {
+		position: fixed;
+		top: 0;
+		bottom: 0;
+		width: 100vw;
+		left: -100%;
+		z-index: 50;
+	}
+
+	ul {
+		padding-left: 0;
+
+		li {
+			color: var(--colors-text);
+			list-style-type: none;
+			transition: 0.5s;
+
+			&:hover {
+				border-radius: 0.4rem;
+				background-color: var(--colors-item-hover);
+			}
+
+			.link {
+				display: flex;
+				align-items: center;
+				column-gap: 0.5rem;
+				padding: 0.8rem 1rem;
+				position: relative;
+				text-decoration: none;
+			}
+
+			.activeLink {
+				color: var(--colors-ui-main);
+			}
+		}
+	}
+}
+
+.mobileMenu {
+	left: 0;
+	display: grid;
+	place-items: center;
+
+	nav {
+		width: 50%;
+		padding-left: 30px;
+	}
+}

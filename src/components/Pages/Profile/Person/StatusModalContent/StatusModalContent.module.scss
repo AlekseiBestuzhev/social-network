@@ -1,0 +1,12 @@
+.wrapper {
+	padding: 3rem;
+	width: 30rem;
+
+	display: flex;
+	flex-direction: column;
+	row-gap: 1rem;
+
+	&:last-child {
+		align-items: flex-end;
+	}
+}

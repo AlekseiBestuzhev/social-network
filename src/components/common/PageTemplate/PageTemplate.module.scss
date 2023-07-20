@@ -1,0 +1,15 @@
+.container {
+	padding: 4rem 6rem;
+
+	.pageTitle {
+		padding: 0 0 2rem 0;
+		font-size: var(--text-size-large);
+		font-weight: var(--text-weight-md);
+		letter-spacing: var(--text-letter-spacing);
+	}
+
+	.content {
+		// for loading position
+		position: relative;
+	}
+}

@@ -1,0 +1,20 @@
+.header {
+	display: flex;
+	justify-content: space-between;
+	gap: 5rem;
+
+	.photoBlock {
+		width: 15rem;
+		height: 15rem;
+		background-color: var(--colors-bg);
+	}
+
+	.rightColumn {
+		flex: 0 1 18rem;
+	}
+}
+
+.footer {
+	display: flex;
+	justify-content: flex-end;
+}

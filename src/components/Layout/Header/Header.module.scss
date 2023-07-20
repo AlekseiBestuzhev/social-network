@@ -1,0 +1,40 @@
+.header {
+	height: 4rem;
+	background-color: var(--colors-bg-extra);
+	box-shadow: var(--shadow);
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	z-index: 100;
+
+	.wrapper {
+		padding: 0 1rem 0 2rem;
+		height: 100%;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin: 0 auto;
+		max-width: 67rem;
+
+		>img {
+			height: 1.5rem;
+		}
+
+		a {
+			color: var(--colors-text);
+
+			.userInfo {
+				display: flex;
+				align-items: center;
+				column-gap: 0.625rem;
+
+				img {
+					height: 2.5rem;
+					width: 2.5rem;
+					border-radius: 50%;
+				}
+			}
+		}
+	}
+}

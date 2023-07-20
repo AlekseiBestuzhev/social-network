@@ -2,7 +2,7 @@ import { getUsersThunkCreator, setFollowingThunkCreator } from "@/redux/users/us
 import { UserType, setCurrentPage } from "@/redux/users/users-reducer";
 import { withAuthRedirect } from "@/hoc/withAuthRedirect";
 import { Users } from "@/components/Pages/Users/Users";
-import { AppStateType } from "@/redux/redux-store";
+import { AppRootStateType } from "@/app/store.ts";
 import { Component, ComponentType } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -44,7 +44,7 @@ export type UsersType = MapStateToPropsType & {
 	onPageChange: (newPage: number) => void
 };
 
-const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
+const mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
 	return {
 		users: state.usersPage.users,
 		pageSize: state.usersPage.pageSize,

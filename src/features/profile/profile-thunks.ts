@@ -1,19 +1,19 @@
-import { followAPI, profileAPI } from "@/api/api";
-import { AppDispatch, AppThunk } from "@/redux/redux-store";
+import { followAPI, profileAPI } from "@/api/api.ts";
 import {
 	setStatus,
 	setUserProfile,
 	followOnProfile,
 	unfollowOnProfile,
 	setFollowingInProgressOnProfile
-} from "@/redux/profile/profile-reducer";
+} from "@/features/profile/profile-reducer.ts";
+import {AppDispatchType} from "@/app/hooks.ts";
 
-export const setUserProfileThunkCreator = (id: number): AppThunk => async (dispatch: AppDispatch) => {
+export const setUserProfileThunkCreator = (id: number) => async (dispatch: AppDispatchType) => {
 	const response = await profileAPI.setProfile(id);
 	dispatch(setUserProfile(response));
 }
 
-export const getFollowingOnProfileThunkCreator = (id: number): AppThunk => async (dispatch: AppDispatch) => {
+export const getFollowingOnProfileThunkCreator = (id: number) => async (dispatch: AppDispatchType) => {
 	dispatch(setFollowingInProgressOnProfile(true));
 	const result = await followAPI.getFollowingStatus(id);
 	result
@@ -22,7 +22,7 @@ export const getFollowingOnProfileThunkCreator = (id: number): AppThunk => async
 	dispatch(setFollowingInProgressOnProfile(false));
 }
 
-export const switchFollowingOnProfileThunkCreator = (id: number, followed: boolean): AppThunk => async (dispatch: AppDispatch) => {
+export const switchFollowingOnProfileThunkCreator = (id: number, followed: boolean) => async (dispatch: AppDispatchType) => {
 	dispatch(setFollowingInProgressOnProfile(true));
 	const result = await followAPI.swichFollow(id, followed)
 	if (result === 0) {
@@ -33,12 +33,12 @@ export const switchFollowingOnProfileThunkCreator = (id: number, followed: boole
 	dispatch(setFollowingInProgressOnProfile(false));
 }
 
-export const getUserStatusThunkCreator = (id: number): AppThunk => async (dispatch: AppDispatch) => {
+export const getUserStatusThunkCreator = (id: number) => async (dispatch: AppDispatchType) => {
 	const result = await profileAPI.getUserStatus(id);
 	dispatch(setStatus(result));
 }
 
-export const updateMyStatusThunkCreator = (status: string): AppThunk => async (dispatch: AppDispatch) => {
+export const updateMyStatusThunkCreator = (status: string) => async (dispatch: AppDispatchType) => {
 	const result = await profileAPI.updateMyStatus(status)
 	if (result === 0) {
 		dispatch(setStatus(status));

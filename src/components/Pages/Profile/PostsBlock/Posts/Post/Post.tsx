@@ -1,5 +1,5 @@
 import cls from '@/components/Pages/Profile/PostsBlock/Posts/Post/Post.module.scss';
-import { removeLike, setLike } from '@/redux/profile/profile-reducer';
+import { removeLike, setLike } from '@/features/profile/profile-reducer.ts';
 import { Avatar } from '@/components/common/Avatar/Avatar';
 import { RiHeart3Line } from 'react-icons/ri';
 import { RiHeart3Fill } from 'react-icons/ri';

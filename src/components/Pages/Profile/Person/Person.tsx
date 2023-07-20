@@ -7,83 +7,65 @@ import { Avatar } from '@/components/common/Avatar/Avatar';
 import profileBcg from '@/assets/images/profile-bcg.jpeg';
 import { Modal } from '@/components/common/Modal/Modal';
 import classNames from 'classnames';
-import { Component } from 'react';
+import {FC, ReactNode, useState} from "react";
 
-type PersonPropsType = Pick<ProfilePropsType, 'profile' | 'isMe' | 'status'>;
+type PersonPropsType = Pick<ProfilePropsType, 'profile' | 'isMe' | 'status'> & {
+	children: ReactNode
+};
 
-type StateType = {
-	photoOpen: boolean,
-	statusEditMode: boolean
-}
+export const Person: FC<PersonPropsType> = (props) => {
 
-export class Person extends Component<PersonPropsType, StateType> {
+	const [photoIsOpen, setPhotoIsOpen] = useState(false);
+	const [statusEditMode, setStatusEditMode] = useState(false);
 
-	constructor(props: PersonPropsType) {
-		super(props);
-		this.state = {
-			photoOpen: false,
-			statusEditMode: false
-		};
+	const openPhotoModal = () => {
+		setPhotoIsOpen(true);
 	}
 
-	openPhotoModal = () => {
-		this.setState({
-			photoOpen: true
-		})
+	const closePhotoModal = () => {
+		setPhotoIsOpen(false);
 	}
 
-	closePhotoModal = () => {
-		this.setState({
-			photoOpen: false
-		})
+	const openStatusModal = () => {
+		setStatusEditMode(true);
 	}
 
-	openStatusModal = () => {
-		if (this.props.isMe) {
-			this.setState({
-				statusEditMode: true
-			})
-		}
+	const closeStatusModal = () => {
+		setStatusEditMode(false);
 	}
 
-	closeStatusModal = () => {
-		this.setState({
-			statusEditMode: false
-		})
-	}
-
-	render() {
-
-		const userName = this.props.profile.fullName;
-		const photo = this.props.profile.photos.large;
+		const userName = props.profile.fullName;
+		const photo = props.profile.photos.large;
 
 		const statusStyles = classNames(cls.status, {
-			[cls.pointer]: this.props.isMe
+			[cls.pointer]: props.isMe
 		})
 
 		return (
 			<section>
 				<img className={cls.header}
-					src={this.props.isMe ? profileBcg : anotherUserBcg}
+					src={props.isMe ? profileBcg : anotherUserBcg}
 					alt={'Stars'}
 				/>
 				<div className={cls.person}>
 					<div className={cls.info}>
-						<Avatar size='12.5rem' photo={photo} border onClick={this.openPhotoModal} />
+						<Avatar size='12.5rem' photo={photo} border onClick={openPhotoModal} />
 						{
-							photo && <Modal onClose={this.closePhotoModal} opened={this.state.photoOpen}>
+							photo && <Modal onClose={closePhotoModal} opened={photoIsOpen}>
 								<AvatarModalContent photo={photo} name={userName} />
 							</Modal>
 						}
-						<Modal onClose={this.closeStatusModal} opened={this.state.statusEditMode}>
-							<StatusModalContent onClose={this.closeStatusModal} />
+						{
+						props.isMe && <Modal onClose={closeStatusModal} opened={statusEditMode}>
+							<StatusModalContent onClose={closeStatusModal} />
 						</Modal>
+						}
 						<div className={cls.about}>
-							<p className={statusStyles} onClick={this.openStatusModal}>
+							<p className={statusStyles} onClick={openStatusModal}>
 								{
-									this.props.status
-										? this.props.status
-										: this.props.isMe
+									props.status
+										? props.status
+										: props.isMe
 											? 'Enter status...'
 											: ''
 								}
@@ -91,9 +73,8 @@ export class Person extends Component<PersonPropsType, StateType> {
 							<h2 className={cls.name}>{userName}</h2>
 						</div>
 					</div>
-					{this.props.children}
+					{props.children}
 				</div>
 			</section>
 		);
 	}
-}

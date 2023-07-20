@@ -3,7 +3,7 @@ import { LastMessageType, Messages } from "@/components/Pages/Messages/Messages"
 import { WithRouterType } from "@/components/Pages/Profile/ProfileContainer";
 import { withAuthRedirect } from "@/hoc/withAuthRedirect";
 import { Component, ComponentType } from "react";
-import { AppStateType } from "@/redux/redux-store";
+import { AppRootStateType } from "@/app/store.ts";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -86,7 +86,7 @@ type MDTPtype = {
 	setCurrentDialog: (userID: string) => void
 }
 
-const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
+const mapStateToProps = (state: AppRootStateType): MapStateToPropsType => ({
 	messagesData: state.messagesPage.messagesData,
 	dialogsData: state.messagesPage.dialogsData,
 	currentDialog: state.messagesPage.currentDialog

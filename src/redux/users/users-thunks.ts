@@ -1,4 +1,4 @@
-import { AppDispatch, AppThunk } from '@/redux/redux-store';
+import { AppDispatch, AppThunk } from '@/app/store.ts';
 import { followAPI, usersAPI } from '@/api/api';
 import {
 	follow,

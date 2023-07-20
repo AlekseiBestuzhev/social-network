@@ -1,7 +1,7 @@
 import defaultAvatarDark from '@/assets/images/default-avatar-dark.svg';
 import defaultAvatar from '@/assets/images/default-avatar.svg';
 import { ThemeType } from '@/redux/theme/theme-reducer';
-import { AppStateType } from '@/redux/redux-store';
+import { AppRootStateType } from '@/app/store.ts';
 import { CSSProperties, Component, memo } from 'react';
 import { connect } from 'react-redux';
 
@@ -46,7 +46,7 @@ class ThemedImage extends Component<ThemedImageProps> {
 	}
 }
 
-const mapStateToProps = (state: AppStateType): ThemeType => ({
+const mapStateToProps = (state: AppRootStateType): ThemeType => ({
 	current: state.theme.current
 });
 

@@ -7,7 +7,7 @@ import {
 	setLike,
 	removeLike,
 	setStatus
-} from "@/redux/profile/profile-reducer";
+} from "@/features/profile/profile-reducer.ts";
 
 let initialState: ProfilePageType;
 

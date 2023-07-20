@@ -1,0 +1,11 @@
+import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
+import {ActionsTypes} from "@/redux/action-creators-types.ts";
+import {AppRootStateType} from "@/app/store.ts";
+import {ThunkDispatch} from "redux-thunk";
+
+
+//type AppActionsType = ListsActionTypes | TasksActionTypes | AppReducerActionTypes | AuthActionsType;
+export type AppDispatchType = ThunkDispatch<AppRootStateType, any, ActionsTypes>;
+
+export const useAppSelector: TypedUseSelectorHook<AppRootStateType> = useSelector;
+export const useAppDispatch = () => useDispatch<AppDispatchType>();

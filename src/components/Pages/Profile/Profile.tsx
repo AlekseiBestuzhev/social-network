@@ -1,7 +1,7 @@
 import { PostsBlock } from "@/components/Pages/Profile/PostsBlock/PostsBlock";
 import { Controls } from "@/components/Pages/Profile/Controls/Controls";
 import { Person } from "@/components/Pages/Profile/Person/Person";
-import { UserProfileType } from '@/redux/profile/profile-reducer';
+import { UserProfileType } from '@/features/profile/profile-reducer.ts';
 import { FC, memo } from 'react';
 
 export type ProfilePropsType = {

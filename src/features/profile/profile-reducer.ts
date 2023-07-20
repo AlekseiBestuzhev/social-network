@@ -1,9 +1,11 @@
-import { PostType } from '@/components/Pages/Profile/PostsBlock/Posts/Post/Post';
-import { ActionsTypes } from '@/redux/action-creators-types';
-import { UserPhotosType } from '@/redux/users/users-reducer';
+import { PostType } from '@/components/Pages/Profile/PostsBlock/Posts/Post/Post.tsx';
+import { ActionsTypes } from '@/redux/action-creators-types.ts';
+import { UserPhotosType } from '@/redux/users/users-reducer.ts';
 import badman from '@/assets/images/localUsers/bad-man.jpg';
 import john from '@/assets/images/localUsers/john-doe.jpg';
 import { v1 } from 'uuid';
+
+//_____ types
 
 export type UserProfileType = {
 	aboutMe: string,

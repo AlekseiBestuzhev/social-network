@@ -1,6 +1,6 @@
 import { updateMessageTextAC, addMessageAC } from "@/redux/messages/messages-reducer";
 import { AddItemForm } from "@/components/common/AddItemForm/AddItemForm";
-import { AppStateType } from "@/redux/redux-store";
+import { AppRootStateType } from "@/app/store.ts";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 
@@ -15,7 +15,7 @@ type MapDispatchToPropsType = {
 
 export type NewMessageType = MapStateToPropsType & MapDispatchToPropsType;
 
-const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
+const mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
 	return {
 		currentText: state.messagesPage.newMessageText,
 	}

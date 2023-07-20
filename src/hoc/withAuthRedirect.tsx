@@ -1,6 +1,6 @@
 import { Loading } from '@/components/common/Loading/Loading';
-import { AppStateType } from '@/redux/redux-store';
-import { Redirect } from 'react-router-dom';
+import { AppRootStateType } from '@/app/store.ts';
+import { Navigate } from "react-router-dom";
 import { connect } from 'react-redux';
 import { ComponentType } from 'react';
 
@@ -9,7 +9,7 @@ type MapStateToPropsType = {
 	isAuth: boolean
 }
 
-const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
+const mapStateToProps = (state: AppRootStateType): MapStateToPropsType => ({
 	isAuth: state.auth.isAuth,
 	authInProgress: state.auth.inProgress
 });
@@ -21,11 +21,11 @@ export const withAuthRedirect = <T,>(Component: ComponentType<T>) => {
 		const { isAuth, authInProgress, ...restProps } = props;
 
 		return (
-			props.authInProgress
+			authInProgress
 				? <Loading />
-				: props.isAuth
-					? <Component {...restProps as T & {}} />
-					: <Redirect to='/login' />
+				: isAuth
+					? <Component {...restProps as T & object} />
+					: <Navigate to='/login' />
 		)
 	}
 

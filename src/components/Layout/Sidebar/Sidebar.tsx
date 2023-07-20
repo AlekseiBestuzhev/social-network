@@ -1,20 +1,20 @@
 import cls from '@/components/Layout/Sidebar/Sidebar.module.scss';
-import { NavLink, useRouteMatch } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { RiQuestionAnswerLine } from 'react-icons/ri';
 import { RiNewspaperLine } from 'react-icons/ri';
 import { RiSettings3Line } from 'react-icons/ri';
 import { RiMusic2Line } from 'react-icons/ri';
 import { RiUser3Line } from 'react-icons/ri';
 import { RiTeamLine } from 'react-icons/ri';
-import classNames from 'classnames';
+//import classNames from 'classnames';
 
 export const Sidebar = () => {
 
-	const match = useRouteMatch<{ userID: string }>('/profile/:userID?');
+	//const userID = useParams();
 
-	const isActive = classNames('', {
-		[cls.activeLink]: !match?.params.userID,
-	});
+	// const isActive = classNames('', {
+	// 	[cls.activeLink]: !userID,
+	// });
 
 	return (
 		<aside className={cls.sidebar}>
@@ -22,7 +22,7 @@ export const Sidebar = () => {
 				<ul>
 					<li>
 						<NavLink
-							activeClassName={isActive}
+
 							className={cls.link}
 							to={'/profile'}
 						>
@@ -31,7 +31,7 @@ export const Sidebar = () => {
 					</li>
 					<li>
 						<NavLink
-							activeClassName={cls.activeLink}
+
 							className={cls.link}
 							to={'/messages'}
 						>
@@ -40,7 +40,7 @@ export const Sidebar = () => {
 					</li>
 					<li>
 						<NavLink
-							activeClassName={cls.activeLink}
+
 							className={cls.link}
 							to={'/users'}
 						>
@@ -49,7 +49,7 @@ export const Sidebar = () => {
 					</li>
 					<li>
 						<NavLink
-							activeClassName={cls.activeLink}
+
 							className={cls.link}
 							to={'/news'}
 						>
@@ -58,7 +58,7 @@ export const Sidebar = () => {
 					</li>
 					<li>
 						<NavLink
-							activeClassName={cls.activeLink}
+
 							className={cls.link}
 							to={'/music'}
 						>
@@ -67,7 +67,7 @@ export const Sidebar = () => {
 					</li>
 					<li>
 						<NavLink
-							activeClassName={cls.activeLink}
+
 							className={cls.link}
 							to={'/settings'}
 						>

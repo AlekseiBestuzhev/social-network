@@ -1,6 +1,6 @@
-import { updatePostTexAC, addPostAC } from "@/redux/profile/profile-reducer";
+import { updatePostTexAC, addPostAC } from "@/features/profile/profile-reducer.ts";
 import { AddItemForm } from "@/components/common/AddItemForm/AddItemForm";
-import { AppStateType } from "@/redux/redux-store";
+import { AppRootStateType } from "@/app/store.ts";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 
@@ -13,7 +13,7 @@ type MapDispatchToPropsType = {
 	addText: (userID: string, name: string, photo: string | null) => void
 }
 
-const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
+const mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
 	return {
 		currentText: state.profilePage.newPostText,
 	}

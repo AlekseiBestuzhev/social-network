@@ -10,7 +10,7 @@ import {
 	removeLike,
 	setStatus,
 	setLike
-} from "@/redux/profile/profile-reducer";
+} from "@/features/profile/profile-reducer.ts";
 import {
 	setFollowingInProgress,
 	setTotalUsersCount,

@@ -1,5 +1,5 @@
 import { setAuthInProgress, setUserAuthData, setUserAuthPhoto } from '@/redux/auth/auth-reducer';
-import { AppDispatch, AppThunk } from '@/redux/redux-store';
+import { AppDispatch, AppThunk } from '@/app/store.ts';
 import { authAPI, profileAPI } from '@/api/api';
 
 export const authThunkCreator = (): AppThunk => async (dispatch: AppDispatch) => {

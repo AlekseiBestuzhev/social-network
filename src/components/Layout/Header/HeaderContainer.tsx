@@ -1,7 +1,7 @@
 import { UserPhotosType } from "@/redux/users/users-reducer";
 import { authThunkCreator } from "@/redux/auth/auth-thunks";
 import { Header } from "@/components/Layout/Header/Header";
-import { AppStateType } from "@/redux/redux-store";
+import { AppRootStateType } from "@/app/store.ts";
 import { connect } from "react-redux";
 import { Component } from "react";
 
@@ -28,7 +28,7 @@ type MapDispatchToPropsType = {
 
 export type HeaderType = MapStateToPropsType & MapDispatchToPropsType;
 
-const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
+const mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
 	return {
 		isAuth: state.auth.isAuth,
 		login: state.auth.login,

@@ -1,6 +1,6 @@
 import { ThemeType, ThemeVariantType, switchTheme } from "@/redux/theme/theme-reducer";
 import { Settings } from "@/components/Pages/Settings/Settings";
-import { AppStateType } from "@/redux/redux-store";
+import { AppRootStateType } from "@/app/store.ts";
 import { connect } from "react-redux";
 
 type MapDispatchToPropsType = {
@@ -9,7 +9,7 @@ type MapDispatchToPropsType = {
 
 export type SettingsPropsType = MapDispatchToPropsType & ThemeType;
 
-const mapStateToProps = (state: AppStateType): ThemeType => ({
+const mapStateToProps = (state: AppRootStateType): ThemeType => ({
 	current: state.theme.current
 })
 

@@ -1,7 +1,7 @@
 import { ChangeEvent, Component, ReactNode, KeyboardEvent, createRef } from 'react';
 import cls from '@/components/common/AddItemForm/AddItemForm.module.scss';
 import { Button } from '@/components/common/Button/Button';
-import { AppStateType } from '@/redux/redux-store';
+import { AppRootStateType } from '@/app/store.ts';
 import { connect } from 'react-redux';
 
 export type AddItemFormType = MapStateToPropsType & {
@@ -115,7 +115,7 @@ type MapStateToPropsType = {
 	avatar: string | null
 }
 
-const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
+const mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
 	return {
 		userID: state.auth.id,
 		name: state.auth.login,

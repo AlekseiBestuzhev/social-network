@@ -1,7 +1,7 @@
 import { SettingsPropsType } from '@/components/Pages/Settings/SettingsContainer';
 import { PageTemplate } from '@/components/common/PageTemplate/PageTemplate';
 import cls from '@/components/Pages/Settings/Settings.module.scss';
-import { ThemeVariantType } from '@/redux/theme/theme-reducer';
+import { ThemeVariantType } from '@/features/theme/theme-reducer';
 import { ChangeEvent, Component } from 'react';
 import { RiMoonFill } from 'react-icons/ri';
 import { RiMoonLine } from 'react-icons/ri';

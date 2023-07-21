@@ -1,4 +1,4 @@
-import { updateMessageTextAC, addMessageAC } from "@/redux/messages/messages-reducer";
+import { updateMessageTextAC, addMessageAC } from "@/features/messages/messages-reducer";
 import { AddItemForm } from "@/components/common/AddItemForm/AddItemForm";
 import { AppRootStateType } from "@/app/store.ts";
 import { connect } from "react-redux";

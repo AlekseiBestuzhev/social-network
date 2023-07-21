@@ -1,7 +1,7 @@
 import cls from '@/components/Pages/Messages/DialogList/DialogList.module.scss'
 import { Dialog } from '@/components/Pages/Messages/DialogList/Dialog/Dialog';
 import { LastMessageType } from '@/components/Pages/Messages/Messages';
-import { MessagesPageType } from '@/redux/messages/messages-reducer';
+import { MessagesPageType } from '@/features/messages/messages-reducer';
 import { FC } from 'react';
 
 type DialogListPropsType = Pick<MessagesPageType, 'dialogsData'> & {

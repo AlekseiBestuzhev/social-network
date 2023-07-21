@@ -1,5 +1,5 @@
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
-import {ActionsTypes} from "@/redux/action-creators-types.ts";
+import {ActionsTypes} from "@/app/action-creators-types.ts";
 import {AppRootStateType} from "@/app/store.ts";
 import {ThunkDispatch} from "redux-thunk";
 

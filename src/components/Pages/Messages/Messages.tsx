@@ -3,7 +3,7 @@ import { DialogType } from '@/components/Pages/Messages/DialogList/Dialog/Dialog
 import { DialogList } from '@/components/Pages/Messages/DialogList/DialogList';
 import { SectionInfo } from '@/components/common/SectionInfo/SectionInfo';
 import cls from '@/components/Pages/Messages/Messages.module.scss';
-import { MessageType } from '@/redux/messages/messages-reducer';
+import { MessageType } from '@/features/messages/messages-reducer';
 import picture from '@/assets/images/messages.gif';
 import { FC, memo } from 'react';
 

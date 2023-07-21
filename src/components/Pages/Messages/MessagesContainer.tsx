@@ -1,10 +1,8 @@
-import { MessagesDataType, MessagesPageType, setCurrentDialog } from "@/redux/messages/messages-reducer";
+import { MessagesDataType, MessagesPageType, setCurrentDialog } from "@/features/messages/messages-reducer";
 import { LastMessageType, Messages } from "@/components/Pages/Messages/Messages";
-import { WithRouterType } from "@/components/Pages/Profile/ProfileContainer";
-import { withAuthRedirect } from "@/hoc/withAuthRedirect";
+import { withAuthRedirect } from "@/app/hoc/withAuthRedirect";
 import { Component, ComponentType } from "react";
 import { AppRootStateType } from "@/app/store.ts";
-import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { compose } from "redux";
 

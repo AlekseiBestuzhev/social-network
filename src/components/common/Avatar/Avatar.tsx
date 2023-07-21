@@ -1,6 +1,6 @@
 import defaultAvatarDark from '@/assets/images/default-avatar-dark.svg';
 import defaultAvatar from '@/assets/images/default-avatar.svg';
-import { ThemeType } from '@/redux/theme/theme-reducer';
+import { ThemeType } from '@/features/theme/theme-reducer';
 import { AppRootStateType } from '@/app/store.ts';
 import { CSSProperties, Component, memo } from 'react';
 import { connect } from 'react-redux';

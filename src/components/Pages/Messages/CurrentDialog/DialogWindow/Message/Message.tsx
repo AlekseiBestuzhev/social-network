@@ -1,5 +1,5 @@
 import cls from '@/components/Pages/Messages/CurrentDialog/DialogWindow/Message/Message.module.scss';
-import { MessageType } from '@/redux/messages/messages-reducer';
+import { MessageType } from '@/features/messages/messages-reducer';
 import { FC } from 'react';
 
 type MessagePropsType = MessageType & {

@@ -1,7 +1,7 @@
 import { NewMessageContainer } from '@/components/Pages/Messages/CurrentDialog/NewMessage/NewMessageContainer';
 import { DialogWindow } from '@/components/Pages/Messages/CurrentDialog//DialogWindow/DialogWindow';
 import cls from '@/components/Pages/Messages/CurrentDialog/CurrentDialog.module.scss';
-import { MessageType } from '@/redux/messages/messages-reducer';
+import { MessageType } from '@/features/messages/messages-reducer';
 import { RiSendPlaneFill } from 'react-icons/ri';
 import { RiAlignRight } from 'react-icons/ri';
 import { FC } from 'react';

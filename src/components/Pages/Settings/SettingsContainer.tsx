@@ -1,4 +1,4 @@
-import { ThemeType, ThemeVariantType, switchTheme } from "@/redux/theme/theme-reducer";
+import { ThemeType, ThemeVariantType, switchTheme } from "@/features/theme/theme-reducer";
 import { Settings } from "@/components/Pages/Settings/Settings";
 import { AppRootStateType } from "@/app/store.ts";
 import { connect } from "react-redux";

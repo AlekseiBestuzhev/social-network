@@ -1,6 +1,6 @@
-import { PostType } from '@/components/Pages/Profile/PostsBlock/Posts/Post/Post.tsx';
-import { ActionsTypes } from '@/redux/action-creators-types.ts';
-import { UserPhotosType } from '@/redux/users/users-reducer.ts';
+import { PostType } from '@/features/profile/components/PostsBlock/Posts/Post/Post.tsx';
+import { ActionsTypes } from '@/app/action-creators-types.ts';
+import { UserPhotosType } from '@/features/users/users-reducer.ts';
 import badman from '@/assets/images/localUsers/bad-man.jpg';
 import john from '@/assets/images/localUsers/john-doe.jpg';
 import { v1 } from 'uuid';

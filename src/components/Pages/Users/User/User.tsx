@@ -1,7 +1,7 @@
 import cls from '@/components/Pages/Users/User/User.module.scss';
 import { Button } from '@/components/common/Button/Button';
 import { Avatar } from '@/components/common/Avatar/Avatar';
-import { UserType } from '@/redux/users/users-reducer';
+import { UserType } from '@/features/users/users-reducer';
 import { NavLink } from 'react-router-dom';
 import { FC } from 'react';
 

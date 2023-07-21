@@ -1,5 +1,5 @@
-import { UserPhotosType } from "@/redux/users/users-reducer";
-import { authThunkCreator } from "@/redux/auth/auth-thunks";
+import { UserPhotosType } from "@/features/users/users-reducer";
+import { authThunkCreator } from "@/features/auth/auth-thunks.ts";
 import { Header } from "@/components/Layout/Header/Header";
 import { AppRootStateType } from "@/app/store.ts";
 import { connect } from "react-redux";

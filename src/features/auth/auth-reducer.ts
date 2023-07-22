@@ -1,13 +1,20 @@
-import { ActionsTypes } from "../../app/action-creators-types.ts";
 import { UserPhotosType } from "@/features/users/users-reducer.ts";
+
+export type AuthActionsType =
+	| ReturnType<typeof setUserAuthData>
+	| ReturnType<typeof setUserAuthName>
+	| ReturnType<typeof setUserAuthPhoto>
 
 export type AuthUserDataType = {
 	id: number | null,
 	login: string | null,
 	email: string | null,
 	isAuth: boolean,
-	photos: UserPhotosType,
-	inProgress: boolean
+	photos: UserPhotosType
+}
+
+type InitStateType = AuthUserDataType & {
+	fullName: string | null
 }
 
 export type AuthUserType = {
@@ -17,7 +24,7 @@ export type AuthUserType = {
 	resultCode: 0
 }
 
-const initialState: AuthUserDataType = {
+const initState: InitStateType = {
 	id: null,
 	login: null,
 	email: null,
@@ -26,63 +33,56 @@ const initialState: AuthUserDataType = {
 		small: null,
 		large: null
 	},
-	inProgress: true
+	fullName: null
 }
 
-export const AuthReducer = (state: AuthUserDataType = initialState, action: ActionsTypes): AuthUserDataType => {
+export const AuthReducer = (state: InitStateType = initState, action: AuthActionsType): InitStateType => {
 	switch (action.type) {
-		case 'SET-USER-AUTH-DATA': {
+		case 'SET-USER-AUTH-DATA':
 			return {
 				...state,
 				...action.payload,
-				isAuth: true,
-			};
-		}
-		case 'SET-USER-AUTH-PHOTO': {
+				isAuth: true
+			}
+		case 'SET-USER-AUTH-PHOTO':
 			return {
 				...state,
 				photos: {
 					...state.photos,
 					large: action.payload.photo
 				}
-			};
-		}
-		case 'SET-AUTH-IN-PROGRESS': {
+			}
+		case 'SET-USER-AUTH-NAME' :
 			return {
 				...state,
-				inProgress: action.payload.inProgress
+				fullName: action.payload.name
 			}
-		}
 		default:
 			return state;
 	}
 }
 
-export const setUserAuthData = (id: number, email: string, login: string) => {
-	return {
+//_____ actions
+
+export const setUserAuthData = (id: number, email: string, login: string) => ({
 		type: 'SET-USER-AUTH-DATA',
 		payload: {
 			id,
 			email,
 			login
 		}
-	} as const
-}
+	} as const);
 
-export const setUserAuthPhoto = (photo: string) => {
-	return {
+export const setUserAuthPhoto = (photo: string) => ({
 		type: 'SET-USER-AUTH-PHOTO',
 		payload: {
 			photo
 		}
-	} as const
-}
+	} as const);
 
-export const setAuthInProgress = (inProgress: boolean) => {
-	return {
-		type: 'SET-AUTH-IN-PROGRESS',
+export const setUserAuthName = (name: string) => ({
+		type: 'SET-USER-AUTH-NAME',
 		payload: {
-			inProgress
+			name
 		}
-	} as const
-}
+	} as const);

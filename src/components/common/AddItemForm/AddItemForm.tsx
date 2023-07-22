@@ -118,7 +118,7 @@ type MapStateToPropsType = {
 const mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
 	return {
 		userID: state.auth.id,
-		name: state.auth.login,
+		name: state.auth.fullName,
 		avatar: state.auth.photos.large
 	}
 }

@@ -31,7 +31,7 @@ export const Profile = withAuthRedirect(() => {
                followingInProgress={followingInProgress}
             />
          </Person>
-         <PostsBlock userName={profile.fullName} isMe={!userID}/>
+         <PostsBlock user={ !userID ? 'My ' : `${profile.fullName}'s `}/>
       </>
    )
 })

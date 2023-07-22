@@ -1,33 +1,23 @@
-import { Loading } from '@/components/common/Loading/Loading.tsx';
-import { AppRootStateType } from '@/app/store.ts';
-import { Navigate } from "react-router-dom";
-import { connect } from 'react-redux';
-import { ComponentType } from 'react';
-
-type MapStateToPropsType = {
-	authInProgress: boolean,
-	isAuth: boolean
-}
-
-const mapStateToProps = (state: AppRootStateType): MapStateToPropsType => ({
-	isAuth: state.auth.isAuth,
-	authInProgress: state.auth.inProgress
-});
+import {isAppInitSelector} from "@/features/service/selectors/isAppInitSelector/isAppInitSelector.ts";
+import {authUserSelector} from "@/features/auth/selectors/authUserSelector/authUserSelector.ts";
+import {Loading} from '@/components/common/Loading/Loading.tsx';
+import {useAppSelector} from "@/app/hooks.ts";
+import {Navigate} from "react-router-dom"
+import {ComponentType} from 'react';
 
 export const withAuthRedirect = <T,>(Component: ComponentType<T>) => {
 
-	const RedirectComponent = (props: MapStateToPropsType) => {
+	return (props: T) => {
 
-		const { isAuth, authInProgress, ...restProps } = props;
+		const isAuth = useAppSelector(authUserSelector);
+		const isAppInit = useAppSelector(isAppInitSelector);
 
 		return (
-			authInProgress
-				? <Loading />
-				: isAuth
-					? <Component {...restProps as T & object} />
-					: <Navigate to='/login' />
+			isAppInit
+				? isAuth
+					? <Component {...props as T & object} />
+					: <Navigate to='/login'/>
+				: <Loading/>
 		)
 	}
-
-	return connect(mapStateToProps)(RedirectComponent);
 }

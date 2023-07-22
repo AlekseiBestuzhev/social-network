@@ -1,10 +1,16 @@
 import { DialogType } from '@/components/Pages/Messages/DialogList/Dialog/Dialog.tsx';
 import heisenberg from '@/assets/images/localUsers/heisenberg.jpg';
-import { ActionsTypes } from '@/app/action-creators-types.ts';
 import meladze from '@/assets/images/localUsers/meladze.jpg';
 import badman from '@/assets/images/localUsers/bad-man.jpg';
 import shelby from '@/assets/images/localUsers/shelby.jpg';
 import { v1 } from 'uuid';
+
+// _____ types
+
+export type MessagesActionsType =
+	| ReturnType<typeof updateMessageTextAC>
+	| ReturnType<typeof setCurrentDialog>
+	| ReturnType<typeof addMessageAC>
 
 export type MessageType = {
 	id: string,
@@ -26,6 +32,8 @@ export type MessagesPageType = {
 	newMessageText: string,
 	currentDialog: string
 }
+
+// _____ reducer
 
 const initialState: MessagesPageType = {
 	dialogsData: [
@@ -57,7 +65,7 @@ const initialState: MessagesPageType = {
 	currentDialog: ''
 }
 
-export const MessagesReducer = (state: MessagesPageType = initialState, action: ActionsTypes): MessagesPageType => {
+export const MessagesReducer = (state: MessagesPageType = initialState, action: MessagesActionsType): MessagesPageType => {
 	switch (action.type) {
 		case 'UPDATE-MESSAGE-TEXT': {
 			return {
@@ -95,12 +103,12 @@ export const MessagesReducer = (state: MessagesPageType = initialState, action: 
 	}
 }
 
-export const updateMessageTextAC = (newText: string) => {
-	return {
+// _____ actions
+
+export const updateMessageTextAC = (newText: string) => ({
 		type: 'UPDATE-MESSAGE-TEXT',
 		changedMessageText: newText
-	} as const;
-}
+	} as const);
 
 export const addMessageAC = (userID: string, name: string, photo: string | null) => {
 	const formatter = new Intl.DateTimeFormat("ru", {
@@ -126,11 +134,9 @@ export const addMessageAC = (userID: string, name: string, photo: string | null)
 	} as const;
 }
 
-export const setCurrentDialog = (userID: string) => {
-	return {
+export const setCurrentDialog = (userID: string) => ({
 		type: 'SET-CURRENT-DIALOG',
 		payload: {
 			userID
 		}
-	} as const;
-}
+	} as const);

@@ -1,4 +1,3 @@
-import { DialogType } from '@/components/Pages/Messages/DialogList/Dialog/Dialog.tsx';
 import heisenberg from '@/assets/images/localUsers/heisenberg.jpg';
 import meladze from '@/assets/images/localUsers/meladze.jpg';
 import badman from '@/assets/images/localUsers/bad-man.jpg';
@@ -24,6 +23,12 @@ export type MessageType = {
 
 export type MessagesDataType = {
 	[key: string]: MessageType[]
+}
+
+export type DialogType = {
+	id: string,
+	name: string,
+	avatar: string | null
 }
 
 export type MessagesPageType = {

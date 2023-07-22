@@ -34,7 +34,7 @@ export const StatusModalContent: FC<PropsType> = (props) => {
             value={statusString}
             onChange={onChangeHandler}
          />
-         <Button mainColor='Main' size='large' onClick={onClickHandler}>
+         <Button variant='Main' size='large' onClick={onClickHandler}>
             Apply <RiCheckFill size={'1.125rem'}/>
          </Button>
       </div>

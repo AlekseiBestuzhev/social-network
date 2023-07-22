@@ -37,8 +37,8 @@ export const User: FC<UserItemListType> = (
 					<Avatar photo={photos.large} />
 				</NavLink>
 				<Button
-					isDisabled={followingInProgress.some(elemID => elemID === id)}
-					mainColor={buttonStyles}
+					disabled={followingInProgress.some(elemID => elemID === id)}
+					variant={buttonStyles}
 					size='small'
 					onClick={followHandler(id, followed)}
 				>
@@ -48,7 +48,7 @@ export const User: FC<UserItemListType> = (
 			<div className={cls.info}>
 				<div className={cls.nameStatus}>
 					<NavLink to={`/profile/${id}`}>
-						<h3 className={cls.name} >{name}</h3>
+						<h3 className={cls.name} data-url={uniqueUrlName}>{name}</h3>
 					</NavLink>
 					{status && <p className={cls.status}>"{status}"</p>}
 				</div >

@@ -1,17 +1,16 @@
 import {AvatarModalContent} from '@/features/profile/components/Person/AvatarModalContent/AvatarModalContent.tsx';
 import {StatusModalContent} from '@/features/profile/components/Person/StatusModalContent/StatusModalContent.tsx';
 import cls from '@/features/profile/components/Person/Person.module.scss';
+import {UserProfileType} from "@/features/profile/profile-reducer.ts";
 import anotherUserBcg from '@/assets/images/another-user.jpg';
 import {Avatar} from '@/components/common/Avatar/Avatar.tsx';
 import profileBcg from '@/assets/images/profile-bcg.jpeg';
 import {Modal} from '@/components/common/Modal/Modal.tsx';
-import {FC, ReactNode, useState} from "react";
+import {PropsWithChildren, FC, useState} from "react";
 import classNames from 'classnames';
-import {UserProfileType} from "@/features/profile/profile-reducer.ts";
 
-type PersonPropsType = {
+type PersonPropsType = PropsWithChildren & {
    profile: UserProfileType,
-   children: ReactNode,
    status: string,
    isMe: boolean,
 };
@@ -19,6 +18,7 @@ type PersonPropsType = {
 export const Person: FC<PersonPropsType> = ({isMe, status, profile, children}) => {
 
    const [photoIsOpen, setPhotoIsOpen] = useState(false);
+
    const [statusEditMode, setStatusEditMode] = useState(false);
 
    const openPhotoModal = () => {
@@ -30,7 +30,7 @@ export const Person: FC<PersonPropsType> = ({isMe, status, profile, children}) =
    }
 
    const openStatusModal = () => {
-      setStatusEditMode(true);
+      if (isMe) setStatusEditMode(true);
    }
 
    const closeStatusModal = () => {

@@ -99,8 +99,8 @@ export class AddItemFormContainer extends Component<AddItemFormType, AddItemForm
 				></textarea>
 				<Button
 					onClick={this.addTextHandler.bind(this)}
-					isDisabled={!this.props.currentText}
-					mainColor='Submit'
+					disabled={!this.props.currentText}
+					variant='Submit'
 				>
 					{this.props.children}
 				</Button>

@@ -30,7 +30,7 @@ export const Controls: FC<ControlsPropsType> = memo(({
    }
 
    const toProfileSettings = () => {
-      navigate('/profile-settings');
+      navigate('/profile/settings');
    }
 
    const followTextHandler = followed ? 'Unfollow' : 'Follow';
@@ -43,20 +43,20 @@ export const Controls: FC<ControlsPropsType> = memo(({
             isMe
                ? <Button
                   onClick={toProfileSettings}
-                  mainColor='White'
+                  variant='White'
                   size='large'>
                   Edit profile
                </Button>
                : <>
                   <Button
                      onClick={() => alert('Chat will work later')}
-                     mainColor='White'
+                     variant='White'
                      size='large'>
                      Message <RiChat3Line size={'1rem'}/>
                   </Button>
                   <Button
-                     isDisabled={followingInProgress}
-                     mainColor={buttonStyles}
+                     disabled={followingInProgress}
+                     variant={buttonStyles}
                      onClick={followHandler(userID, followed)}
                      size='large'>
                      {followTextHandler}{followIconHandler}

@@ -21,7 +21,7 @@ export const EditProfile = () => {
             </div>
          </div>
          <div className={cls.footer}>
-            <Button mainColor='Main' size='large' onClick={applyChanges}>Apply <RiCheckFill size={'1.125rem'}/></Button>
+            <Button variant='Main' size='large' onClick={applyChanges}>Apply <RiCheckFill size={'1.125rem'}/></Button>
          </div>
       </PageTemplate>
    );

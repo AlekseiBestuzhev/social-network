@@ -6,13 +6,13 @@ export const Login = () => {
 	return (
 		<PageTemplate pageTitle="Login">
 			<form>
-				<input autoComplete='username' placeholder='Login'  ID='login'/>
+				<input autoComplete='username' placeholder='Login'/>
 				<input name="password" type="password" autoComplete='current-password' placeholder='Password' />
 				<label htmlFor="rememberMe">
 					<input id="rememberMe" name="rememberMe" type="checkbox" />
 					Remember me
 				</label>
-				<Button mainColor='Main' onClick={() => { }}>Log In</Button>
+				<Button variant='Main' onClick={() => { }}>Log In</Button>
 			</form>
 		</PageTemplate>
 	);

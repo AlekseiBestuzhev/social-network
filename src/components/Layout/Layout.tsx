@@ -1,13 +1,8 @@
 import HeaderContainer from "@/components/Layout/Header/HeaderContainer";
 import {Sidebar} from "@/components/Layout/Sidebar/Sidebar";
-import { FC, ReactNode } from "react";
+import {FC, PropsWithChildren} from "react";
 
-
-type LayoutType = {
-	children: ReactNode
-}
-
-export const Layout: FC<LayoutType> = ({ children }) => {
+export const Layout: FC<PropsWithChildren> = ({ children }) => {
 
 	return (
 		<div className="app-wrapper">

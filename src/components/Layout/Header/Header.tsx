@@ -29,7 +29,7 @@ export const Header: FC<HeaderType> = memo(({ isAuth, login, photos }) => {
 							</div>
 						</NavLink>
 						: <NavLink to={'/login'}>
-							<Button mainColor="White" onClick={onClickHandler}> LOGIN </Button>
+							<Button variant="White" onClick={onClickHandler}> LOGIN </Button>
 						</NavLink>
 				}
 			</div>

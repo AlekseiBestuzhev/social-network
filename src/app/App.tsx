@@ -20,7 +20,7 @@ export const App = () => {
 			<Layout>
 				<Routes>
 					<Route path='/' element={<Navigate to={'/profile'} />} />
-					<Route path='/profile-settings' element={<EditProfile />} />
+					<Route path='/profile/settings' element={<EditProfile />} />
 					<Route path='/profile/:userID?' element={<Profile />} />
 					{/*<Route path='/messages/:userID?' element={<MessagesContainer />} />*/}
 					<Route path='/users' element={<UsersContainer />} />

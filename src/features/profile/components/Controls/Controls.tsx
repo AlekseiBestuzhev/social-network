@@ -35,7 +35,7 @@ export const Controls: FC<ControlsPropsType> = memo(({
 
    const followTextHandler = followed ? 'Unfollow' : 'Follow';
    const followIconHandler = followed ? <RiUserUnfollowLine size={'1rem'}/> : <RiUserAddLine size={'1rem'}/>;
-   const buttonStyles = !followed ? 'Green' : 'Default';
+   const buttonStyles = !followed ? 'green' : 'default';
 
    return (
       <div className={cls.wrapper}>
@@ -43,14 +43,14 @@ export const Controls: FC<ControlsPropsType> = memo(({
             isMe
                ? <Button
                   onClick={toProfileSettings}
-                  variant='White'
+                  variant='white'
                   size='large'>
                   Edit profile
                </Button>
                : <>
                   <Button
                      onClick={() => alert('Chat will work later')}
-                     variant='White'
+                     variant='white'
                      size='large'>
                      Message <RiChat3Line size={'1rem'}/>
                   </Button>

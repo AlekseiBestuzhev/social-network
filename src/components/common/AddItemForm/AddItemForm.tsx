@@ -100,7 +100,7 @@ export class AddItemFormContainer extends Component<AddItemFormType, AddItemForm
 				<Button
 					onClick={this.addTextHandler.bind(this)}
 					disabled={!this.props.currentText}
-					variant='Submit'
+					variant='submit'
 				>
 					{this.props.children}
 				</Button>

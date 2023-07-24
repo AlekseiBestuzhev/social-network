@@ -1,9 +1,9 @@
-import { PaginationBlock } from "@/components/common/PaginationBlock/PaginationBlock";
-import { PageTemplate } from "@/components/common/PageTemplate/PageTemplate";
-import { UsersType } from "@/components/Pages/Users/UsersContainer";
-import { Loading } from "@/components/common/Loading/Loading";
-import cls from '@/components/Pages/Users/Users.module.scss';
-import { User } from "@/components/Pages/Users/User/User";
+import { PaginationBlock } from "@/components/common/PaginationBlock/PaginationBlock.tsx";
+import { PageTemplate } from "@/components/common/PageTemplate/PageTemplate.tsx";
+import { UsersType } from "@/Pages/Users/UsersContainer.tsx";
+import { Loading } from "@/components/common/Loading/Loading.tsx";
+import cls from '@/Pages/Users/Users.module.scss';
+import { User } from "@/features/users/components/User/User.tsx";
 import { FC } from "react";
 
 export const Users: FC<UsersType> = (props) => {

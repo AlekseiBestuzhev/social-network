@@ -1,7 +1,7 @@
-import cls from '@/components/Pages/Users/User/User.module.scss';
-import { Button } from '@/components/common/Button/Button';
-import { Avatar } from '@/components/common/Avatar/Avatar';
-import { UserType } from '@/features/users/users-reducer';
+import cls from '@/features/users/components/User/User.module.scss';
+import { Button } from '@/components/common/Button/Button.tsx';
+import { Avatar } from '@/components/common/Avatar/Avatar.tsx';
+import { UserType } from '@/features/users/users-reducer.ts';
 import { NavLink } from 'react-router-dom';
 import { FC } from 'react';
 
@@ -28,7 +28,7 @@ export const User: FC<UserItemListType> = (
 	}
 
 	const followBtnText = followed ? 'unfollow' : 'follow';
-	const buttonStyles = followBtnText === 'follow' ? 'Green' : 'Default';
+	const buttonStyles = followBtnText === 'follow' ? 'green' : 'default';
 
 	return (
 		<li className={cls.body}>

@@ -3,7 +3,7 @@ import cls from '@/components/common/Button/Button.module.scss'
 import classNames from "classnames";
 
 type ButtonType = PropsWithChildren & ButtonHTMLAttributes<HTMLButtonElement> & {
-	variant?: 'Default' | 'Main' | 'Green' | 'White' | 'Submit',
+	variant?: 'default' | 'main' | 'green' | 'white' | 'submit',
 	size?: 'small' | 'normal' | 'large'
 }
 

@@ -1,7 +1,7 @@
 import {EditProfile} from "@/features/profile/components/EditProfile/EditProfile.tsx";
 import { SettingsContainer } from "@/components/Pages/Settings/SettingsContainer.tsx";
 //import { MessagesContainer } from '@/components/Pages/Messages/MessagesContainer';
-import { UsersContainer } from '@/components/Pages/Users/UsersContainer.tsx';
+import { UsersContainer } from '@/Pages/Users/UsersContainer.tsx';
 import {Profile} from "@/Pages/Profile/Profile.tsx";
 import { Navigate, Routes, Route } from 'react-router-dom';
 import { Music } from '@/components/Pages/Music/Music.tsx';

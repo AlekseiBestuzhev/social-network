@@ -12,7 +12,7 @@ export const Login = () => {
 					<input id="rememberMe" name="rememberMe" type="checkbox" />
 					Remember me
 				</label>
-				<Button variant='Main' onClick={() => { }}>Log In</Button>
+				<Button variant='main' onClick={() => { }}>Log In</Button>
 			</form>
 		</PageTemplate>
 	);

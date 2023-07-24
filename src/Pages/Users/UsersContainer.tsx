@@ -1,7 +1,7 @@
-import { getUsersThunkCreator, setFollowingThunkCreator } from "@/features/users/users-thunks";
-import { UserType, setCurrentPage } from "@/features/users/users-reducer";
-import { withAuthRedirect } from "@/app/hoc/withAuthRedirect";
-import { Users } from "@/components/Pages/Users/Users";
+import { getUsersThunkCreator, setFollowingThunkCreator } from "@/features/users/users-thunks.ts";
+import { UserType, setCurrentPage } from "@/features/users/users-reducer.ts";
+import { withAuthRedirect } from "@/app/hoc/withAuthRedirect.tsx";
+import { Users } from "@/Pages/Users/Users.tsx";
 import { AppRootStateType } from "@/app/store.ts";
 import { Component, ComponentType } from "react";
 import { connect } from "react-redux";

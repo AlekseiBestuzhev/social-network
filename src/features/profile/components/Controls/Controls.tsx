@@ -1,6 +1,6 @@
 import {switchFollowingOnProfileTC} from "@/features/profile/profile-thunks.ts";
 import cls from '@/features/profile/components/Controls/Controls.module.scss'
-import {Button} from '@/components/common/Button/Button.tsx';
+import {Button} from '@/components/Button/Button.tsx';
 import {RiUserUnfollowLine} from "react-icons/ri";
 import {RiUserAddLine} from "react-icons/ri";
 import {useAppDispatch} from "@/app/hooks.ts";

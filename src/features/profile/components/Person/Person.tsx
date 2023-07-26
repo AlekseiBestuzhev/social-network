@@ -3,9 +3,9 @@ import {StatusModalContent} from '@/features/profile/components/Person/StatusMod
 import cls from '@/features/profile/components/Person/Person.module.scss';
 import {UserProfileType} from "@/features/profile/profile-reducer.ts";
 import anotherUserBcg from '@/assets/images/another-user.jpg';
-import {Avatar} from '@/components/common/Avatar/Avatar.tsx';
+import {Avatar} from '@/components/Avatar/Avatar.tsx';
 import profileBcg from '@/assets/images/profile-bcg.jpeg';
-import {Modal} from '@/components/common/Modal/Modal.tsx';
+import {Modal} from '@/components/Modal/Modal.tsx';
 import {PropsWithChildren, FC, useState} from "react";
 import classNames from 'classnames';
 

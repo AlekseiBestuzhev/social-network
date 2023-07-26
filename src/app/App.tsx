@@ -1,13 +1,13 @@
 import {EditProfile} from "@/features/profile/components/EditProfile/EditProfile.tsx";
-import { SettingsContainer } from "@/components/Pages/Settings/SettingsContainer.tsx";
 //import { MessagesContainer } from '@/components/Pages/Messages/MessagesContainer';
+import { SettingsContainer } from "@/pages/Settings/SettingsContainer.tsx";
 import { Navigate, Routes, Route } from 'react-router-dom';
-import { Music } from '@/components/Pages/Music/Music.tsx';
-import { Login } from '@/components/Pages/Login/Login.tsx';
-import { News } from '@/components/Pages/News/News.tsx';
 import { Layout } from '@/components/Layout/Layout.tsx';
-import {Profile} from "@/Pages/Profile/Profile.tsx";
-import {Users} from "@/Pages/Users/Users.tsx";
+import {Profile} from "@/pages/Profile/Profile.tsx";
+import { Login } from '@/pages/Login/Login.tsx';
+import { Music } from '@/pages/Music/Music.tsx';
+import {Users} from "@/pages/Users/Users.tsx";
+import { News } from '@/pages/News/News.tsx';
 import {useLayoutEffect} from 'react';
 
 export const App = () => {

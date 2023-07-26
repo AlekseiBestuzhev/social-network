@@ -2,8 +2,8 @@ import cls from '@/features/profile/components/Person/StatusModalContent/StatusM
 import {statusSelector} from "@/features/profile/selectors/statusSelector/statusSelector.ts";
 import {updateMyStatusTC} from '@/features/profile/profile-thunks.ts';
 import {useAppDispatch, useAppSelector} from "@/app/hooks.ts";
-import {Button} from '@/components/common/Button/Button.tsx';
-import {Input} from '@/components/common/Input/Input.tsx';
+import {Button} from '@/components/Button/Button.tsx';
+import {Input} from '@/components/Input/Input.tsx';
 import {RiCheckFill} from 'react-icons/ri';
 import {FC, useState} from 'react';
 
@@ -34,7 +34,7 @@ export const StatusModalContent: FC<PropsType> = (props) => {
             value={statusString}
             onChange={onChangeHandler}
          />
-         <Button variant='Main' size='large' onClick={onClickHandler}>
+         <Button variant='main' size='large' onClick={onClickHandler}>
             Apply <RiCheckFill size={'1.125rem'}/>
          </Button>
       </div>

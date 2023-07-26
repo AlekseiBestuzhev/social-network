@@ -1,6 +1,6 @@
 import cls from '@/components/Layout/Header/Header.module.scss';
-import { Button } from "@/components/common/Button/Button";
-import { Avatar } from "@/components/common/Avatar/Avatar";
+import { Button } from "@/components/Button/Button";
+import { Avatar } from "@/components/Avatar/Avatar";
 import { HeaderType } from "./HeaderContainer";
 import { NavLink } from "react-router-dom";
 import logo from '@/assets/images/logo.svg';

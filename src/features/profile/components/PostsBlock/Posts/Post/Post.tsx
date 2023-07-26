@@ -1,6 +1,6 @@
 import cls from '@/features/profile/components/PostsBlock/Posts/Post/Post.module.scss';
 import {removeLike, setLike} from '@/features/profile/profile-reducer.ts';
-import {Avatar} from '@/components/common/Avatar/Avatar.tsx';
+import {Avatar} from '@/components/Avatar/Avatar.tsx';
 import {RiHeart3Line} from 'react-icons/ri';
 import {RiHeart3Fill} from 'react-icons/ri';
 import {useAppDispatch} from '@/app/hooks.ts';

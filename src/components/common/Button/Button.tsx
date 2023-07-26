@@ -17,7 +17,8 @@ export const Button: FC<ButtonType> = ({ variant, size, children, ...restProps }
 	return (
 		<button
 			{...restProps}
-			className={styles}>
+			className={styles}
+		>
 			{children}
 		</button>
 	);

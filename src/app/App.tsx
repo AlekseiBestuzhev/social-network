@@ -1,13 +1,13 @@
 import {EditProfile} from "@/features/profile/components/EditProfile/EditProfile.tsx";
 import { SettingsContainer } from "@/components/Pages/Settings/SettingsContainer.tsx";
 //import { MessagesContainer } from '@/components/Pages/Messages/MessagesContainer';
-import { UsersContainer } from '@/Pages/Users/UsersContainer.tsx';
-import {Profile} from "@/Pages/Profile/Profile.tsx";
 import { Navigate, Routes, Route } from 'react-router-dom';
 import { Music } from '@/components/Pages/Music/Music.tsx';
 import { Login } from '@/components/Pages/Login/Login.tsx';
 import { News } from '@/components/Pages/News/News.tsx';
 import { Layout } from '@/components/Layout/Layout.tsx';
+import {Profile} from "@/Pages/Profile/Profile.tsx";
+import {Users} from "@/Pages/Users/Users.tsx";
 import {useLayoutEffect} from 'react';
 
 export const App = () => {
@@ -23,7 +23,7 @@ export const App = () => {
 					<Route path='/profile/settings' element={<EditProfile />} />
 					<Route path='/profile/:userID?' element={<Profile />} />
 					{/*<Route path='/messages/:userID?' element={<MessagesContainer />} />*/}
-					<Route path='/users' element={<UsersContainer />} />
+					<Route path='/users' element={<Users />} />
 					<Route path='/news' element={<News/>} />
 					<Route path='/music' element={<Music/>} />
 					<Route path='/settings' element={<SettingsContainer/>} />

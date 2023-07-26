@@ -4,7 +4,6 @@ export type UsersActionsType =
    | ReturnType<typeof setFollowingInProgress>
    | ReturnType<typeof setTotalUsersCount>
    | ReturnType<typeof setCurrentPage>
-   | ReturnType<typeof setFetching>
    | ReturnType<typeof setUsers>
    | ReturnType<typeof unfollow>
    | ReturnType<typeof follow>
@@ -28,7 +27,6 @@ export type UsersPageType = {
    pageSize: number,
    totalUsersCount: number,
    currentPage: number,
-   isFetching: boolean,
    followingInProgress: number[]
 }
 
@@ -36,10 +34,9 @@ export type UsersPageType = {
 
 const initialState: UsersPageType = {
    users: [],
-   pageSize: 20,
+   pageSize: 10,
    totalUsersCount: 0,
    currentPage: 1,
-   isFetching: false,
    followingInProgress: []
 }
 
@@ -69,11 +66,6 @@ export const UsersReducer = (state: UsersPageType = initialState, action: UsersA
          return {
             ...state,
             currentPage: action.payload.currentPage
-         }
-      case 'SWITCH-FETCHING':
-         return {
-            ...state,
-            isFetching: action.payload.isFetching
          }
       case 'SET-FOLLOWING-IN-PROGRESS': {
          return {
@@ -122,13 +114,6 @@ export const setTotalUsersCount = (newTotalCount: number) => ({
    type: 'SET-TOTAL-USERS-COUNT',
    payload: {
       newTotalCount
-   }
-} as const);
-
-export const setFetching = (isFetching: boolean) => ({
-   type: 'SWITCH-FETCHING',
-   payload: {
-      isFetching
    }
 } as const);
 

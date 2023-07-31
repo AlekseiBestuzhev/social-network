@@ -1,7 +1,7 @@
 import {EditProfile} from "@/features/profile/components/EditProfile/EditProfile.tsx";
 //import { MessagesContainer } from '@/components/Pages/Messages/MessagesContainer';
-import { SettingsContainer } from "@/pages/Settings/SettingsContainer.tsx";
 import { Navigate, Routes, Route } from 'react-router-dom';
+import { Settings } from "@/pages/Settings/Settings.tsx";
 import { Layout } from '@/components/Layout/Layout.tsx';
 import {Profile} from "@/pages/Profile/Profile.tsx";
 import { Login } from '@/pages/Login/Login.tsx';
@@ -26,7 +26,7 @@ export const App = () => {
 					<Route path='/users' element={<Users />} />
 					<Route path='/news' element={<News/>} />
 					<Route path='/music' element={<Music/>} />
-					<Route path='/settings' element={<SettingsContainer/>} />
+					<Route path='/settings' element={<Settings/>} />
 					<Route path='/login' element={<Login/>} />
 				</Routes>
 			</Layout>

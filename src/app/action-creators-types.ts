@@ -3,6 +3,7 @@ import {ProfileActionsType} from "@/features/profile/profile-reducer.ts";
 import {ServiceActionsType} from "@/features/service/service-reducer.ts";
 import {UsersActionsType} from "@/features/users/users-reducer.ts";
 import {AuthActionsType} from "@/features/auth/auth-reducer.ts";
+import {ThemeActionType} from "@/features/theme/theme-reducer.ts";
 
 export type ActionsTypes =
    | MessagesActionsType
@@ -10,3 +11,4 @@ export type ActionsTypes =
    | ProfileActionsType
    | UsersActionsType
    | AuthActionsType
+   | ThemeActionType

@@ -6,7 +6,7 @@ export type ThemeType = {
    current: ThemeVariantType
 };
 
-type ThemeActionType = ReturnType<typeof switchTheme>;
+export type ThemeActionType = ReturnType<typeof switchTheme>;
 
 // _____ reducer
 

@@ -1,27 +1,29 @@
-import { SettingsPropsType } from '@/pages/Settings/SettingsContainer';
 import { PageTemplate } from '@/components/PageTemplate/PageTemplate';
-import { ThemeVariantType } from '@/features/theme/theme-reducer';
+import {switchTheme, ThemeVariantType} from '@/features/theme/theme-reducer';
 import cls from '@/pages/Settings/Settings.module.scss';
-import { ChangeEvent, Component } from 'react';
+import {ChangeEvent, useEffect} from 'react';
 import { RiMoonFill } from 'react-icons/ri';
 import { RiMoonLine } from 'react-icons/ri';
+import {useAppDispatch, useAppSelector} from "@/app/hooks.ts";
+import {AppRootStateType} from "@/app/store.ts";
 
-export class Settings extends Component<SettingsPropsType> {
+export const Settings = () => {
 
-	componentDidUpdate(prevProps: Readonly<SettingsPropsType>) {
-		if (prevProps.current !== this.props.current) {
-			document.body.setAttribute('data-theme', this.props.current);
-		}
-	}
+	const theme = useAppSelector((state: AppRootStateType): ThemeVariantType => state.theme.current);
 
-	handleThemeChange = (e: ChangeEvent<HTMLInputElement>) => {
+	const dispatch = useAppDispatch();
+
+	useEffect(() => {
+		document.body.setAttribute('data-theme', theme);
+	}, [theme]);
+
+	const handleThemeChange = (e: ChangeEvent<HTMLInputElement>) => {
 		if (e.currentTarget.checked) {
 			const currentValue = e.currentTarget.value as ThemeVariantType;
-			this.props.switchTheme(currentValue);
+			dispatch(switchTheme(currentValue));
 		}
 	}
 
-	render() {
 		return (
 			<PageTemplate pageTitle='Settings'>
 				<h3 className={cls.title}>Theme switcher</h3>
@@ -31,23 +33,22 @@ export class Settings extends Component<SettingsPropsType> {
 							type="radio"
 							name="theme"
 							value="light"
-							checked={this.props.current === 'light'}
-							onChange={this.handleThemeChange}
+							checked={theme === 'light'}
+							onChange={handleThemeChange}
 						/>
-						Light mode {this.props.current === 'light' ? <RiMoonLine /> : <RiMoonFill />}
+						Light mode {theme === 'light' ? <RiMoonLine /> : <RiMoonFill />}
 					</label>
 					<label>
 						<input
 							type="radio"
 							name="theme"
 							value="dark"
-							checked={this.props.current === 'dark'}
-							onChange={this.handleThemeChange}
+							checked={theme === 'dark'}
+							onChange={handleThemeChange}
 						/>
-						Dark mode {this.props.current === 'light' ? <RiMoonFill /> : <RiMoonLine />}
+						Dark mode {theme === 'light' ? <RiMoonFill /> : <RiMoonLine />}
 					</label>
 				</div>
 			</PageTemplate>
-		);
-	}
+		)
 }

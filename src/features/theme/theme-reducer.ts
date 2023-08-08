@@ -1,5 +1,7 @@
 // _____ types
 
+import {loadThemeFromLS} from "@/common/utils/locatStorageUtils.ts";
+
 export type ThemeVariantType = 'light' | 'dark';
 
 export type ThemeType = {
@@ -11,7 +13,7 @@ export type ThemeActionType = ReturnType<typeof switchTheme>;
 // _____ reducer
 
 const initialState: ThemeType = {
-   current: 'light'
+   current: loadThemeFromLS() as ThemeVariantType || 'light'
 }
 
 export const ThemeReducer = (state: ThemeType = initialState, action: ThemeActionType): ThemeType => {

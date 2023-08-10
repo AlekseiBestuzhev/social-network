@@ -6,7 +6,6 @@ import { ThemeReducer } from '@/features/theme/theme-reducer.ts';
 import { AuthReducer } from '@/features/auth/auth-reducer.ts';
 import thunk from 'redux-thunk';
 import {ServiceReducer} from "@/features/service/service-reducer.ts";
-import {saveThemeToLS} from "@/common/utils/locatStorageUtils.ts";
 
 const rootReducer = combineReducers({
 	theme: ThemeReducer,
@@ -19,7 +18,3 @@ const rootReducer = combineReducers({
 
 export const store = legacy_createStore(rootReducer, applyMiddleware(thunk));
 export type AppRootStateType = ReturnType<typeof store.getState>;
-
-store.subscribe(() => {
-	saveThemeToLS(store.getState().theme.current);
-});

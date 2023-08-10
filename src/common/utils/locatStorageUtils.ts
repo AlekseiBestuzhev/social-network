@@ -1,12 +1,12 @@
 import {ThemeVariantType} from "@/features/theme/theme-reducer.ts";
 
-export const loadThemeFromLS = () => {
+export const loadThemeFromLS = (): ThemeVariantType | undefined => {
    try {
-      const lastAppliedTheme = localStorage.getItem('lastAppliedTheme');
+      const lastAppliedTheme = localStorage.getItem('theme');
       if (!lastAppliedTheme) {
          return undefined;
       }
-      return lastAppliedTheme;
+      return lastAppliedTheme as ThemeVariantType;
    } catch (err) {
       return undefined;
    }
@@ -14,7 +14,7 @@ export const loadThemeFromLS = () => {
 
 export const saveThemeToLS = (theme: ThemeVariantType) => {
    try {
-      localStorage.setItem('lastAppliedTheme', theme);
+      localStorage.setItem('theme', theme);
    } catch (err) {
       console.log(err)
    }

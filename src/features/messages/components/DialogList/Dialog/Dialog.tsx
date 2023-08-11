@@ -1,9 +1,9 @@
-import cls from '@/components/Pages/Messages/DialogList/Dialog/Dialog.module.scss';
+import cls from '@/features/messages/components/DialogList/Dialog/Dialog.module.scss';
+import {DialogType} from "@/features/messages/messages-reducer.ts";
 import { Avatar } from '@/components/Avatar/Avatar';
 import { NavLink } from 'react-router-dom';
-import { FC } from 'react';
-import {DialogType} from "@/features/messages/messages-reducer.ts";
 import classNames from "classnames";
+import {FC, memo} from 'react';
 
 type DialogPropsType = DialogType & Record<'lastMessage' | 'lastDate', string>;
 
@@ -12,7 +12,7 @@ export type LinkProps = {
 	isPending: boolean;
 }
 
-export const Dialog: FC<DialogPropsType> = ({ id, name, avatar, lastMessage, lastDate }) => {
+export const Dialog: FC<DialogPropsType> = memo(({ id, name, avatar, lastMessage, lastDate }) => {
 
 	const linkStyles = ({isActive}: LinkProps) => classNames(cls.link, {
 		[cls.activeLink]: isActive
@@ -35,4 +35,4 @@ export const Dialog: FC<DialogPropsType> = ({ id, name, avatar, lastMessage, las
 			</NavLink>
 		</li>
 	)
-}
+})

@@ -1,43 +1,35 @@
-import { CurrentDialog } from '@/pages/Messages/CurrentDialog/CurrentDialog';
-import {DialogType, MessageType} from '@/features/messages/messages-reducer';
-import { DialogList } from '@/pages/Messages/DialogList/DialogList';
+import {CurrentDialog} from "@/features/messages/components/CurrentDialog/CurrentDialog.tsx";
+import {DialogList} from "@/features/messages/components/DialogList/DialogList.tsx";
+import {setCurrentDialog} from "@/features/messages/messages-reducer.ts";
 import { SectionInfo } from '@/components/SectionInfo/SectionInfo';
 import cls from '@/pages/Messages/Messages.module.scss';
 import picture from '@/assets/images/messages.gif';
-import { FC, memo } from 'react';
+import {useAppDispatch} from "@/app/hooks.ts";
+import {useMatch} from "react-router-dom";
+import {useEffect} from "react";
 
-export type LastMessageType = {
-	userID: string,
-	text: string,
-	date: string
-};
+export const Messages = () => {
 
-type MessagesPropsType = {
-	dialogsData: DialogType[],
-	lastMessages: LastMessageType[],
-	currentUserID: string,
-	currentUserName: string,
-	currentMessages: MessageType[]
-}
+	const currentUserID = useMatch('/messages/:userID')?.params.userID;
+	const dispatch = useAppDispatch();
 
-export const Messages: FC<MessagesPropsType> = memo(({
-	dialogsData,
-	lastMessages,
-	currentUserID,
-	currentUserName,
-	currentMessages }) => {
+	useEffect(() => {
+		if (currentUserID) {
+			dispatch(setCurrentDialog(currentUserID));
+		}
+	}, [currentUserID]);
 
 	return (
 		<div className={cls.page}>
 			<div className={cls.leftColumn}>
 				<h2 className={cls.title}>Dialogs</h2>
-				<DialogList dialogsData={dialogsData} lastMessages={lastMessages} />
+				<DialogList />
 			</div>
 			{
 				currentUserID
-					? <CurrentDialog userID={currentUserID} messagesData={currentMessages} name={currentUserName} />
+					? <CurrentDialog userID={currentUserID}/>
 					: <SectionInfo text='Choose the dialog...' picture={picture} size='16rem' />
 			}
 		</div>
-	);
-})
+	)
+}

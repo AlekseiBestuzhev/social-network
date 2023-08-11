@@ -1,4 +1,3 @@
-import {LinkProps} from "@/components/Pages/Messages/DialogList/Dialog/Dialog.tsx";
 import cls from '@/components/Layout/Sidebar/Sidebar.module.scss';
 import { RiQuestionAnswerLine } from 'react-icons/ri';
 import { RiNewspaperLine } from 'react-icons/ri';
@@ -8,6 +7,7 @@ import { RiUser3Line } from 'react-icons/ri';
 import { RiTeamLine } from 'react-icons/ri';
 import {NavLink, useMatch} from 'react-router-dom';
 import classNames from "classnames";
+import {LinkProps} from "@/features/messages/components/DialogList/Dialog/Dialog.tsx";
 
 export const Sidebar = () => {
 

@@ -1,0 +1,29 @@
+.page {
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	height: 100%;
+
+	.leftColumn {
+		border-right: var(--border);
+
+		.title {
+			padding: 1rem 0 1rem 2rem;
+			font-size: var(--text-size-large);
+			font-weight: var(--text-weight-md);
+			letter-spacing: var(--text-letter-spacing);
+			line-height: 1;
+			border-bottom: var(--border);
+		}
+	}
+
+	.rightColumn {
+		height: calc(100vh - 7rem);
+		display: flex;
+		flex-direction: column;
+
+		.formWrapper {
+			border-top: var(--border);
+			padding: 2rem 0;
+		}
+	}
+}

@@ -1,6 +1,6 @@
 import { PageTemplate } from '@/components/PageTemplate/PageTemplate';
 import { SectionInfo } from '@/components/SectionInfo/SectionInfo';
-import picture from '@/assets/images/in-dev.gif';
+import picture from '@/assets/animate-images/in-dev.gif';
 
 export const News = () => {
 

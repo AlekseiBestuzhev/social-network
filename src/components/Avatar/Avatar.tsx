@@ -1,38 +1,40 @@
-import defaultAvatarDark from '@/assets/images/default-avatar-dark.svg';
-import defaultAvatar from '@/assets/images/default-avatar.svg';
-import { ThemeType } from '@/features/theme/theme-reducer';
-import { AppRootStateType } from '@/app/store.ts';
-import { CSSProperties, Component, memo } from 'react';
-import { connect } from 'react-redux';
+import defaultAvatarDark from '@/assets/images/avatar/default-avatar-dark.svg';
+import {themeSelector} from '@/features/theme/selectors/themeSelector';
+import defaultAvatar from '@/assets/images/avatar/default-avatar.svg';
+import {CSSProperties, memo, FC} from 'react';
+import {useAppSelector} from '@/app/hooks.ts';
 
-type ThemedImageProps = ThemeType & {
+type PropsType = {
 	photo: string | null,
 	onClick?: () => void,
 	border?: boolean,
 	size?: string,
+	turnOffCursorPointer?: boolean
 }
 
-class ThemedImage extends Component<ThemedImageProps> {
+export const Avatar: FC<PropsType> = memo(({photo, onClick, border, size, turnOffCursorPointer}) => {
 
-	render() {
+	const currentTheme = useAppSelector(themeSelector);
 
-		const photoHandler = this.props.photo
-			? this.props.photo
-			: this.props.current === 'light'
+		const photoHandler = photo
+			? photo
+			: currentTheme === 'light'
 				? defaultAvatar
 				: defaultAvatarDark
 
 		const styleHandler: CSSProperties = {
-			width: this.props.size || '5rem',
-			height: this.props.size || '5rem',
+			width: size || '5rem',
+			height: size || '5rem',
 			borderRadius: '100%',
 			objectFit: 'cover',
-			border: this.props.border ? '0.3rem solid var(--colors-bg-extra)' : 'none',
-			cursor: this.props.photo && this.props.onClick ? 'pointer' : 'auto'
+			border: border ? '0.3rem solid var(--colors-bg-extra)' : 'none',
+			cursor: turnOffCursorPointer ? 'auto' : 'pointer'
 		}
 
 		const onClickHandler = () => {
-			this.props.photo && this.props.onClick && this.props.onClick()
+			if(photo && onClick) {
+				onClick();
+			}
 		}
 
 		return (
@@ -43,11 +45,4 @@ class ThemedImage extends Component<ThemedImageProps> {
 				alt='Default avatar'
 			/>
 		)
-	}
-}
-
-const mapStateToProps = (state: AppRootStateType): ThemeType => ({
-	current: state.theme.current
-});
-
-export const Avatar = memo(connect(mapStateToProps)(ThemedImage));
+})

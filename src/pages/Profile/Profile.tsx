@@ -2,8 +2,8 @@ import {PostsBlock} from "@/features/profile/components/PostsBlock/PostsBlock.ts
 import {Controls} from "@/features/profile/components/Controls/Controls.tsx";
 import {useProfileData} from "@/features/profile/hooks/useProfileData.ts";
 import {Person} from "@/features/profile/components/Person/Person.tsx";
+import {withAuthRedirect} from "@/common/hoc/withAuthRedirect.tsx";
 import {setProfileTC} from "@/features/profile/profile-thunks.ts";
-import {withAuthRedirect} from "@/app/hoc/withAuthRedirect.tsx";
 import {useAppDispatch} from "@/app/hooks.ts";
 import {useParams} from "react-router-dom";
 import {useEffect} from "react";

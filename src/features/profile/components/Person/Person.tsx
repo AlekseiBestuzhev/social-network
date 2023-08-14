@@ -1,12 +1,12 @@
 import {AvatarModalContent} from '@/features/profile/components/Person/AvatarModalContent/AvatarModalContent.tsx';
 import {StatusModalContent} from '@/features/profile/components/Person/StatusModalContent/StatusModalContent.tsx';
+import anotherUserBcg from '@/assets/images/profile-cover/another-user.jpg';
 import cls from '@/features/profile/components/Person/Person.module.scss';
-import {UserProfileType} from "@/features/profile/profile-reducer.ts";
-import anotherUserBcg from '@/assets/images/another-user.jpg';
+import profileBcg from '@/assets/images/profile-cover/profile-bcg.jpeg';
+import {UserProfileType} from '@/features/profile/profile-reducer.ts';
 import {Avatar} from '@/components/Avatar/Avatar.tsx';
-import profileBcg from '@/assets/images/profile-bcg.jpeg';
+import {PropsWithChildren, FC, useState} from 'react';
 import {Modal} from '@/components/Modal/Modal.tsx';
-import {PropsWithChildren, FC, useState} from "react";
 import classNames from 'classnames';
 
 type PersonPropsType = PropsWithChildren & {
@@ -52,7 +52,7 @@ export const Person: FC<PersonPropsType> = ({isMe, status, profile, children}) =
          />
          <div className={cls.person}>
             <div className={cls.info}>
-               <Avatar size='12.5rem' photo={photo} border onClick={openPhotoModal}/>
+               <Avatar size='12.5rem' photo={photo} border onClick={openPhotoModal} turnOffCursorPointer={!photo}/>
                {
                   photo && <Modal onClose={closePhotoModal} opened={photoIsOpen}>
                        <AvatarModalContent photo={photo} name={userName}/>

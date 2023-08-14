@@ -1,7 +1,7 @@
 import cls from '@/features/messages/components/CurrentDialog/DialogWindow/Message/Message.module.scss';
 import { MessageType } from '@/features/messages/messages-reducer';
-import {FC, memo} from 'react';
 import classNames from "classnames";
+import {FC, memo} from 'react';
 
 type MessagePropsType = MessageType & {
 	iSender: boolean

@@ -1,23 +1,22 @@
 import {CurrentDialog} from "@/features/messages/components/CurrentDialog/CurrentDialog.tsx";
 import {DialogList} from "@/features/messages/components/DialogList/DialogList.tsx";
 import {setCurrentDialog} from "@/features/messages/messages-reducer.ts";
-import { SectionInfo } from '@/components/SectionInfo/SectionInfo';
-import cls from '@/pages/Messages/Messages.module.scss';
-import picture from '@/assets/images/messages.gif';
+import {withAuthRedirect} from "@/common/hoc/withAuthRedirect.tsx";
+import { SectionInfo } from "@/components/SectionInfo/SectionInfo";
+import picture from "@/assets/animate-images/messages.gif";
+import cls from "@/pages/Messages/Messages.module.scss";
 import {useAppDispatch} from "@/app/hooks.ts";
-import {useMatch} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {useEffect} from "react";
 
-export const Messages = () => {
+export const Messages = withAuthRedirect(() => {
 
-	const currentUserID = useMatch('/messages/:userID')?.params.userID;
 	const dispatch = useAppDispatch();
+	const {userID} = useParams();
 
 	useEffect(() => {
-		if (currentUserID) {
-			dispatch(setCurrentDialog(currentUserID));
-		}
-	}, [currentUserID]);
+			dispatch(setCurrentDialog(userID || ''));
+	}, [userID]);
 
 	return (
 		<div className={cls.page}>
@@ -26,10 +25,10 @@ export const Messages = () => {
 				<DialogList />
 			</div>
 			{
-				currentUserID
-					? <CurrentDialog userID={currentUserID}/>
+				userID
+					? <CurrentDialog userID={userID}/>
 					: <SectionInfo text='Choose the dialog...' picture={picture} size='16rem' />
 			}
 		</div>
 	)
-}
+})

@@ -2,8 +2,8 @@ import {Message} from "@/features/messages/components/CurrentDialog/DialogWindow
 import cls from '@/features/messages/components/CurrentDialog/DialogWindow/DialogWindow.module.scss';
 import {messagesDataSelector} from "@/features/messages/selectors/messagesDataSelector";
 import { SectionInfo } from '@/components/SectionInfo/SectionInfo';
+import picture from '@/assets/animate-images/dialog.gif';
 import {FC, memo, useEffect, useRef} from 'react';
-import picture from '@/assets/images/dialog.gif';
 import {useAppSelector} from "@/app/hooks.ts";
 
 type DialogWindowPropsType = {

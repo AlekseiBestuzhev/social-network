@@ -2,10 +2,10 @@ import cls from '@/features/profile/components/Person/StatusModalContent/StatusM
 import {statusSelector} from "@/features/profile/selectors/statusSelector";
 import {updateMyStatusTC} from '@/features/profile/profile-thunks.ts';
 import {useAppDispatch, useAppSelector} from "@/app/hooks.ts";
+import {ChangeEvent, FC, memo, useState} from 'react';
 import {Button} from '@/components/Button/Button.tsx';
 import {Input} from '@/components/Input/Input.tsx';
 import {RiCheckFill} from 'react-icons/ri';
-import {FC, memo, useState} from 'react';
 
 type PropsType = {
    onClose: () => void
@@ -19,8 +19,8 @@ export const StatusModalContent: FC<PropsType> = memo(({onClose}) => {
 
    const [statusString, setStatusString] = useState(status);
 
-   const onChangeHandler = (value: string) => {
-      setStatusString(value);
+   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+      setStatusString(e.currentTarget.value);
    }
 
    const onClickHandler = async () => {
@@ -35,7 +35,6 @@ export const StatusModalContent: FC<PropsType> = memo(({onClose}) => {
    return (
       <div className={cls.wrapper}>
          <Input
-            ID='status'
             title='Enter new status'
             value={statusString}
             onChange={onChangeHandler}

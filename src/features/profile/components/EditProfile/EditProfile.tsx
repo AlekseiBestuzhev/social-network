@@ -1,8 +1,8 @@
-import cls from '@/features/profile/components/EditProfile/EditProfile.module.scss';
+import cls from "@/features/profile/components/EditProfile/EditProfile.module.scss";
 import {PageTemplate} from "@/components/PageTemplate/PageTemplate.tsx";
-import {Button} from '@/components/Button/Button.tsx';
-import {Input} from '@/components/Input/Input.tsx';
-import {RiCheckFill} from 'react-icons/ri';
+import {Button} from "@/components/Button/Button.tsx";
+import {Input} from "@/components/Input/Input.tsx";
+import {RiCheckFill} from "react-icons/ri";
 
 export const EditProfile = () => {
 
@@ -17,7 +17,7 @@ export const EditProfile = () => {
                area for photo changing
             </div>
             <div className={cls.rightColumn}>
-               <Input ID='fullName' title='Full Name' value={''} onChange={() => {}}/>
+               <Input title='Full Name' value={''} onChange={() => {}}/>
             </div>
          </div>
          <div className={cls.footer}>

@@ -1,29 +1,16 @@
+import {FC, forwardRef, InputHTMLAttributes, Ref} from 'react';
 import cls from '@/components/Input/Input.module.scss';
-import {ChangeEvent, FC, InputHTMLAttributes} from 'react';
 
 type PropsType = InputHTMLAttributes<HTMLInputElement> & {
-	title?: string,
-	value?: string,
-	onChange?: (value: string) => void
+	title?: string
 }
 
-export const Input: FC<PropsType> = ({ title, value, onChange, ...restProps }) => {
-
-	const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-		if (onChange) {
-			onChange(e.currentTarget.value);
-		}
-	}
+export const Input: FC<PropsType> = forwardRef(({ title, ...restProps }, ref: Ref<HTMLInputElement>) => {
 
 	return (
 		<label className={cls.wrapper}>
 			{title && <p className={cls.title}>{title}:</p>}
-			<input
-				value={value}
-				{...restProps}
-				className={cls.input}
-				onChange={onChangeHandler}
-			/>
+			<input ref={ref}{...restProps} className={cls.input} />
 		</label>
 	);
-}
+})

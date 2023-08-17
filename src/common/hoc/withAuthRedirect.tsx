@@ -1,15 +1,15 @@
-import {authUserSelector} from "@/features/auth/selectors/authUserSelector/authUserSelector.ts";
 import {isAppInitSelector} from "@/features/service/selectors/isAppInitSelector";
-import {Loading} from '@/components/Loading/Loading.tsx';
+import {authUserIDSelector} from "@/features/auth/selectors/authUserIDSelector";
+import {Loading} from "@/components/Loading/Loading.tsx";
 import {useAppSelector} from "@/app/hooks.ts";
 import {Navigate} from "react-router-dom"
-import {ComponentType} from 'react';
+import {ComponentType} from "react";
 
 export const withAuthRedirect = <T,>(Component: ComponentType<T>) => {
 
 	return (props: T) => {
 
-		const isAuth = useAppSelector(authUserSelector);
+		const isAuth = useAppSelector(authUserIDSelector);
 		const isAppInit = useAppSelector(isAppInitSelector);
 
 		return (

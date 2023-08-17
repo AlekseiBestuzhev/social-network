@@ -1,15 +1,18 @@
-import cls from '@/components/Layout/Header/Header.module.scss';
-import { Button } from "@/components/Button/Button";
+import cls from "@/components/Layout/Header/Header.module.scss";
+import {useAuth} from "@/features/auth/hooks/useAuth.ts";
+import {NavLink, useNavigate} from "react-router-dom";
 import { Avatar } from "@/components/Avatar/Avatar";
-import { HeaderType } from "./HeaderContainer";
-import { NavLink } from "react-router-dom";
-import logo from '@/assets/images/logo.svg';
-import { FC, memo } from "react";
+import { Button } from "@/components/Button/Button";
+import logo from "@/assets/images/logo.svg";
 
-export const Header: FC<HeaderType> = memo(({ isAuth, login, photos }) => {
+export const Header = () => {
+
+	const {authUserID, authUserName, authUserAvatar} = useAuth();
+
+	const navigate = useNavigate();
 
 	const onClickHandler = () => {
-		alert('This function didn\'t work yet')
+		navigate('/login');
 	}
 
 	return (
@@ -21,18 +24,16 @@ export const Header: FC<HeaderType> = memo(({ isAuth, login, photos }) => {
 					alt={'Logo'}
 				/>
 				{
-					isAuth
+					authUserID
 						? <NavLink to={'/profile'}>
 							<div className={cls.userInfo}>
-								<p>{login}</p>
-								<Avatar size='2.5rem' photo={photos.large} />
+								<p>{authUserName}</p>
+								<Avatar size='2.5rem' photo={authUserAvatar} />
 							</div>
 						</NavLink>
-						: <NavLink to={'/login'}>
-							<Button variant="White" onClick={onClickHandler}> LOGIN </Button>
-						</NavLink>
+						: <Button variant="white" onClick={onClickHandler}> LOGIN </Button>
 				}
 			</div>
 		</header>
 	)
-})
+}

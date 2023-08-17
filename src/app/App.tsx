@@ -1,23 +1,34 @@
 import {EditProfile} from "@/features/profile/components/EditProfile/EditProfile.tsx";
+import {authUserIDSelector} from "@/features/auth/selectors/authUserIDSelector";
+import {authThunkCreator} from "@/features/auth/auth-thunks.ts";
+import {useAppDispatch, useAppSelector} from "@/app/hooks.ts";
 import {useTheme} from "@/features/theme/hooks/useTheme.ts";
 import { Navigate, Routes, Route } from 'react-router-dom';
 import { Settings } from "@/pages/Settings/Settings.tsx";
-import { Layout } from '@/components/Layout/Layout.tsx';
-import { Messages } from '@/pages/Messages/Messages';
+import { Layout } from "@/components/Layout/Layout.tsx";
+import { Messages } from "@/pages/Messages/Messages";
 import {Profile} from "@/pages/Profile/Profile.tsx";
-import { Login } from '@/pages/Login/Login.tsx';
-import { Music } from '@/pages/Music/Music.tsx';
+import {useEffect, useLayoutEffect} from "react";
+import { Login } from "@/pages/Login/Login.tsx";
+import { Music } from "@/pages/Music/Music.tsx";
 import {Users} from "@/pages/Users/Users.tsx";
-import { News } from '@/pages/News/News.tsx';
-import {useLayoutEffect} from 'react';
+import { News } from "@/pages/News/News.tsx";
 
 export const App = () => {
+
+	const authUser = useAppSelector(authUserIDSelector);
+
+	const dispatch = useAppDispatch();
 
 	const theme = useTheme();
 
 	useLayoutEffect(() => {
 			document.body.setAttribute('data-theme', theme);
 	}, [theme]);
+
+	useEffect(() => {
+		dispatch(authThunkCreator());
+	}, []);
 
 		return (
 			<Layout>
@@ -30,7 +41,11 @@ export const App = () => {
 					<Route path='/news' element={<News/>} />
 					<Route path='/music' element={<Music/>} />
 					<Route path='/settings' element={<Settings/>} />
-					<Route path='/login' element={<Login/>} />
+					{
+						authUser
+							? <Route path='/login' element={<Navigate to={'/profile'} />} />
+							: <Route path='/login' element={<Login/>} />
+					}
 				</Routes>
 			</Layout>
 		);

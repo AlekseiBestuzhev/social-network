@@ -1,14 +1,13 @@
-import {postsSelector} from "@/features/profile/selectors/postsSelector/postsSelector.ts";
 import cls from "@/features/profile/components/PostsBlock/Posts/Posts.module.scss";
 import {Post} from "@/features/profile/components/PostsBlock/Posts/Post/Post.tsx";
+import {postsSelector} from "@/features/profile/selectors/postsSelector";
 import {useAppSelector} from "@/app/hooks.ts";
 
 export const Posts = () => {
 
    const postsData = useAppSelector(postsSelector);
 
-   const postsList =
-      postsData.length
+   const postsList = postsData.length
          ? postsData.map(el => (
             <Post
                key={el.id}

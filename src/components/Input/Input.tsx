@@ -1,28 +1,29 @@
 import cls from '@/components/Input/Input.module.scss';
-import { ChangeEvent, FC } from 'react';
+import {ChangeEvent, FC, InputHTMLAttributes} from 'react';
 
-type PropsType = {
-	ID: string,
-	title: string,
-	value: string,
-	onChange: (value: string) => void
+type PropsType = InputHTMLAttributes<HTMLInputElement> & {
+	title?: string,
+	value?: string,
+	onChange?: (value: string) => void
 }
 
-export const Input: FC<PropsType> = ({ ID, title, value, onChange }) => {
+export const Input: FC<PropsType> = ({ title, value, onChange, ...restProps }) => {
 
 	const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-		onChange(e.currentTarget.value)
+		if (onChange) {
+			onChange(e.currentTarget.value);
+		}
 	}
 
 	return (
-		<label htmlFor={ID} className={cls.wrapper}>
-			<p className={cls.title}>{title}:</p>
+		<label className={cls.wrapper}>
+			{title && <p className={cls.title}>{title}:</p>}
 			<input
 				value={value}
+				{...restProps}
+				className={cls.input}
 				onChange={onChangeHandler}
-				className={cls.status}
-				type="text" id={ID}
-				name={ID} />
+			/>
 		</label>
 	);
 }

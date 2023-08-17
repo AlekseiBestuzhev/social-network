@@ -6,15 +6,19 @@
 		margin-bottom: 0.5rem;
 	}
 
-	.status {
+	.input {
 		width: 100%;
-		padding: 0.5rem;
+		padding: 0.8rem;
 		border-radius: 0.5rem;
 
 		background-color: transparent;
 		color: var(--colors-text);
 		border: var(--border-2);
 		outline: none;
+
+		&::placeholder {
+			color: inherit;
+		}
 
 		&:focus {
 			border-color: var(--colors-ui-main);

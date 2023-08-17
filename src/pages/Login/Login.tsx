@@ -1,19 +1,24 @@
+import {LoginForm} from "@/features/auth/components/LoginForm/LoginForm.tsx";
+import cls from "@/features/auth/components/LoginForm/LoginForm.module.scss"
 import { PageTemplate } from "@/components/PageTemplate/PageTemplate"
-import {Button} from "@/components/Button/Button";
 
 export const Login = () => {
 
 	return (
 		<PageTemplate pageTitle="Login">
-			<form>
-				<input autoComplete='username' placeholder='Login'/>
-				<input name="password" type="password" autoComplete='current-password' placeholder='Password' />
-				<label htmlFor="rememberMe">
-					<input id="rememberMe" name="rememberMe" type="checkbox" />
-					Remember me
-				</label>
-				<Button variant='main' onClick={() => { }}>Log In</Button>
-			</form>
+			<div className={cls.wrapper}>
+				<div className={cls.content}>
+					<div className={cls.info}>
+						<p>To log in get registered
+							<a href='https://social-network.samuraijs.com/' target='_blank' rel="noreferrer"> here</a>
+						</p>
+						<p>or use common test account credentials:</p>
+						<p>Email: free@samuraijs.com</p>
+						<p>Password: free</p>
+					</div>
+				<LoginForm />
+				</div>
+			</div>
 		</PageTemplate>
 	);
 }

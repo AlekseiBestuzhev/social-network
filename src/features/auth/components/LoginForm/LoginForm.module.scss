@@ -1,0 +1,19 @@
+.wrapper {
+  height: 100%;
+  display: grid;
+  place-items: center;
+
+  .content {
+    width: 15rem;
+
+    .info {
+      margin-bottom: 2rem;
+      color: var(--colors-text-extra);
+      line-height: 1.5;
+
+      a {
+        color: var(--colors-ui-main);
+      }
+    }
+  }
+}

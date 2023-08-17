@@ -25,13 +25,14 @@ body[data-theme='light'] {
 	--colors-bg-extra: #ffffff;
 	--colors-bg-loader: hsla(0, 0%, 100%, 0.7);
 	--colors-text: #000;
-	--colors-text-extra: #b1b1b1;
+	--colors-text-extra: #a0a0a0;
 	--colors-item-hover: #dfdfdf;
 
 	--shadow: hsla(210, 8%, 62%, 0.35) 0 8px 24px;
 	--shadow-line-block: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, hsla(210, 8%, 62%, 0.3) 100%);
-	--border: 1px solid #d2d2d2;
-	--border-2: 2px solid #d2d2d2;
+	--border: 1px solid #c5c5c5;
+	--border-2: 2px solid #c5c5c5;
+	--border-3: 2px solid #dadada;
 }
 
 body[data-theme='dark'] {
@@ -43,13 +44,14 @@ body[data-theme='dark'] {
 	--colors-bg-extra: hsl(0, 0%, 18%);
 	--colors-bg-loader: hsla(0, 0%, 18%, 0.7);
 	--colors-text: #ffffff;
-	--colors-text-extra: #7d7d7d;
+	--colors-text-extra: #909090;
 	--colors-item-hover: #151515;
 
 	--shadow: hsla(0, 0%, 0%, 0.4) 0 8px 24px;
 	--shadow-line-block: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, hsla(0, 0%, 0%, 0.3) 100%);
-	--border: 1px solid #4a4a4a;
-	--border-2: 2px solid #4a4a4a;
+	--border: 1px solid #5d5d5d;
+	--border-2: 2px solid #5d5d5d;
+	--border-3: 2px solid #434343;
 }
 
 // ! _______________________ COMMON _______________________

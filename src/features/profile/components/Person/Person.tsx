@@ -1,5 +1,7 @@
 import {AvatarModalContent} from '@/features/profile/components/Person/AvatarModalContent/AvatarModalContent.tsx';
 import {StatusModalContent} from '@/features/profile/components/Person/StatusModalContent/StatusModalContent.tsx';
+import anotherUserBcgWebp from '@/assets/images/profile-cover/another-user.webp';
+import profileBcgWebp from '@/assets/images/profile-cover/profile-bcg.webp';
 import anotherUserBcg from '@/assets/images/profile-cover/another-user.jpg';
 import cls from '@/features/profile/components/Person/Person.module.scss';
 import profileBcg from '@/assets/images/profile-cover/profile-bcg.jpeg';
@@ -47,10 +49,10 @@ export const Person: FC<PersonPropsType> = ({isMe, status, profile, children}) =
 
    return (
       <section>
-         <img className={cls.header}
-              src={isMe ? profileBcg : anotherUserBcg}
-              alt={'Stars'}
-         />
+         <picture>
+            <source srcSet={isMe ? profileBcgWebp : anotherUserBcgWebp} type="image/webp" />
+            <img className={cls.header} src={isMe ? profileBcg : anotherUserBcg} alt={'Profile cover'}/>
+         </picture>
          <div className={cls.person}>
             <div className={cls.info}>
                <Avatar size='12.5rem' photo={photo} border onClick={openPhotoModal} turnOffCursorPointer={!photo}/>

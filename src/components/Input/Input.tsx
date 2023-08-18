@@ -1,16 +1,32 @@
-import {FC, forwardRef, InputHTMLAttributes, Ref} from 'react';
-import cls from '@/components/Input/Input.module.scss';
+import {FC, forwardRef, InputHTMLAttributes, Ref} from "react";
+import cls from "@/components/Input/Input.module.scss";
+import classNames from "classnames";
 
 type PropsType = InputHTMLAttributes<HTMLInputElement> & {
-	title?: string
+   title?: string,
+   error?: string
 }
 
-export const Input: FC<PropsType> = forwardRef(({ title, ...restProps }, ref: Ref<HTMLInputElement>) => {
+export const Input: FC<PropsType> = forwardRef(({
+                                                   title,
+                                                   error,
+                                                   placeholder,
+                                                   ...restProps
+                                                }, ref: Ref<HTMLInputElement>) => {
 
-	return (
-		<label className={cls.wrapper}>
-			{title && <p className={cls.title}>{title}:</p>}
-			<input ref={ref}{...restProps} className={cls.input} />
-		</label>
-	);
+   const placeholderClasses = classNames(cls.message, {
+      [cls.error]: error
+   })
+
+   const inputClasses = classNames(cls.input, {
+      [cls.error]: error
+   })
+
+   return (
+      <label className={cls.wrapper}>
+         {title && <p className={cls.title}>{title}:</p>}
+         <input ref={ref} {...restProps}  className={inputClasses}/>
+         <span className={placeholderClasses}>{error || placeholder}</span>
+      </label>
+   );
 })

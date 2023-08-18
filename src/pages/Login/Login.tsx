@@ -1,5 +1,5 @@
 import {LoginForm} from "@/features/auth/components/LoginForm/LoginForm.tsx";
-import cls from "@/features/auth/components/LoginForm/LoginForm.module.scss"
+import cls from "@/pages/Login/Login.module.scss"
 import { PageTemplate } from "@/components/PageTemplate/PageTemplate"
 
 export const Login = () => {
@@ -10,7 +10,7 @@ export const Login = () => {
 				<div className={cls.content}>
 					<div className={cls.info}>
 						<p>To log in get registered
-							<a href='https://social-network.samuraijs.com/' target='_blank' rel="noreferrer"> here</a>
+							<a href='https://social-network.samuraijs.com/' target='_blank' rel="noreferrer">here</a>
 						</p>
 						<p>or use common test account credentials:</p>
 						<p>Email: free@samuraijs.com</p>

@@ -4,7 +4,7 @@
   place-items: center;
 
   .content {
-    width: 15rem;
+    width: 16rem;
 
     .info {
       margin-bottom: 2rem;
@@ -13,6 +13,8 @@
 
       a {
         color: var(--colors-ui-main);
+        text-decoration: underline;
+        margin-left: 0.2rem;
       }
     }
   }

@@ -1,4 +1,4 @@
-import {useForm, SubmitHandler } from "react-hook-form";
+import {useForm, SubmitHandler} from "react-hook-form";
 import {Button} from "@/components/Button/Button.tsx";
 import {login} from "@/features/auth/auth-thunks.ts";
 import {Input} from "@/components/Input/Input.tsx";
@@ -15,7 +15,7 @@ export const LoginForm = () => {
 
    const dispatch = useAppDispatch();
 
-   const { register, handleSubmit } = useForm<LoginFormType>();
+   const {register, handleSubmit, formState: {errors}} = useForm<LoginFormType>({mode: "onTouched"});
    const onSubmit: SubmitHandler<LoginFormType> = data => {
       dispatch(login(data));
    }
@@ -31,12 +31,32 @@ export const LoginForm = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
          <div style={styles}>
             <Input
-               {...register("email", { required: true })}
+               {...register("email", {
+                  required: {
+                     value: true,
+                     message: 'Field is required'
+                  },
+                  pattern: {
+                     value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                     message: 'Invalid email'
+                  }
+               })}
+               error={errors.email?.message}
                autoComplete='username'
-               placeholder='Login'
+               placeholder='Email'
             />
             <Input
-               {...register("password", { required: true })}
+               {...register("password", {
+                  required: {
+                     value: true,
+                     message: 'Field is required'
+                  },
+                  minLength: {
+                     value: 4,
+                     message: 'Min count is 4'
+                  }
+               })}
+               error={errors.password?.message}
                autoComplete='current-password'
                placeholder='Password'
                type="password"

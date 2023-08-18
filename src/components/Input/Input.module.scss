@@ -1,26 +1,58 @@
 .wrapper {
-	width: 100%;
+  width: 100%;
 
-	.title {
-		margin-bottom: 0.5rem;
-	}
+  position: relative;
 
-	.input {
-		width: 100%;
-		padding: 0.8rem 0.5rem;
-		border-radius: 0.5rem;
+  .title {
+    margin-bottom: 0.5rem;
+  }
 
-		background-color: transparent;
-		color: var(--colors-text);
-		border: var(--border-2);
-		outline: none;
+  .input {
+    width: 100%;
+    padding: 1rem 0.7rem;
+    border-radius: 0.5rem;
 
-		&::placeholder {
-			color: inherit;
-		}
+    background-color: transparent;
+    color: var(--colors-text);
+    border: var(--border-2);
+    outline: none;
 
-		&:focus {
-			border-color: var(--colors-ui-main);
-		}
-	}
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill:active {
+      transition: background-color 5000s ease-in-out 0s;
+      -webkit-text-fill-color: var(--colors-text);
+    }
+
+    &:focus {
+      border-color: var(--colors-ui-main);
+
+      &.error {
+        border-color: var(--colors-error);
+      }
+    }
+  }
+
+  .message {
+    background-color: var(--colors-bg-extra);
+    color: var(--colors-text-extra);
+    font-size: var(--text-size-sm);
+
+    transform: translateY(-50%);
+
+    padding: 0 0.3rem;
+
+    position: absolute;
+    left: 0.4rem;
+    top: 0;
+
+    &.error {
+      color: var(--colors-error);
+    }
+  }
+
+  .error {
+    border-color: var(--colors-error);
+  }
 }

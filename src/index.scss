@@ -14,6 +14,7 @@
 	--text-weight-md: 600;
 	--text-weight-bold: 800;
 	--radius: 0.8rem;
+	--colors-error: #c83939;
 }
 
 body[data-theme='light'] {
@@ -31,8 +32,8 @@ body[data-theme='light'] {
 	--shadow: hsla(210, 8%, 62%, 0.35) 0 8px 24px;
 	--shadow-line-block: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, hsla(210, 8%, 62%, 0.3) 100%);
 	--border: 1px solid #c5c5c5;
-	--border-2: 2px solid #c5c5c5;
-	--border-3: 2px solid #dadada;
+	--border-2: 1px solid #c5c5c5;
+	--border-3: 1px solid #dadada;
 }
 
 body[data-theme='dark'] {
@@ -50,8 +51,8 @@ body[data-theme='dark'] {
 	--shadow: hsla(0, 0%, 0%, 0.4) 0 8px 24px;
 	--shadow-line-block: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, hsla(0, 0%, 0%, 0.3) 100%);
 	--border: 1px solid #5d5d5d;
-	--border-2: 2px solid #5d5d5d;
-	--border-3: 2px solid #434343;
+	--border-2: 1px solid #5d5d5d;
+	--border-3: 1px solid #434343;
 }
 
 // ! _______________________ COMMON _______________________

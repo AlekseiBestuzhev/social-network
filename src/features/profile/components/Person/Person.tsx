@@ -4,8 +4,8 @@ import anotherUserBcg from '@/assets/images/profile-cover/another-user.jpg';
 import cls from '@/features/profile/components/Person/Person.module.scss';
 import profileBcg from '@/assets/images/profile-cover/profile-bcg.jpeg';
 import {UserProfileType} from '@/features/profile/profile-reducer.ts';
+import {PropsWithChildren, FC, useState, useCallback} from 'react';
 import {Avatar} from '@/components/Avatar/Avatar.tsx';
-import {PropsWithChildren, FC, useState} from 'react';
 import {Modal} from '@/components/Modal/Modal.tsx';
 import classNames from 'classnames';
 
@@ -21,23 +21,24 @@ export const Person: FC<PersonPropsType> = ({isMe, status, profile, children}) =
 
    const [statusEditMode, setStatusEditMode] = useState(false);
 
-   const openPhotoModal = () => {
+   const openPhotoModal = useCallback(() => {
       setPhotoIsOpen(true);
-   }
+   }, []);
 
-   const closePhotoModal = () => {
+   const closePhotoModal = useCallback(() => {
       setPhotoIsOpen(false);
-   }
+   }, []);
 
-   const openStatusModal = () => {
+   const openStatusModal = useCallback(() => {
       if (isMe) setStatusEditMode(true);
-   }
+   }, []);
 
-   const closeStatusModal = () => {
+   const closeStatusModal = useCallback(() => {
       setStatusEditMode(false);
-   }
+   }, []);
 
    const userName = profile.fullName;
+
    const photo = profile.photos.large;
 
    const statusStyles = classNames(cls.status, {

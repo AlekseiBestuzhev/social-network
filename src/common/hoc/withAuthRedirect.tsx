@@ -1,23 +1,18 @@
-import {isAppInitSelector} from "@/features/service/selectors/isAppInitSelector";
 import {authUserIDSelector} from "@/features/auth/selectors/authUserIDSelector";
-import {Loading} from "@/components/Loading/Loading.tsx";
 import {useAppSelector} from "@/app/hooks.ts";
 import {Navigate} from "react-router-dom"
 import {ComponentType} from "react";
 
-export const withAuthRedirect = <T,>(Component: ComponentType<T>) => {
+export const withAuthRedirect = <T, >(Component: ComponentType<T>) => {
 
-	return (props: T) => {
+   return (props: T) => {
 
-		const isAuth = useAppSelector(authUserIDSelector);
-		const isAppInit = useAppSelector(isAppInitSelector);
+      const isAuth = useAppSelector(authUserIDSelector);
 
-		return (
-			isAppInit
-				? isAuth
-					? <Component {...props as T & object} />
-					: <Navigate to='/login'/>
-				: <Loading/>
-		)
-	}
+      return (
+         isAuth
+            ? <Component {...props as T & object} />
+            : <Navigate to='/login'/>
+      )
+   }
 }

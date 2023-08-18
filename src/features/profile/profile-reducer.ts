@@ -1,5 +1,6 @@
 import {PostType} from '@/features/profile/components/PostsBlock/Posts/Post/Post.tsx';
 import {UserPhotosType} from '@/features/users/users-reducer.ts';
+import {userLoggedOut} from '@/features/auth/auth-reducer.ts';
 import badman from '@/assets/images/localUsers/bad-man.jpg';
 import john from '@/assets/images/localUsers/john-doe.jpg';
 import {v1} from 'uuid';
@@ -16,6 +17,8 @@ export type ProfileActionsType =
    | ReturnType<typeof addPostAC>
    | ReturnType<typeof setStatus>
    | ReturnType<typeof setLike>
+
+type HandlingActions = ProfileActionsType | ReturnType<typeof userLoggedOut>
 
 export type UserProfileType = {
    aboutMe: string,
@@ -47,7 +50,7 @@ export type ProfilePageType = {
 
 //_____ reducer
 
-const initialState: ProfilePageType = {
+const initState: ProfilePageType = {
    profile: null,
    postsData: [
       {
@@ -90,7 +93,7 @@ const initialState: ProfilePageType = {
    status: ''
 }
 
-export const ProfileReducer = (state: ProfilePageType = initialState, action: ProfileActionsType): ProfilePageType => {
+export const ProfileReducer = (state: ProfilePageType = initState, action: HandlingActions): ProfilePageType => {
    switch (action.type) {
       case 'UPDATE-POST-TEXT':
          return {
@@ -153,8 +156,10 @@ export const ProfileReducer = (state: ProfilePageType = initialState, action: Pr
             ...state,
             status: action.payload.status
          }
+      case 'USER-LOGGED-OUT':
+         return initState
       default:
-         return state;
+         return state
    }
 }
 

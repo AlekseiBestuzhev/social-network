@@ -3,9 +3,10 @@ import {UserPhotosType} from "@/features/users/users-reducer.ts";
 // _____ types
 
 export type AuthActionsType =
+   | ReturnType<typeof setUserAuthPhoto>
    | ReturnType<typeof setUserAuthData>
    | ReturnType<typeof setUserAuthName>
-   | ReturnType<typeof setUserAuthPhoto>
+   | ReturnType<typeof userLoggedOut>
 
 export type AuthUserDataType = {
    id: number | null,
@@ -61,8 +62,10 @@ export const AuthReducer = (state: InitStateType = initState, action: AuthAction
             ...state,
             fullName: action.payload.name
          }
+      case 'USER-LOGGED-OUT':
+         return initState
       default:
-         return state;
+         return state
    }
 }
 
@@ -89,4 +92,8 @@ export const setUserAuthName = (name: string) => ({
    payload: {
       name
    }
+} as const);
+
+export const userLoggedOut = () => ({
+   type: 'USER-LOGGED-OUT'
 } as const);

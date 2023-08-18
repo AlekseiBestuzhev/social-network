@@ -1,3 +1,5 @@
+import {userLoggedOut} from "@/features/auth/auth-reducer.ts";
+
 // _____ types
 
 export type UsersActionsType =
@@ -7,6 +9,8 @@ export type UsersActionsType =
    | ReturnType<typeof setUsers>
    | ReturnType<typeof unfollow>
    | ReturnType<typeof follow>
+
+type HandlingActions = UsersActionsType | ReturnType<typeof userLoggedOut>
 
 export type UserPhotosType = {
    small: string | null,
@@ -32,7 +36,7 @@ export type UsersPageType = {
 
 // _____ reducer
 
-const initialState: UsersPageType = {
+const initState: UsersPageType = {
    users: [],
    pageSize: 10,
    totalUsersCount: 0,
@@ -40,7 +44,7 @@ const initialState: UsersPageType = {
    followingInProgress: []
 }
 
-export const UsersReducer = (state: UsersPageType = initialState, action: UsersActionsType): UsersPageType => {
+export const UsersReducer = (state: UsersPageType = initState, action: HandlingActions): UsersPageType => {
    switch (action.type) {
       case 'FOLLOW':
          return {
@@ -75,8 +79,10 @@ export const UsersReducer = (state: UsersPageType = initialState, action: UsersA
                : state.followingInProgress.filter(el => el !== action.payload.userID)
          }
       }
+      case "USER-LOGGED-OUT":
+         return initState
       default:
-         return state;
+         return state
    }
 }
 

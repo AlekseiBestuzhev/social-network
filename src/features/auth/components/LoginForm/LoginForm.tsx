@@ -1,18 +1,24 @@
 import {useForm, SubmitHandler } from "react-hook-form";
 import {Button} from "@/components/Button/Button.tsx";
-import {CSSProperties} from "react";
+import {login} from "@/features/auth/auth-thunks.ts";
 import {Input} from "@/components/Input/Input.tsx";
+import {useAppDispatch} from "@/app/hooks.ts";
+import {CSSProperties} from "react";
 
 export type LoginFormType = {
-   login: string,
+   email: string,
    password: string,
    rememberMe: boolean
 };
 
 export const LoginForm = () => {
 
+   const dispatch = useAppDispatch();
+
    const { register, handleSubmit } = useForm<LoginFormType>();
-   const onSubmit: SubmitHandler<LoginFormType> = data => console.log(data);
+   const onSubmit: SubmitHandler<LoginFormType> = data => {
+      dispatch(login(data));
+   }
 
    const styles: CSSProperties = {
       display: 'flex',
@@ -25,7 +31,7 @@ export const LoginForm = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
          <div style={styles}>
             <Input
-               {...register("login", { required: true })}
+               {...register("email", { required: true })}
                autoComplete='username'
                placeholder='Login'
             />

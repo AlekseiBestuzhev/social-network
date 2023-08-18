@@ -1,3 +1,4 @@
+import {LoginFormType} from "@/features/auth/components/LoginForm/LoginForm.tsx";
 import { API_KEY } from "./API-KEY";
 import axios from "axios";
 
@@ -47,6 +48,14 @@ export const profileAPI = {
 export const authAPI = {
 	authMe: async () => {
 		const response = await instance.get(`auth/me`);
+		return response.data;
+	},
+	login: async (data: LoginFormType) => {
+		const response = await instance.post(`auth/login`, data);
+		return response.data;
+	},
+	logout: async () => {
+		const response = await instance.delete(`auth/login`);
 		return response.data;
 	}
 }

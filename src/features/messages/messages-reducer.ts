@@ -1,4 +1,5 @@
 import heisenberg from '@/assets/images/localUsers/heisenberg.jpg';
+import {userLoggedOut} from '@/features/auth/auth-reducer.ts';
 import meladze from '@/assets/images/localUsers/meladze.jpg';
 import badman from '@/assets/images/localUsers/bad-man.jpg';
 import shelby from '@/assets/images/localUsers/shelby.jpg';
@@ -10,6 +11,8 @@ export type MessagesActionsType =
 	| ReturnType<typeof updateMessageTextAC>
 	| ReturnType<typeof setCurrentDialog>
 	| ReturnType<typeof addMessageAC>
+
+type HandlingActions = MessagesActionsType | ReturnType<typeof userLoggedOut>
 
 export type MessageType = {
 	id: string,
@@ -40,7 +43,7 @@ export type MessagesPageType = {
 
 // _____ reducer
 
-const initialState: MessagesPageType = {
+const initState: MessagesPageType = {
 	dialogsData: [
 		{ id: 'local_meladze', name: 'В. Меладзе', avatar: meladze },
 		{ id: 'local_the-badman', name: 'The Badman', avatar: badman },
@@ -70,7 +73,7 @@ const initialState: MessagesPageType = {
 	currentDialog: ''
 }
 
-export const MessagesReducer = (state: MessagesPageType = initialState, action: MessagesActionsType): MessagesPageType => {
+export const MessagesReducer = (state: MessagesPageType = initState, action: HandlingActions): MessagesPageType => {
 	switch (action.type) {
 		case 'UPDATE-MESSAGE-TEXT': {
 			return {
@@ -103,8 +106,10 @@ export const MessagesReducer = (state: MessagesPageType = initialState, action: 
 				currentDialog: action.payload.userID
 			}
 		}
+		case "USER-LOGGED-OUT":
+			return initState
 		default:
-			return state;
+			return state
 	}
 }
 

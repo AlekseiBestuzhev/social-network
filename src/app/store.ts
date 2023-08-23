@@ -1,11 +1,11 @@
-import { applyMiddleware, combineReducers, legacy_createStore } from "redux";
+import {applyMiddleware, combineReducers, compose, legacy_createStore} from 'redux';
 import { MessagesReducer } from '@/features/messages/messages-reducer.ts';
 import { ProfileReducer } from '@/features/profile/profile-reducer.ts';
+import {ServiceReducer} from '@/features/service/service-reducer.ts';
 import { UsersReducer } from '@/features/users/users-reducer.ts';
 import { ThemeReducer } from '@/features/theme/theme-reducer.ts';
 import { AuthReducer } from '@/features/auth/auth-reducer.ts';
 import thunk from 'redux-thunk';
-import {ServiceReducer} from "@/features/service/service-reducer.ts";
 
 const rootReducer = combineReducers({
 	theme: ThemeReducer,
@@ -16,5 +16,9 @@ const rootReducer = combineReducers({
 	service: ServiceReducer
 });
 
-export const store = legacy_createStore(rootReducer, applyMiddleware(thunk));
+// @ts-ignore
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+export const store = legacy_createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
+
 export type AppRootStateType = ReturnType<typeof store.getState>;

@@ -4,7 +4,19 @@
   <img src="src/assets/images/logo.svg" style="width: 400px" alt="logo" />
 </p>
 
-## React + TypeScript SPA 🚀
+React + TypeScript SPA 🚀
+
+<hr>
+
+## Description
+
+A social network that implements subscription to users, change of status, photo of the user and his personal data, change of theme. 
+Locally it is possible to create wall posts and send messages in dialogues. In the future, sending messages to specific users and general chat will be implemented.
+
+
+In the application, you can log in using a test account or follow the link to register your own. All login information is provided on the login page.
+
+<hr>
 
 Build tool: Vite + SWC
 

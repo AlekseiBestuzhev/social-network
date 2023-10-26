@@ -1,5 +1,9 @@
 # Social Network App
 
+<p align="center">
+  <img src="src/assets/images/logo.svg" style="width: 400px" alt="logo" />
+</p>
+
 ## React + TypeScript SPA 🚀
 
 Build tool: Vite + SWC

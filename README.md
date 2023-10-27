@@ -1,7 +1,7 @@
 # Social Network App
 
 <p align="center">
-  <img src="src/assets/images/logo.svg" style="width: 400px" alt="logo" />
+  <img src="src/assets/images/logo-readme.png" style="width: 400px" alt="logo" />
 </p>
 
 React + TypeScript SPA 🚀

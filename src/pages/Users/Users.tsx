@@ -8,57 +8,55 @@ import {setCurrentPage} from "@/features/users/users-reducer.ts";
 import {User} from "@/features/users/components/User/User.tsx";
 import {useAppDispatch, useAppSelector} from "@/app/hooks.ts";
 import {Loading} from "@/components/Loading/Loading.tsx";
-import cls from "@/Pages/Users/Users.module.scss";
+import cls from "./Users.module.scss";
 import {useEffect} from "react";
 
 export const Users = withAuthRedirect(() => {
 
-   const {followList, totalUsersCount, currentPage, pageSize, users} = useUsersData();
+    const {followList, totalUsersCount, currentPage, pageSize, users} = useUsersData();
 
-   const appStatus = useAppSelector(appStatusSelector);
+    const appStatus = useAppSelector(appStatusSelector);
 
-   const loading = appStatus === 'loading';
+    const loading = appStatus === 'loading';
 
-   const dispatch = useAppDispatch();
+    const dispatch = useAppDispatch();
 
-   const userList = users.map(u => (
-      <User
-         key={u.id}
-         id={u.id}
-         photos={u.photos}
-         name={u.name}
-         uniqueUrlName={u.uniqueUrlName}
-         followed={u.followed}
-         status={u.status}
-         followingInProgress={followList}
-      />
-   ));
+    const onPageChange = (newPage: number) => {
+        void dispatch(setCurrentPage(newPage));
+        void dispatch(getUsersThunkCreator(newPage, pageSize));
+    }
 
-   const onPageChange = (newPage: number) => {
-      dispatch(setCurrentPage(newPage));
-      dispatch(getUsersThunkCreator(newPage, pageSize));
-   }
+    useEffect(() => {
+        void dispatch(getUsersThunkCreator(currentPage, pageSize));
+        return () => {
+            onPageChange(1);
+        }
+    }, []);
 
-   useEffect(() => {
-      dispatch(getUsersThunkCreator(currentPage, pageSize));
-      return () => {
-         onPageChange(1);
-      }
-   }, []);
-
-   return (
-      <PageTemplate pageTitle="Users">
-         <nav className={cls.wrapper}>
-            <PaginationBlock
-               pageSize={pageSize}
-               onPageChange={onPageChange}
-               totalUsersCount={totalUsersCount}
-            />
-         </nav>
-         {loading && <Loading/>}
-         <ul className={cls.list}>
-            {userList}
-         </ul>
-      </PageTemplate>
-   )
+    return (
+        <PageTemplate pageTitle="Users">
+            <nav className={cls.wrapper}>
+                <PaginationBlock
+                    pageSize={pageSize}
+                    onPageChange={onPageChange}
+                    totalUsersCount={totalUsersCount}
+                />
+            </nav>
+            {loading && <Loading/>}
+            <ul className={cls.list}>
+                {users.map(u => (
+                    <User
+                        key={u.id}
+                        id={u.id}
+                        photos={u.photos}
+                        name={u.name}
+                        uniqueUrlName={u.uniqueUrlName}
+                        followed={u.followed}
+                        status={u.status}
+                        followingInProgress={followList}
+                    />
+                ))}
+            </ul>
+        </PageTemplate>
+    )
 })

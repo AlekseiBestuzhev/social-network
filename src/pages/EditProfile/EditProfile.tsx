@@ -1,20 +1,40 @@
 import {PhotoUploaderWithPreview} from "@/components/PhotoUploaderWithPreview/PhotoUploaderWithPreview.tsx";
-import {profileSelector} from "@/features/profile/selectors/profileSelector";
+import {authUserAvatarSelector} from "@/features/auth/selectors/authUserAvatarSelector";
 import {PageTemplate} from "@/components/PageTemplate/PageTemplate.tsx";
+import {updateMyPhotoTC} from "@/features/profile/profile-thunks.ts";
 import cls from "@/pages/EditProfile/EditProfile.module.scss";
+import {useAppDispatch, useAppSelector} from "@/app/hooks.ts";
+import {validateImage} from "@/common/utils/validateImage.ts";
 import {Button} from "@/components/Button/Button.tsx";
 import {Input} from "@/components/Input/Input.tsx";
 import {RiCheckFill} from "react-icons/ri";
-import {useAppSelector} from "@/app/hooks.ts";
 import {ChangeEvent} from "react";
 
 export const EditProfile = () => {
+    const dispatch = useAppDispatch()
 
-    const profile = useAppSelector(profileSelector);
-    const avatar = profile?.photos.large || null
+    const avatar = useAppSelector(authUserAvatarSelector);
+
+    const maxSize = 3
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg']
 
     const onImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
-        console.log(e)
+        try {
+            if (e.target.files && e.target.files.length) {
+                const file = e.target.files[0]
+
+                if (validateImage(file, maxSize, allowedTypes)) {
+                    const formData = new FormData()
+
+                    formData.append('image', file)
+                    await dispatch(updateMyPhotoTC(formData))
+
+                    //toast.success('Your avatar successfully changed', { containerId: 'common' })
+                }
+            }
+        } catch (error) {
+            console.log(error)
+        }
     }
 
    const applyChanges = () => {

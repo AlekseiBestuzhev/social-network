@@ -8,6 +8,7 @@ import {
    unfollowOnProfile,
    setFollowingInProgressOnProfile
 } from "@/features/profile/profile-reducer.ts";
+import {setPhotos} from "@/features/auth/auth-reducer.ts";
 
 export const setProfileTC = (id: number) =>
    async (dispatch: AppDispatchType, getState: () => AppRootStateType) => {
@@ -34,7 +35,7 @@ export const getFollowingOnProfileTC = (id: number) => async (dispatch: AppDispa
 
 export const switchFollowingOnProfileTC = (id: number, followed: boolean) => async (dispatch: AppDispatchType) => {
    dispatch(setFollowingInProgressOnProfile(true));
-   const result = await followAPI.swichFollow(id, followed)
+   const result = await followAPI.switchFollow(id, followed)
    if (result === 0) {
       followed
          ? dispatch(unfollowOnProfile())
@@ -52,5 +53,12 @@ export const updateMyStatusTC = (status: string) => async (dispatch: AppDispatch
    const result = await profileAPI.updateMyStatus(status)
    if (result === 0) {
       dispatch(setStatus(status));
+   }
+}
+
+export const updateMyPhotoTC = (data: FormData) => async (dispatch: AppDispatchType) => {
+   const result = await profileAPI.updateMyPhoto(data)
+   if (result.resultCode === 0) {
+      dispatch(setPhotos(result.data.photos));
    }
 }

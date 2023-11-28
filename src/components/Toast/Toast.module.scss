@@ -1,0 +1,54 @@
+.root {
+  position: fixed;
+  left: 1rem;
+  bottom: 1rem;
+  z-index: 1000;
+
+  overflow: hidden;
+
+  max-width: 25rem;
+  padding: 2rem 3rem 2rem 1.5rem;
+  border-radius: var(--radius);
+
+  background-color: var(--colors-error);
+  box-shadow: var(--shadow-toast);
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    height: 4px;
+
+    background-color: var(--colors-text-const);
+
+    animation-name: widthChange;
+    animation-timing-function: linear;
+    animation-duration: 6s;
+  }
+
+  .content {
+    display: flex;
+    column-gap: 1rem;
+
+    > svg {
+      fill: var(--colors-text-const);
+    }
+
+    .text {
+      flex-shrink: 1;
+      word-wrap: break-word;
+      color: var(--colors-text-const);
+    }
+  }
+}
+
+@keyframes widthChange {
+  0% {
+    width: 100%;
+  }
+  100% {
+    width: 0;
+  }
+}

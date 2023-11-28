@@ -9,6 +9,8 @@ import {Button} from "@/components/Button/Button.tsx";
 import {Input} from "@/components/Input/Input.tsx";
 import {RiCheckFill} from "react-icons/ri";
 import {ChangeEvent} from "react";
+import {setAppError} from "@/features/service/service-reducer.ts";
+import {handleServerError} from "@/common/utils/handleServerError.ts";
 
 export const EditProfile = () => {
     const dispatch = useAppDispatch()
@@ -23,17 +25,16 @@ export const EditProfile = () => {
             if (e.target.files && e.target.files.length) {
                 const file = e.target.files[0]
 
-                if (validateImage(file, maxSize, allowedTypes)) {
+                if (validateImage(file, maxSize, allowedTypes, dispatch)) {
                     const formData = new FormData()
 
                     formData.append('image', file)
                     await dispatch(updateMyPhotoTC(formData))
-
-                    //toast.success('Your avatar successfully changed', { containerId: 'common' })
                 }
             }
         } catch (error) {
-            console.log(error)
+            const message = handleServerError(error)
+            dispatch(setAppError(message))
         }
     }
 

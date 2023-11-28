@@ -8,13 +8,13 @@ export type ServiceActionsType =
 export type ServiceType = {
    isAppInit: boolean,
    appStatus: AppStatusTypes,
-   error: boolean
+   error: string | null
 }
 
 const initialState: ServiceType = {
    isAppInit: false,
    appStatus: 'loading',
-   error: false
+   error: null
 }
 
 export const ServiceReducer = (state: ServiceType = initialState, action: ServiceActionsType): ServiceType => {
@@ -55,7 +55,7 @@ export const setAppStatus = (status: AppStatusTypes) => ({
    }
 } as const);
 
-export const setAppError = (error: boolean) => ({
+export const setAppError = (error: string | null) => ({
    type: 'SET-APP-ERROR',
    payload: {
       error

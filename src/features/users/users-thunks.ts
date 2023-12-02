@@ -19,7 +19,7 @@ export const getUsersThunkCreator = (currentPage: number, pageSize: number) => a
 
 export const setFollowingThunkCreator = (id: number, followed: boolean) => async (dispatch: AppDispatchType) => {
    dispatch(setFollowingInProgress(id, true));
-   const result = await followAPI.swichFollow(id, followed)
+   const result = await followAPI.switchFollow(id, followed)
    if (result === 0) {
       followed
          ? dispatch(unfollow(id))

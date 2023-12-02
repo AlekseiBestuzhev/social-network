@@ -15,6 +15,7 @@
 	--text-weight-bold: 800;
 	--radius: 0.8rem;
 	--colors-error: #c83939;
+	--colors-text-const: #ffffff;
 }
 
 body[data-theme='light'] {
@@ -30,6 +31,7 @@ body[data-theme='light'] {
 	--colors-item-hover: #dfdfdf;
 
 	--shadow: hsla(210, 8%, 62%, 0.35) 0 8px 24px;
+	--shadow-toast: hsla(210, 8%, 62%, 0.45) 0 0 24px;
 	--shadow-line-block: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, hsla(210, 8%, 62%, 0.3) 100%);
 	--border: 1px solid #c5c5c5;
 	--border-2: 1px solid #c5c5c5;
@@ -49,6 +51,7 @@ body[data-theme='dark'] {
 	--colors-item-hover: #151515;
 
 	--shadow: hsla(0, 0%, 0%, 0.4) 0 8px 24px;
+	--shadow-toast: hsla(0, 0%, 0%, 0.5) 0 0 24px;
 	--shadow-line-block: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, hsla(0, 0%, 0%, 0.3) 100%);
 	--border: 1px solid #5d5d5d;
 	--border-2: 1px solid #5d5d5d;

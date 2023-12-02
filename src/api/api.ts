@@ -22,7 +22,7 @@ export const followAPI = {
 		const response = await instance.get(`follow/${id}`);
 		return response.data;
 	},
-	swichFollow: async (id: number, followed: boolean) => {
+	switchFollow: async (id: number, followed: boolean) => {
 		const response = followed
 			? await instance.delete(`follow/${id}`)
 			: await instance.post(`follow/${id}`)
@@ -42,6 +42,13 @@ export const profileAPI = {
 	updateMyStatus: async (status: string) => {
 		const response = await instance.put('profile/status', { status });
 		return response.data.resultCode;
+	},
+	updateMyPhoto: async (data: FormData) => {
+		const response = await instance.put('profile/photo', data, {
+			headers: {
+				'Content-Type': 'multipart/form-data'
+			}})
+		return response.data;
 	}
 }
 

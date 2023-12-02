@@ -18,7 +18,7 @@ export const Profile = withAuthRedirect(() => {
    const {currentUser, status, profile, followed, followingInProgress} = useProfileData(userID);
 
    useEffect(() => {
-      dispatch(setProfileTC(currentUser));
+      void dispatch(setProfileTC(currentUser));
    }, [currentUser]);
 
    return (

@@ -1,6 +1,7 @@
 import {Sidebar} from "@/components/Layout/Sidebar/Sidebar";
 import {Header} from "@/components/Layout/Header/Header";
 import {FC, PropsWithChildren} from "react";
+import {Toast} from "@/components/Toast/Toast.tsx";
 
 export const Layout: FC<PropsWithChildren> = ({ children }) => {
 
@@ -11,6 +12,7 @@ export const Layout: FC<PropsWithChildren> = ({ children }) => {
 			<main className='content'>
 				{children}
 			</main>
+			<Toast />
 		</div>
 	);
 }

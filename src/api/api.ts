@@ -41,7 +41,7 @@ export const profileAPI = {
 	},
 	updateMyStatus: async (status: string) => {
 		const response = await instance.put('profile/status', { status });
-		return response.data.resultCode;
+		return response.data;
 	},
 	updateMyPhoto: async (data: FormData) => {
 		const response = await instance.put('profile/photo', data, {

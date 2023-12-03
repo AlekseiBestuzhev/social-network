@@ -1,8 +1,8 @@
 import defaultAvatarDark from '@/assets/images/avatar/default-avatar-dark.svg';
 import {themeSelector} from '@/features/theme/selectors/themeSelector';
 import defaultAvatar from '@/assets/images/avatar/default-avatar.svg';
+import {useAppSelector} from "@/common/hooks/useAppSelector.ts";
 import {CSSProperties, memo, FC} from 'react';
-import {useAppSelector} from '@/app/hooks.ts';
 
 type PropsType = {
 	photo: string | null,
@@ -13,7 +13,6 @@ type PropsType = {
 }
 
 export const Avatar: FC<PropsType> = memo(({photo, onClick, border, size, turnOffCursorPointer}) => {
-
 	const currentTheme = useAppSelector(themeSelector);
 
 		const photoHandler = photo

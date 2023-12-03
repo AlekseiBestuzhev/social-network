@@ -1,7 +1,7 @@
 import {authUserAvatarSelector} from "@/features/auth/selectors/authUserAvatarSelector";
 import {authUserNameSelector} from "@/features/auth/selectors/authUserNameSelector";
 import {authUserIDSelector} from "@/features/auth/selectors/authUserIDSelector";
-import {useAppSelector} from "@/app/hooks.ts";
+import {useAppSelector} from "@/common/hooks/useAppSelector.ts";
 
 export const useAuth = () => {
 

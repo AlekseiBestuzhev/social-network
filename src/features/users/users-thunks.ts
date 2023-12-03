@@ -7,7 +7,7 @@ import {
    setFollowingInProgress
 } from '@/features/users/users-reducer.ts';
 import {setAppStatus} from "@/features/service/service-reducer.ts";
-import {AppDispatchType} from "@/app/hooks.ts";
+import {AppDispatchType} from "@/common/hooks/useAppDispatch.ts";
 
 export const getUsersThunkCreator = (currentPage: number, pageSize: number) => async (dispatch: AppDispatchType) => {
    dispatch(setAppStatus('loading'));

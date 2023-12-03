@@ -1,4 +1,4 @@
-import cls from '@/features/profile/components/Person/AvatarModalContent/AvatarModalContent.module.scss';
+import cls from '@/features/profile/components/AvatarControl/AvatarModalContent/AvatarModalContent.module.scss';
 import {RiHeart3Line} from 'react-icons/ri';
 import {RiHeart3Fill} from 'react-icons/ri';
 import {RiLock2Line} from 'react-icons/ri';

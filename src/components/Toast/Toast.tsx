@@ -1,6 +1,7 @@
 import {appErrorSelector} from "@/features/service/selectors/appErrorSelector";
 import {setAppError} from "@/features/service/service-reducer.ts";
-import {useAppDispatch, useAppSelector} from "@/app/hooks.ts";
+import {useAppDispatch} from "@/common/hooks/useAppDispatch.ts";
+import {useAppSelector} from "@/common/hooks/useAppSelector.ts";
 import {RiErrorWarningFill} from "react-icons/ri";
 import cls from './Toast.module.scss'
 import {useEffect} from "react";

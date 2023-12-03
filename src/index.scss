@@ -25,6 +25,7 @@ body[data-theme='light'] {
 
 	--colors-bg: #f5f5f5;
 	--colors-bg-extra: #ffffff;
+	--colors-bg-status: #d8ebfc;
 	--colors-bg-loader: hsla(0, 0%, 100%, 0.7);
 	--colors-text: #000;
 	--colors-text-extra: #a0a0a0;
@@ -45,6 +46,7 @@ body[data-theme='dark'] {
 
 	--colors-bg: #1f1f1f;
 	--colors-bg-extra: hsl(0, 0%, 18%);
+	--colors-bg-status: hsl(0, 0%, 24%);
 	--colors-bg-loader: hsla(0, 0%, 18%, 0.7);
 	--colors-text: #ffffff;
 	--colors-text-extra: #909090;

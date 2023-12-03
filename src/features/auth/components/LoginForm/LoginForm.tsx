@@ -2,7 +2,7 @@ import {useForm, SubmitHandler} from "react-hook-form";
 import {Button} from "@/components/Button/Button.tsx";
 import {login} from "@/features/auth/auth-thunks.ts";
 import {Input} from "@/components/Input/Input.tsx";
-import {useAppDispatch} from "@/app/hooks.ts";
+import {useAppDispatch} from "@/common/hooks/useAppDispatch.ts";
 import {CSSProperties} from "react";
 
 export type LoginFormType = {

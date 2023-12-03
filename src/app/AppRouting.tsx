@@ -1,11 +1,11 @@
 import {authUserIDSelector} from "@/features/auth/selectors/authUserIDSelector";
 import {EditProfile} from "@/pages/EditProfile/EditProfile.tsx";
+import {useAppSelector} from "@/common/hooks/useAppSelector.ts";
 import {Loading} from "@/components/Loading/Loading.tsx";
 import {Navigate, Route, Routes} from "react-router-dom";
 import {Settings} from "@/pages/Settings/Settings.tsx";
 import {Music} from "@/pages/Music/Music.tsx";
 import {Login} from "@/pages/Login/Login.tsx";
-import {useAppSelector} from "@/app/hooks.ts";
 import {News} from "@/pages/News/News.tsx";
 import {lazy, Suspense} from "react";
 
@@ -20,7 +20,6 @@ const Messages = lazy(
 );
 
 export const AppRouting = () => {
-
     const authUser = useAppSelector(authUserIDSelector);
 
     return (

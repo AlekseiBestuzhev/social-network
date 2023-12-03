@@ -4,7 +4,7 @@ import {setAppError} from "@/features/service/service-reducer.ts";
 import {setPhotos} from "@/features/auth/auth-reducer.ts";
 import {followAPI, profileAPI} from "@/api/api.ts";
 import {AppRootStateType} from "@/app/store.ts";
-import {AppDispatchType} from "@/app/hooks.ts";
+import {AppDispatchType} from "@/common/hooks/useAppDispatch.ts";
 import {
     setStatus,
     setUserProfile,
@@ -53,10 +53,19 @@ export const getUserStatusTC = (id: number) => async (dispatch: AppDispatchType)
     dispatch(setStatus(result));
 }
 
-export const updateMyStatusTC = (status: string) => async (dispatch: AppDispatchType) => {
-    const result = await profileAPI.updateMyStatus(status)
-    if (result === 0) {
-        dispatch(setStatus(status));
+export const updateMyStatusTC = (status: string, onClose: () => void) => async (dispatch: AppDispatchType) => {
+    try {
+        const result = await profileAPI.updateMyStatus(status)
+        if (result.resultCode === 0) {
+            dispatch(setStatus(status));
+            onClose()
+        } else {
+            const message = handleResultCodeError(result)
+            dispatch(setAppError(message))
+        }
+    } catch (error) {
+        const message = handleServerError(error)
+        dispatch(setAppError(message))
     }
 }
 

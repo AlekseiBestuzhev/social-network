@@ -1,8 +1,9 @@
-import cls from '@/features/profile/components/Person/StatusModalContent/StatusModalContent.module.scss';
+import cls from '@/features/profile/components/StatusControl/StatusModalContent/StatusModalContent.module.scss';
 import {statusSelector} from "@/features/profile/selectors/statusSelector";
 import {updateMyStatusTC} from '@/features/profile/profile-thunks.ts';
-import {ChangeEvent, FC, memo, useCallback, useState} from 'react';
-import {useAppDispatch, useAppSelector} from "@/app/hooks.ts";
+import {useAppDispatch} from "@/common/hooks/useAppDispatch.ts";
+import {useAppSelector} from "@/common/hooks/useAppSelector.ts";
+import {ChangeEvent, FC, memo, useState} from 'react';
 import {Button} from '@/components/Button/Button.tsx';
 import {Input} from '@/components/Input/Input.tsx';
 import {RiCheckFill} from 'react-icons/ri';
@@ -12,25 +13,19 @@ type PropsType = {
 };
 
 export const StatusModalContent: FC<PropsType> = memo(({onClose}) => {
-
    const dispatch = useAppDispatch();
 
    const status = useAppSelector(statusSelector);
 
    const [statusString, setStatusString] = useState(status);
 
-   const onChangeHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
       setStatusString(e.currentTarget.value);
-   }, []);
+   }
 
-   const onClickHandler = useCallback(async () => {
-      try {
-         await dispatch(updateMyStatusTC(statusString));
-         onClose();
-      } catch (err) {
-         console.log(err);
-      }
-   }, []);
+   const onClickHandler = async () => {
+      await dispatch(updateMyStatusTC(statusString, onClose));
+   }
 
    return (
       <div className={cls.wrapper}>

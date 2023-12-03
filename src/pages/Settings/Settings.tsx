@@ -3,7 +3,8 @@ import {switchDependencyOnSystem, switchTheme, ThemeVariantType} from '@/feature
 import {themeSelector} from "@/features/theme/selectors/themeSelector";
 import { PageTemplate } from '@/components/PageTemplate/PageTemplate';
 import {saveThemeToLS} from "@/common/utils/locatStorageUtils.ts";
-import {useAppDispatch, useAppSelector} from "@/app/hooks.ts";
+import {useAppDispatch} from "@/common/hooks/useAppDispatch.ts";
+import {useAppSelector} from "@/common/hooks/useAppSelector.ts";
 import cls from '@/pages/Settings/Settings.module.scss';
 import { RiSettingsLine } from 'react-icons/ri';
 import { RiMoonFill } from 'react-icons/ri';
@@ -11,7 +12,6 @@ import { RiMoonLine } from 'react-icons/ri';
 import {ChangeEvent} from 'react';
 
 export const Settings = () => {
-
 	const dependsOnSystem = useAppSelector(dependsOnSystemSelector);
 
 	const theme = useAppSelector(themeSelector);

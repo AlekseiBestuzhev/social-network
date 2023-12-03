@@ -2,17 +2,16 @@ import {Message} from "@/features/messages/components/CurrentDialog/DialogWindow
 import cls from '@/features/messages/components/CurrentDialog/DialogWindow/DialogWindow.module.scss';
 import {messagesDataSelector} from "@/features/messages/selectors/messagesDataSelector";
 import {SectionInfo} from '@/components/SectionInfo/SectionInfo';
+import {useAppSelector} from "@/common/hooks/useAppSelector.ts";
 import pictureWebp from '@/assets/animate-images/dialog.webp';
 import picture from '@/assets/animate-images/dialog.gif';
 import {FC, memo, useEffect, useRef} from 'react';
-import {useAppSelector} from "@/app/hooks.ts";
 
 type DialogWindowPropsType = {
    userID: string
 }
 
 export const DialogWindow: FC<DialogWindowPropsType> = memo(({userID}) => {
-
    const messagesEndRef = useRef<null | HTMLDivElement>(null);
 
    const messagesData = useAppSelector(messagesDataSelector)[userID];

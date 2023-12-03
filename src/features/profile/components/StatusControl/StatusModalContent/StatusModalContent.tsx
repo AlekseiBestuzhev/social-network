@@ -1,4 +1,4 @@
-import cls from '@/features/profile/components/Person/StatusModalContent/StatusModalContent.module.scss';
+import cls from '@/features/profile/components/StatusControl/StatusModalContent/StatusModalContent.module.scss';
 import {statusSelector} from "@/features/profile/selectors/statusSelector";
 import {updateMyStatusTC} from '@/features/profile/profile-thunks.ts';
 import {ChangeEvent, FC, memo, useCallback, useState} from 'react';

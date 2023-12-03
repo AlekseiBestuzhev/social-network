@@ -3,7 +3,7 @@ import cls from '@/features/users/components/User/User.module.scss';
 import {Button} from '@/components/Button/Button.tsx';
 import {Avatar} from '@/components/Avatar/Avatar.tsx';
 import {UserType} from '@/features/users/users-reducer.ts';
-import {useAppDispatch} from "@/app/hooks.ts";
+import {useAppDispatch} from "@/common/hooks/useAppDispatch.ts";
 import {NavLink} from 'react-router-dom';
 import {FC, memo} from 'react';
 

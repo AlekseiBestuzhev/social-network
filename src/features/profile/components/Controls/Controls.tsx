@@ -3,7 +3,7 @@ import cls from '@/features/profile/components/Controls/Controls.module.scss'
 import {Button} from '@/components/Button/Button.tsx';
 import {RiUserUnfollowLine} from "react-icons/ri";
 import {RiUserAddLine} from "react-icons/ri";
-import {useAppDispatch} from "@/app/hooks.ts";
+import {useAppDispatch} from "@/common/hooks/useAppDispatch.ts";
 import {RiChat3Line} from "react-icons/ri";
 import {useNavigate} from "react-router-dom";
 import {FC, memo} from 'react';

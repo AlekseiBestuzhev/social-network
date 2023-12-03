@@ -5,7 +5,7 @@ import {Person} from "@/features/profile/components/Person/Person.tsx";
 import {withAuthRedirect} from "@/common/hoc/withAuthRedirect.tsx";
 import {setProfileTC} from "@/features/profile/profile-thunks.ts";
 import {Loading} from "@/components/Loading/Loading.tsx";
-import {useAppDispatch} from "@/app/hooks.ts";
+import {useAppDispatch} from "@/common/hooks/useAppDispatch.ts";
 import {useParams} from "react-router-dom";
 import {useEffect} from "react";
 

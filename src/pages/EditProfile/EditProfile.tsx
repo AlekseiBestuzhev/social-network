@@ -3,7 +3,7 @@ import {authUserAvatarSelector} from "@/features/auth/selectors/authUserAvatarSe
 import {PageTemplate} from "@/components/PageTemplate/PageTemplate.tsx";
 import {updateMyPhotoTC} from "@/features/profile/profile-thunks.ts";
 import cls from "@/pages/EditProfile/EditProfile.module.scss";
-import {useAppDispatch, useAppSelector} from "@/app/hooks.ts";
+import {useAppDispatch, useAppSelector} from "@/common/hooks/useAppDispatch.ts";
 import {validateImage} from "@/common/utils/validateImage.ts";
 import {Button} from "@/components/Button/Button.tsx";
 import {Input} from "@/components/Input/Input.tsx";

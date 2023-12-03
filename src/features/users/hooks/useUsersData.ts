@@ -3,7 +3,7 @@ import {totalUsersCountSelector} from "@/features/users/selectors/totalUsersCoun
 import {currentPageSelector} from "@/features/users/selectors/currentPageSelector";
 import {pageSizeSelector} from "@/features/users/selectors/pageSizeSelector";
 import {usersSelector} from "@/features/users/selectors/usersSelector";
-import {useAppSelector} from "@/app/hooks.ts";
+import {useAppSelector} from "@/common/hooks/useAppDispatch.ts";
 
 export const useUsersData = () => {
 

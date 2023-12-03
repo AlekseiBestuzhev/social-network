@@ -3,7 +3,7 @@ import {removeLike, setLike} from '@/features/profile/profile-reducer.ts';
 import {Avatar} from '@/components/Avatar/Avatar.tsx';
 import {RiHeart3Line} from 'react-icons/ri';
 import {RiHeart3Fill} from 'react-icons/ri';
-import {useAppDispatch} from '@/app/hooks.ts';
+import {useAppDispatch} from '@/common/hooks/useAppDispatch.ts';
 import {FC} from 'react';
 
 export type PostType = {

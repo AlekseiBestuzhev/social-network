@@ -6,7 +6,7 @@ import {useUsersData} from "@/features/users/hooks/useUsersData.ts";
 import {withAuthRedirect} from "@/common/hoc/withAuthRedirect.tsx";
 import {setCurrentPage} from "@/features/users/users-reducer.ts";
 import {User} from "@/features/users/components/User/User.tsx";
-import {useAppDispatch, useAppSelector} from "@/app/hooks.ts";
+import {useAppDispatch, useAppSelector} from "@/common/hooks/useAppDispatch.ts";
 import {Loading} from "@/components/Loading/Loading.tsx";
 import cls from "./Users.module.scss";
 import {useEffect} from "react";

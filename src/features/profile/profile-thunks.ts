@@ -4,7 +4,7 @@ import {setAppError} from "@/features/service/service-reducer.ts";
 import {setPhotos} from "@/features/auth/auth-reducer.ts";
 import {followAPI, profileAPI} from "@/api/api.ts";
 import {AppRootStateType} from "@/app/store.ts";
-import {AppDispatchType} from "@/app/hooks.ts";
+import {AppDispatchType} from "@/common/hooks/useAppDispatch.ts";
 import {
     setStatus,
     setUserProfile,

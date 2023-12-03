@@ -2,7 +2,7 @@ import {setUserAuthData, setUserAuthName, setUserAuthPhoto, userLoggedOut} from 
 import {LoginFormType} from "@/features/auth/components/LoginForm/LoginForm.tsx";
 import {setAppInit} from "@/features/service/service-reducer.ts";
 import {authAPI, profileAPI} from '@/api/api.ts';
-import {AppDispatchType} from "@/app/hooks.ts";
+import {AppDispatchType} from "@/common/hooks/useAppDispatch.ts";
 
 export const authThunkCreator = () => async (dispatch: AppDispatchType) => {
    const response = await authAPI.authMe();

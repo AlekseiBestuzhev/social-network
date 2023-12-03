@@ -2,7 +2,7 @@ import defaultAvatarDark from '@/assets/images/avatar/default-avatar-dark.svg';
 import {themeSelector} from '@/features/theme/selectors/themeSelector';
 import defaultAvatar from '@/assets/images/avatar/default-avatar.svg';
 import {CSSProperties, memo, FC} from 'react';
-import {useAppSelector} from '@/app/hooks.ts';
+import {useAppSelector} from '@/common/hooks/useAppDispatch.ts';
 
 type PropsType = {
 	photo: string | null,

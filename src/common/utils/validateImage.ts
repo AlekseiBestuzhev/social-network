@@ -1,4 +1,4 @@
-import {AppDispatchType} from "@/app/hooks.ts";
+import {AppDispatchType} from "@/common/hooks/useAppDispatch.ts";
 import {setAppError} from "@/features/service/service-reducer.ts";
 
 export const validateImage = (

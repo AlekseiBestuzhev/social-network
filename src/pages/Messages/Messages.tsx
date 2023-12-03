@@ -6,7 +6,7 @@ import {SectionInfo} from "@/components/SectionInfo/SectionInfo";
 import pictureWebp from "@/assets/animate-images/messages.webp";
 import picture from "@/assets/animate-images/messages.gif";
 import cls from "@/pages/Messages/Messages.module.scss";
-import {useAppDispatch} from "@/app/hooks.ts";
+import {useAppDispatch} from "@/common/hooks/useAppDispatch.ts";
 import {useParams} from "react-router-dom";
 import {useEffect} from "react";
 

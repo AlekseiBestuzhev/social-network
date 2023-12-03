@@ -5,7 +5,7 @@ import {Navigate, Route, Routes} from "react-router-dom";
 import {Settings} from "@/pages/Settings/Settings.tsx";
 import {Music} from "@/pages/Music/Music.tsx";
 import {Login} from "@/pages/Login/Login.tsx";
-import {useAppSelector} from "@/app/hooks.ts";
+import {useAppSelector} from "@/common/hooks/useAppDispatch.ts";
 import {News} from "@/pages/News/News.tsx";
 import {lazy, Suspense} from "react";
 

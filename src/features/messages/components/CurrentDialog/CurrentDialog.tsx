@@ -4,7 +4,7 @@ import cls from '@/features/messages/components/CurrentDialog/CurrentDialog.modu
 import {dialogsDataSelector} from "@/features/messages/selectors/dialogsDataSelector";
 import { RiSendPlaneFill } from 'react-icons/ri';
 import { RiAlignRight } from 'react-icons/ri';
-import {useAppSelector} from "@/app/hooks.ts";
+import {useAppSelector} from "@/common/hooks/useAppDispatch.ts";
 import {FC, memo} from "react";
 
 type PropsType = {

@@ -5,7 +5,7 @@ import {logout} from "@/features/auth/auth-thunks.ts";
 import {Avatar} from "@/components/Avatar/Avatar";
 import {Button} from "@/components/Button/Button";
 import {RiLogoutBoxLine} from "react-icons/ri";
-import {useAppDispatch} from "@/app/hooks.ts";
+import {useAppDispatch} from "@/common/hooks/useAppDispatch.ts";
 import logo from "@/assets/images/logo.svg";
 
 export const Header = () => {

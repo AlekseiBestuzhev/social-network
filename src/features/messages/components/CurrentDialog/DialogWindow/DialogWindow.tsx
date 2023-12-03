@@ -5,7 +5,7 @@ import {SectionInfo} from '@/components/SectionInfo/SectionInfo';
 import pictureWebp from '@/assets/animate-images/dialog.webp';
 import picture from '@/assets/animate-images/dialog.gif';
 import {FC, memo, useEffect, useRef} from 'react';
-import {useAppSelector} from "@/app/hooks.ts";
+import {useAppSelector} from "@/common/hooks/useAppDispatch.ts";
 
 type DialogWindowPropsType = {
    userID: string

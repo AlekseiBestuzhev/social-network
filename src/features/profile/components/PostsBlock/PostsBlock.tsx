@@ -2,7 +2,7 @@ import cls from '@/features/profile/components/PostsBlock/PostsBlock.module.scss
 import {addPostAC, updatePostTexAC} from "@/features/profile/profile-reducer.ts";
 import {Posts} from "@/features/profile/components/PostsBlock/Posts/Posts.tsx";
 import {AddItemForm} from "@/components/AddItemForm/AddItemForm.tsx";
-import {useAppDispatch, useAppSelector} from "@/app/hooks.ts";
+import {useAppDispatch, useAppSelector} from "@/common/hooks/useAppDispatch.ts";
 import {CgAddR} from "react-icons/cg";
 import {FC} from "react";
 

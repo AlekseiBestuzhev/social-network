@@ -53,10 +53,19 @@ export const getUserStatusTC = (id: number) => async (dispatch: AppDispatchType)
     dispatch(setStatus(result));
 }
 
-export const updateMyStatusTC = (status: string) => async (dispatch: AppDispatchType) => {
-    const result = await profileAPI.updateMyStatus(status)
-    if (result === 0) {
-        dispatch(setStatus(status));
+export const updateMyStatusTC = (status: string, onClose: () => void) => async (dispatch: AppDispatchType) => {
+    try {
+        const result = await profileAPI.updateMyStatus(status)
+        if (result.resultCode === 0) {
+            dispatch(setStatus(status));
+            onClose()
+        } else {
+            const message = handleResultCodeError(result)
+            dispatch(setAppError(message))
+        }
+    } catch (error) {
+        const message = handleServerError(error)
+        dispatch(setAppError(message))
     }
 }
 

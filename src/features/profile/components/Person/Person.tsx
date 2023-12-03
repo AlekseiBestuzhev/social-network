@@ -27,13 +27,11 @@ export const Person: FC<PersonPropsType> = ({isMe, status, profile, children}) =
             <div className={cls.person}>
                 <div className={cls.info}>
                     <AvatarControl photo={photo} fullName={fullName} />
-                    <div className={cls.about}>
-                        <StatusControl isMe={isMe} status={status} />
                         <h2 className={cls.name}>{fullName}</h2>
-                    </div>
                 </div>
                 {children}
             </div>
+            <StatusControl isMe={isMe} status={status} />
             <ExtraInfo profile={profile} />
         </section>
     )

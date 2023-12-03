@@ -1,7 +1,8 @@
 import cls from '@/features/profile/components/StatusControl/StatusModalContent/StatusModalContent.module.scss';
 import {statusSelector} from "@/features/profile/selectors/statusSelector";
 import {updateMyStatusTC} from '@/features/profile/profile-thunks.ts';
-import {useAppDispatch, useAppSelector} from "@/common/hooks/useAppDispatch.ts";
+import {useAppDispatch} from "@/common/hooks/useAppDispatch.ts";
+import {useAppSelector} from "@/common/hooks/useAppSelector.ts";
 import {ChangeEvent, FC, memo, useState} from 'react';
 import {Button} from '@/components/Button/Button.tsx';
 import {Input} from '@/components/Input/Input.tsx';

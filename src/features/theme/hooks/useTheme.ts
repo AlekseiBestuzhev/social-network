@@ -1,8 +1,9 @@
 import {dependsOnSystemSelector} from "@/features/theme/selectors/dependsOnSystemSelector";
 import {themeSelector} from "@/features/theme/selectors/themeSelector";
 import {getSystemTheme} from "@/common/utils/getSystemTheme.ts";
+import {useAppDispatch} from "@/common/hooks/useAppDispatch.ts";
+import {useAppSelector} from "@/common/hooks/useAppSelector.ts";
 import {switchTheme} from "@/features/theme/theme-reducer.ts";
-import {useAppDispatch, useAppSelector} from "@/common/hooks/useAppDispatch.ts";
 import {useEffect, useRef} from "react";
 
 export const useTheme = () => {

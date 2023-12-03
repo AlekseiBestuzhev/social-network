@@ -1,5 +1,5 @@
 import {authUserIDSelector} from "@/features/auth/selectors/authUserIDSelector";
-import {useAppSelector} from "@/common/hooks/useAppDispatch.ts";
+import {useAppSelector} from "@/common/hooks/useAppSelector.ts";
 import {Navigate} from "react-router-dom"
 import {ComponentType} from "react";
 

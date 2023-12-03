@@ -3,10 +3,9 @@ import {totalUsersCountSelector} from "@/features/users/selectors/totalUsersCoun
 import {currentPageSelector} from "@/features/users/selectors/currentPageSelector";
 import {pageSizeSelector} from "@/features/users/selectors/pageSizeSelector";
 import {usersSelector} from "@/features/users/selectors/usersSelector";
-import {useAppSelector} from "@/common/hooks/useAppDispatch.ts";
+import {useAppSelector} from "@/common/hooks/useAppSelector.ts";
 
 export const useUsersData = () => {
-
    const followList = useAppSelector(followingInProgressUserListSelector);
    const totalUsersCount = useAppSelector(totalUsersCountSelector);
    const currentPage = useAppSelector(currentPageSelector);

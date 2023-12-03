@@ -2,10 +2,9 @@ import {messagesDataSelector} from "@/features/messages/selectors/messagesDataSe
 import {dialogsDataSelector} from "@/features/messages/selectors/dialogsDataSelector";
 import {Dialog} from "@/features/messages/components/DialogList/Dialog/Dialog.tsx";
 import cls from '@/features/messages/components/DialogList/DialogList.module.scss'
-import {useAppSelector} from "@/common/hooks/useAppDispatch.ts";
+import {useAppSelector} from "@/common/hooks/useAppSelector.ts";
 
 export const DialogList = () => {
-
 	const dialogsData = useAppSelector(dialogsDataSelector);
 	const messagesData = useAppSelector(messagesDataSelector);
 

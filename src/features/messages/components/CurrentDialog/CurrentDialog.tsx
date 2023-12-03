@@ -2,9 +2,9 @@ import {NewMessageContainer} from "@/features/messages/components/CurrentDialog/
 import {DialogWindow} from "@/features/messages/components/CurrentDialog/DialogWindow/DialogWindow.tsx";
 import cls from '@/features/messages/components/CurrentDialog/CurrentDialog.module.scss';
 import {dialogsDataSelector} from "@/features/messages/selectors/dialogsDataSelector";
+import {useAppSelector} from "@/common/hooks/useAppSelector.ts";
 import { RiSendPlaneFill } from 'react-icons/ri';
 import { RiAlignRight } from 'react-icons/ri';
-import {useAppSelector} from "@/common/hooks/useAppDispatch.ts";
 import {FC, memo} from "react";
 
 type PropsType = {
@@ -12,7 +12,6 @@ type PropsType = {
 }
 
 export const CurrentDialog: FC<PropsType> = memo(({userID}) => {
-
 	const dialogsData = useAppSelector(dialogsDataSelector);
 
 	const currentUserName = (()=> {

@@ -1,16 +1,17 @@
 import {PhotoUploaderWithPreview} from "@/components/PhotoUploaderWithPreview/PhotoUploaderWithPreview.tsx";
 import {authUserAvatarSelector} from "@/features/auth/selectors/authUserAvatarSelector";
 import {PageTemplate} from "@/components/PageTemplate/PageTemplate.tsx";
+import {handleServerError} from "@/common/utils/handleServerError.ts";
 import {updateMyPhotoTC} from "@/features/profile/profile-thunks.ts";
-import cls from "@/pages/EditProfile/EditProfile.module.scss";
-import {useAppDispatch, useAppSelector} from "@/common/hooks/useAppDispatch.ts";
+import {setAppError} from "@/features/service/service-reducer.ts";
+import {useAppDispatch} from "@/common/hooks/useAppDispatch.ts";
+import {useAppSelector} from "@/common/hooks/useAppSelector.ts";
 import {validateImage} from "@/common/utils/validateImage.ts";
+import cls from "@/pages/EditProfile/EditProfile.module.scss";
 import {Button} from "@/components/Button/Button.tsx";
 import {Input} from "@/components/Input/Input.tsx";
 import {RiCheckFill} from "react-icons/ri";
 import {ChangeEvent} from "react";
-import {setAppError} from "@/features/service/service-reducer.ts";
-import {handleServerError} from "@/common/utils/handleServerError.ts";
 
 export const EditProfile = () => {
     const dispatch = useAppDispatch()

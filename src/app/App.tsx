@@ -1,6 +1,7 @@
 import {isAppInitSelector} from "@/features/service/selectors/isAppInitSelector";
 import {authThunkCreator} from "@/features/auth/auth-thunks.ts";
-import {useAppDispatch, useAppSelector} from "@/common/hooks/useAppDispatch.ts";
+import {useAppDispatch} from "@/common/hooks/useAppDispatch.ts";
+import {useAppSelector} from "@/common/hooks/useAppSelector.ts";
 import {useTheme} from "@/features/theme/hooks/useTheme.ts";
 import {Loading} from "@/components/Loading/Loading.tsx";
 import {Layout} from "@/components/Layout/Layout.tsx";
@@ -8,7 +9,6 @@ import {useEffect, useLayoutEffect} from "react";
 import {AppRouting} from "@/app/AppRouting.tsx";
 
 export const App = () => {
-
    const isAppInit = useAppSelector(isAppInitSelector);
 
    const dispatch = useAppDispatch();

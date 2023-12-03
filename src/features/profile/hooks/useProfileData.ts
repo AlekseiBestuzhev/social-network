@@ -3,7 +3,7 @@ import {authUserIDSelector} from "@/features/auth/selectors/authUserIDSelector";
 import {followedSelector} from "@/features/profile/selectors/followedSelector";
 import {profileSelector} from "@/features/profile/selectors/profileSelector";
 import {statusSelector} from "@/features/profile/selectors/statusSelector";
-import {useAppSelector} from "@/common/hooks/useAppDispatch.ts";
+import {useAppSelector} from "@/common/hooks/useAppSelector.ts";
 
 export const useProfileData = (userID: string | undefined) => {
 

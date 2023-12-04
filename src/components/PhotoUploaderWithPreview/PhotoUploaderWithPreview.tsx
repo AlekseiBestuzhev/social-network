@@ -1,13 +1,13 @@
 import {PhotoUploader} from "@/components/PhotoUploader/PhotoUploader.tsx";
 import cls from './PhotoUploaderWithPreview.module.scss';
-import classNames from "classnames";
-import {FC} from "react";
 import {Avatar} from "@/components/Avatar/Avatar.tsx";
+import {ChangeEvent, FC} from "react";
+import classNames from "classnames";
 
 type Props = {
     name: string
     image: string | null
-    onChange: any
+    onChange: (e: ChangeEvent<HTMLInputElement>) => void
     className?: string
 }
 

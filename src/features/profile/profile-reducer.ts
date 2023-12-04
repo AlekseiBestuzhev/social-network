@@ -20,18 +20,20 @@ export type ProfileActionsType =
 
 type HandlingActions = ProfileActionsType | ReturnType<typeof userLoggedOut>
 
+export type ContactsType = {
+    facebook: string,
+    website: string,
+    vk: string,
+    twitter: string,
+    instagram: string,
+    youtube: string,
+    github: string,
+    mainLink: string
+}
+
 export type UserProfileType = {
     aboutMe: string,
-    contacts: {
-        facebook: string,
-        website: string,
-        vk: string,
-        twitter: string,
-        instagram: string,
-        youtube: string,
-        github: string,
-        mainLink: string
-    },
+    contacts: ContactsType,
     lookingForAJob: boolean,
     lookingForAJobDescription: string,
     fullName: string,

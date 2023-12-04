@@ -1,5 +1,6 @@
 import {PhotoUploaderWithPreview} from "@/components/PhotoUploaderWithPreview/PhotoUploaderWithPreview.tsx";
 import {authUserAvatarSelector} from "@/features/auth/selectors/authUserAvatarSelector";
+import {authUserNameSelector} from "@/features/auth/selectors/authUserNameSelector";
 import {PageTemplate} from "@/components/PageTemplate/PageTemplate.tsx";
 import {handleServerError} from "@/common/utils/handleServerError.ts";
 import {updateMyPhotoTC} from "@/features/profile/profile-thunks.ts";
@@ -8,15 +9,14 @@ import {useAppDispatch} from "@/common/hooks/useAppDispatch.ts";
 import {useAppSelector} from "@/common/hooks/useAppSelector.ts";
 import {validateImage} from "@/common/utils/validateImage.ts";
 import cls from "@/pages/EditProfile/EditProfile.module.scss";
-import {Button} from "@/components/Button/Button.tsx";
-import {Input} from "@/components/Input/Input.tsx";
-import {RiCheckFill} from "react-icons/ri";
 import {ChangeEvent} from "react";
+import {EditExtraInfoForm} from "@/features/profile/components/EditExtraInfoForm/EditExtraInfoForm.tsx";
 
 export const EditProfile = () => {
     const dispatch = useAppDispatch()
 
     const avatar = useAppSelector(authUserAvatarSelector);
+    const userName = useAppSelector(authUserNameSelector)
 
     const maxSize = 3
     const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg']
@@ -39,21 +39,16 @@ export const EditProfile = () => {
         }
     }
 
-   const applyChanges = () => {
-      alert('Sending changes...')
-   }
-
-   return (
-      <PageTemplate pageTitle="Profile Settings">
-         <div className={cls.header}>
-            <PhotoUploaderWithPreview name={'avatar'} image={avatar} onChange={onImageChange} />
-            <div className={cls.rightColumn}>
-               <Input title='Full Name' value={''} onChange={() => {}}/>
+    return (
+        <PageTemplate pageTitle="Profile Settings">
+            <div className={cls.header}>
+                <div className={cls.greeting}>
+                    <h3 className={cls.title}>Hello, {userName}</h3>
+                    <p className={cls.text}>Edit your profile info here</p>
+                </div>
+                <PhotoUploaderWithPreview name={'avatar'} image={avatar} onChange={onImageChange}/>
             </div>
-         </div>
-         <div className={cls.footer}>
-            <Button variant='main' size='large' onClick={applyChanges}>Apply <RiCheckFill size={'1.125rem'}/></Button>
-         </div>
-      </PageTemplate>
-   );
+            <EditExtraInfoForm onSubmit={()=>{}} />
+        </PageTemplate>
+    );
 }

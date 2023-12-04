@@ -17,7 +17,7 @@ export type AuthUserDataType = {
     photos: UserPhotosType
 }
 
-type InitStateType = AuthUserDataType & {
+export type InitStateType = AuthUserDataType & {
     fullName: string | null
 }
 

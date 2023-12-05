@@ -10,8 +10,9 @@ import {
     setUserProfile,
     followOnProfile,
     unfollowOnProfile,
-    setFollowingInProgressOnProfile
+    setFollowingInProgressOnProfile, setUpdatedProfile
 } from "@/features/profile/profile-reducer.ts";
+import {UpdateExtraInfo} from "@/features/profile/components/EditExtraInfoForm/EditExtraInfoForm.tsx";
 
 export const setProfileTC = (id: number) =>
     async (dispatch: AppDispatchType, getState: () => AppRootStateType) => {
@@ -74,6 +75,21 @@ export const updateMyPhotoTC = (data: FormData) => async (dispatch: AppDispatchT
         const result = await profileAPI.updateMyPhoto(data)
         if (result.resultCode === 0) {
             dispatch(setPhotos(result.data.photos));
+        } else {
+            const message = handleResultCodeError(result)
+            dispatch(setAppError(message))
+        }
+    } catch (error) {
+        const message = handleServerError(error)
+        dispatch(setAppError(message))
+    }
+}
+
+export const updateMyProfileTC = (data: UpdateExtraInfo) => async (dispatch: AppDispatchType) => {
+    try {
+        const result = await profileAPI.updateMyExtraInfo(data)
+        if (result.resultCode === 0) {
+            dispatch(setUpdatedProfile(data));
         } else {
             const message = handleResultCodeError(result)
             dispatch(setAppError(message))

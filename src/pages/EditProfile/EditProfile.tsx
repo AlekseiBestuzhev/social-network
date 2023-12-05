@@ -1,22 +1,33 @@
 import {PhotoUploaderWithPreview} from "@/components/PhotoUploaderWithPreview/PhotoUploaderWithPreview.tsx";
 import {authUserAvatarSelector} from "@/features/auth/selectors/authUserAvatarSelector";
 import {authUserNameSelector} from "@/features/auth/selectors/authUserNameSelector";
+import {authUserIDSelector} from "@/features/auth/selectors/authUserIDSelector";
+import {profileSelector} from "@/features/profile/selectors/profileSelector";
 import {PageTemplate} from "@/components/PageTemplate/PageTemplate.tsx";
 import {handleServerError} from "@/common/utils/handleServerError.ts";
-import {updateMyPhotoTC} from "@/features/profile/profile-thunks.ts";
 import {setAppError} from "@/features/service/service-reducer.ts";
 import {useAppDispatch} from "@/common/hooks/useAppDispatch.ts";
 import {useAppSelector} from "@/common/hooks/useAppSelector.ts";
 import {validateImage} from "@/common/utils/validateImage.ts";
 import cls from "@/pages/EditProfile/EditProfile.module.scss";
-import {ChangeEvent} from "react";
-import {EditExtraInfoForm} from "@/features/profile/components/EditExtraInfoForm/EditExtraInfoForm.tsx";
+import {
+    setProfileTC,
+    updateMyPhotoTC,
+    updateMyProfileTC
+} from "@/features/profile/profile-thunks.ts";
+import {ChangeEvent, useEffect} from "react";
+import {
+    EditExtraInfoForm,
+    UpdateExtraInfo
+} from "@/features/profile/components/EditExtraInfoForm/EditExtraInfoForm.tsx";
 
 export const EditProfile = () => {
     const dispatch = useAppDispatch()
 
+    const authUser = useAppSelector(authUserIDSelector);
     const avatar = useAppSelector(authUserAvatarSelector);
     const userName = useAppSelector(authUserNameSelector)
+    const profile = useAppSelector(profileSelector);
 
     const maxSize = 3
     const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg']
@@ -39,6 +50,16 @@ export const EditProfile = () => {
         }
     }
 
+    const onSubmit = (data: UpdateExtraInfo) => {
+        void dispatch(updateMyProfileTC(data))
+    }
+
+    useEffect(() => {
+        if (!profile && authUser) {
+            void dispatch(setProfileTC(authUser));
+        }
+    }, [])
+
     return (
         <PageTemplate pageTitle="Profile Settings">
             <div className={cls.header}>
@@ -48,7 +69,7 @@ export const EditProfile = () => {
                 </div>
                 <PhotoUploaderWithPreview name={'avatar'} image={avatar} onChange={onImageChange}/>
             </div>
-            <EditExtraInfoForm onSubmit={()=>{}} />
+            {profile && <EditExtraInfoForm onSubmit={onSubmit} profile={profile}/>}
         </PageTemplate>
     );
 }

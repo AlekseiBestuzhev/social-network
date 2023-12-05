@@ -17,6 +17,11 @@
     border: var(--border-2);
     outline: none;
 
+    &.textarea {
+      min-height: 6rem;
+      resize: vertical;
+    }
+
     &:-webkit-autofill,
     &:-webkit-autofill:hover,
     &:-webkit-autofill:focus,

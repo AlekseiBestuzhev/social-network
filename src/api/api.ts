@@ -1,6 +1,7 @@
 import {LoginFormType} from "@/features/auth/components/LoginForm/LoginForm.tsx";
 import { API_KEY } from "./API-KEY";
 import axios from "axios";
+import {UpdateExtraInfo} from "@/features/profile/components/EditExtraInfoForm/EditExtraInfoForm.tsx";
 
 const instance = axios.create({
 	baseURL: `https://social-network.samuraijs.com/api/1.0/`,
@@ -48,6 +49,10 @@ export const profileAPI = {
 			headers: {
 				'Content-Type': 'multipart/form-data'
 			}})
+		return response.data;
+	},
+	updateMyExtraInfo: async (data: UpdateExtraInfo) => {
+		const response = await instance.put('profile', data);
 		return response.data;
 	}
 }

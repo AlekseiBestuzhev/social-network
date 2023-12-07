@@ -1,7 +1,7 @@
 import {UpdateExtraInfo} from "@/features/profile/components/EditExtraInfoForm/EditExtraInfoForm.tsx";
 import {handleResultCodeError} from "@/common/utils/handleResultCodeError.ts";
 import {handleServerError} from "@/common/utils/handleServerError.ts";
-import {setNotification} from "@/features/service/service-reducer.ts";
+import {setAppStatus, setNotification} from "@/features/service/service-reducer.ts";
 import {AppDispatchType} from "@/common/hooks/useAppDispatch.ts";
 import {setPhotos} from "@/features/auth/auth-reducer.ts";
 import {followAPI, profileAPI} from "@/api/api.ts";
@@ -89,16 +89,20 @@ export const updateMyPhotoTC = (data: FormData) => async (dispatch: AppDispatchT
 
 export const updateMyProfileTC = (data: UpdateExtraInfo) => async (dispatch: AppDispatchType) => {
     try {
-        const result = await profileAPI.updateMyExtraInfo(data)
+    dispatch(setAppStatus('loading'));
+        const result = await profileAPI.updateMyExtraInfo(data);
         if (result.resultCode === 0) {
             dispatch(setUpdatedProfile(data));
             dispatch(setNotification(noticeStatus.success, 'Profile updated successfully'));
+            dispatch(setAppStatus('succeeded'));
         } else {
-            const message = handleResultCodeError(result)
+            const message = handleResultCodeError(result);
             dispatch(setNotification(noticeStatus.error, message));
+            dispatch(setAppStatus('failed'));
         }
     } catch (error) {
-        const message = handleServerError(error)
+        const message = handleServerError(error);
         dispatch(setNotification(noticeStatus.error, message));
+        dispatch(setAppStatus('failed'));
     }
 }

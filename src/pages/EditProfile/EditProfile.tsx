@@ -1,6 +1,7 @@
 import {PhotoUploaderWithPreview} from "@/components/PhotoUploaderWithPreview/PhotoUploaderWithPreview.tsx";
 import {authUserAvatarSelector} from "@/features/auth/selectors/authUserAvatarSelector";
 import {authUserNameSelector} from "@/features/auth/selectors/authUserNameSelector";
+import {appStatusSelector} from "@/features/service/selectors/appStatusSelector";
 import {authUserIDSelector} from "@/features/auth/selectors/authUserIDSelector";
 import {profileSelector} from "@/features/profile/selectors/profileSelector";
 import {PageTemplate} from "@/components/PageTemplate/PageTemplate.tsx";
@@ -10,17 +11,17 @@ import {useAppDispatch} from "@/common/hooks/useAppDispatch.ts";
 import {useAppSelector} from "@/common/hooks/useAppSelector.ts";
 import {validateImage} from "@/common/utils/validateImage.ts";
 import cls from "@/pages/EditProfile/EditProfile.module.scss";
+import {ChangeEvent, useCallback, useEffect} from "react";
+import {noticeStatus} from "@/common/const";
+import {
+    EditExtraInfoForm,
+    UpdateExtraInfo
+} from "@/features/profile/components/EditExtraInfoForm/EditExtraInfoForm.tsx";
 import {
     setProfileTC,
     updateMyPhotoTC,
     updateMyProfileTC
 } from "@/features/profile/profile-thunks.ts";
-import {ChangeEvent, useEffect} from "react";
-import {
-    EditExtraInfoForm,
-    UpdateExtraInfo
-} from "@/features/profile/components/EditExtraInfoForm/EditExtraInfoForm.tsx";
-import {noticeStatus} from "@/common/const";
 
 export const EditProfile = () => {
     const dispatch = useAppDispatch()
@@ -29,6 +30,8 @@ export const EditProfile = () => {
     const avatar = useAppSelector(authUserAvatarSelector);
     const userName = useAppSelector(authUserNameSelector)
     const profile = useAppSelector(profileSelector);
+    const appStatus = useAppSelector(appStatusSelector);
+    const loading = appStatus === 'loading'
 
     const maxSize = 3
     const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg']
@@ -51,9 +54,9 @@ export const EditProfile = () => {
         }
     }
 
-    const onSubmit = (data: UpdateExtraInfo) => {
+    const onSubmit = useCallback((data: UpdateExtraInfo) => {
         void dispatch(updateMyProfileTC(data))
-    }
+    }, [dispatch]);
 
     useEffect(() => {
         if (!profile && authUser) {
@@ -70,7 +73,7 @@ export const EditProfile = () => {
                 </div>
                 <PhotoUploaderWithPreview name={'avatar'} image={avatar} onChange={onImageChange}/>
             </div>
-            {profile && <EditExtraInfoForm onSubmit={onSubmit} profile={profile}/>}
+            {profile && <EditExtraInfoForm onSubmit={onSubmit} profile={profile} disabled={loading}/>}
         </PageTemplate>
     );
 }

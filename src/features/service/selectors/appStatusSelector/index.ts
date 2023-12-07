@@ -1,4 +1,4 @@
-import {AppStatusTypes} from "@/features/service/service-reducer.ts";
 import { AppRootStateType } from "@/app/store.ts";
+import {AppStatus} from "@/common/const";
 
-export const appStatusSelector = (state: AppRootStateType): AppStatusTypes => state.service.appStatus;
+export const appStatusSelector = (state: AppRootStateType): AppStatus => state.service.appStatus;

@@ -1,20 +1,22 @@
-export type AppStatusTypes = 'idle' | 'loading' | 'succeeded' | 'failed';
+import {appStatus, AppStatus, NoticeStatus, noticeStatus} from "@/common/const";
 
 export type ServiceActionsType =
-   | ReturnType<typeof setAppInit>
-   | ReturnType<typeof setAppError>
+   | ReturnType<typeof setNotification>
    | ReturnType<typeof setAppStatus>
+   | ReturnType<typeof setAppInit>
 
 export type ServiceType = {
    isAppInit: boolean,
-   appStatus: AppStatusTypes,
-   error: string | null
+   appStatus: AppStatus,
+   noticeStatus: NoticeStatus,
+   message: string | null
 }
 
 const initialState: ServiceType = {
    isAppInit: false,
-   appStatus: 'loading',
-   error: null
+   appStatus: appStatus.idle,
+   noticeStatus: noticeStatus.null,
+   message: null
 }
 
 export const ServiceReducer = (state: ServiceType = initialState, action: ServiceActionsType): ServiceType => {
@@ -31,10 +33,10 @@ export const ServiceReducer = (state: ServiceType = initialState, action: Servic
             appStatus: action.payload.status
          };
       }
-      case 'SET-APP-ERROR': {
+      case 'SET-NOTIFICATION': {
          return {
             ...state,
-            error: action.payload.error
+            ...action.payload
          };
       }
       default:
@@ -48,16 +50,17 @@ export const setAppInit = () => ({
    type: 'SET-APP-INIT',
 } as const);
 
-export const setAppStatus = (status: AppStatusTypes) => ({
+export const setAppStatus = (status: AppStatus) => ({
    type: 'SET-APP-STATUS',
    payload: {
       status
    }
 } as const);
 
-export const setAppError = (error: string | null) => ({
-   type: 'SET-APP-ERROR',
+export const setNotification = (noticeStatus: NoticeStatus, message: string | null) => ({
+   type: 'SET-NOTIFICATION',
    payload: {
-      error
+      noticeStatus,
+      message
    }
 } as const);

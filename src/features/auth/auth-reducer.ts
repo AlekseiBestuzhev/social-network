@@ -1,8 +1,10 @@
 import {UserPhotosType} from "@/features/users/users-reducer.ts";
+import {setUpdatedProfile} from "@/features/profile/profile-reducer.ts";
 
 // _____ types
 
 export type AuthActionsType =
+    | ReturnType<typeof setUpdatedProfile>
     | ReturnType<typeof setUserAuthPhoto>
     | ReturnType<typeof setUserAuthData>
     | ReturnType<typeof setUserAuthName>
@@ -17,7 +19,7 @@ export type AuthUserDataType = {
     photos: UserPhotosType
 }
 
-type InitStateType = AuthUserDataType & {
+export type InitStateType = AuthUserDataType & {
     fullName: string | null
 }
 
@@ -63,6 +65,11 @@ export const AuthReducer = (state: InitStateType = initState, action: AuthAction
             }
         case 'USER-LOGGED-OUT':
             return initState
+        case 'SET-UPDATED-PROFILE':
+            return {
+                ...state,
+                fullName: action.payload.data.fullName
+            }
         default:
             return state
     }

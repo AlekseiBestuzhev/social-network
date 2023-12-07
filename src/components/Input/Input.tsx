@@ -2,31 +2,36 @@ import {FC, forwardRef, InputHTMLAttributes, Ref} from "react";
 import cls from "@/components/Input/Input.module.scss";
 import classNames from "classnames";
 
-type PropsType = InputHTMLAttributes<HTMLInputElement> & {
-   title?: string,
-   error?: string
+type PropsType = InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement> & {
+    title?: string,
+    error?: string,
+    multiline?: boolean
 }
 
 export const Input: FC<PropsType> = forwardRef(({
-                                                   title,
-                                                   error,
-                                                   placeholder,
-                                                   ...restProps
-                                                }, ref: Ref<HTMLInputElement>) => {
+                                                    title,
+                                                    error,
+                                                    placeholder,
+                                                    multiline,
+                                                    ...restProps
+                                                }, ref: Ref<HTMLInputElement | HTMLTextAreaElement>) => {
 
-   const placeholderClasses = classNames(cls.message, {
-      [cls.error]: error
-   })
+    const placeholderClasses = classNames(cls.message, {
+        [cls.error]: error
+    })
 
-   const inputClasses = classNames(cls.input, {
-      [cls.error]: error
-   })
+    const inputClasses = classNames(cls.input, {
+        [cls.textarea]: multiline,
+        [cls.error]: error
+    })
 
-   return (
-      <label className={cls.wrapper}>
-         {title && <p className={cls.title}>{title}:</p>}
-         <input ref={ref} {...restProps}  className={inputClasses}/>
-         <span className={placeholderClasses}>{error || placeholder}</span>
-      </label>
-   );
+    const InputElement = multiline ? 'textarea' : 'input';
+
+    return (
+        <label className={cls.wrapper}>
+            {title && <p className={cls.title}>{title}:</p>}
+            <InputElement ref={ref as any} {...restProps}  className={inputClasses}/>
+            <span className={placeholderClasses}>{error || placeholder}</span>
+        </label>
+    );
 })

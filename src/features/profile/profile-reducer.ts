@@ -4,11 +4,13 @@ import {userLoggedOut} from '@/features/auth/auth-reducer.ts';
 import badman from '@/assets/images/localUsers/bad-man.jpg';
 import john from '@/assets/images/localUsers/john-doe.jpg';
 import {v1} from 'uuid';
+import {UpdateExtraInfo} from "@/features/profile/components/EditExtraInfoForm/EditExtraInfoForm.tsx";
 
 //_____ types
 
 export type ProfileActionsType =
     | ReturnType<typeof setFollowingInProgressOnProfile>
+    | ReturnType<typeof setUpdatedProfile>
     | ReturnType<typeof unfollowOnProfile>
     | ReturnType<typeof followOnProfile>
     | ReturnType<typeof updatePostTexAC>
@@ -20,18 +22,20 @@ export type ProfileActionsType =
 
 type HandlingActions = ProfileActionsType | ReturnType<typeof userLoggedOut>
 
+export type ContactsType = {
+    facebook: string,
+    website: string,
+    vk: string,
+    twitter: string,
+    instagram: string,
+    youtube: string,
+    github: string,
+    mainLink: string
+}
+
 export type UserProfileType = {
     aboutMe: string,
-    contacts: {
-        facebook: string,
-        website: string,
-        vk: string,
-        twitter: string,
-        instagram: string,
-        youtube: string,
-        github: string,
-        mainLink: string
-    },
+    contacts: ContactsType,
     lookingForAJob: boolean,
     lookingForAJobDescription: string,
     fullName: string,
@@ -156,6 +160,14 @@ export const ProfileReducer = (state: ProfilePageType = initState, action: Handl
                 ...state,
                 status: action.payload.status
             }
+        case 'SET-UPDATED-PROFILE':
+            return state.profile ? {
+                ...state,
+                profile: {
+                    ...state.profile,
+                    ...action.payload.data
+                }
+            } : state
         case 'USER-LOGGED-OUT':
             return initState
         default:
@@ -236,5 +248,12 @@ export const setStatus = (status: string) => ({
     type: 'SET-STATUS',
     payload: {
         status
+    }
+} as const);
+
+export const setUpdatedProfile = (data: UpdateExtraInfo) => ({
+    type: 'SET-UPDATED-PROFILE',
+    payload: {
+        data
     }
 } as const);

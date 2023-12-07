@@ -1,22 +1,37 @@
 import {PhotoUploaderWithPreview} from "@/components/PhotoUploaderWithPreview/PhotoUploaderWithPreview.tsx";
 import {authUserAvatarSelector} from "@/features/auth/selectors/authUserAvatarSelector";
+import {authUserNameSelector} from "@/features/auth/selectors/authUserNameSelector";
+import {appStatusSelector} from "@/features/service/selectors/appStatusSelector";
+import {authUserIDSelector} from "@/features/auth/selectors/authUserIDSelector";
+import {profileSelector} from "@/features/profile/selectors/profileSelector";
 import {PageTemplate} from "@/components/PageTemplate/PageTemplate.tsx";
 import {handleServerError} from "@/common/utils/handleServerError.ts";
-import {updateMyPhotoTC} from "@/features/profile/profile-thunks.ts";
-import {setAppError} from "@/features/service/service-reducer.ts";
+import {setNotification} from "@/features/service/service-reducer.ts";
 import {useAppDispatch} from "@/common/hooks/useAppDispatch.ts";
 import {useAppSelector} from "@/common/hooks/useAppSelector.ts";
 import {validateImage} from "@/common/utils/validateImage.ts";
 import cls from "@/pages/EditProfile/EditProfile.module.scss";
-import {Button} from "@/components/Button/Button.tsx";
-import {Input} from "@/components/Input/Input.tsx";
-import {RiCheckFill} from "react-icons/ri";
-import {ChangeEvent} from "react";
+import {ChangeEvent, useCallback, useEffect} from "react";
+import {noticeStatus} from "@/common/const";
+import {
+    EditExtraInfoForm,
+    UpdateExtraInfo
+} from "@/features/profile/components/EditExtraInfoForm/EditExtraInfoForm.tsx";
+import {
+    setProfileTC,
+    updateMyPhotoTC,
+    updateMyProfileTC
+} from "@/features/profile/profile-thunks.ts";
 
 export const EditProfile = () => {
     const dispatch = useAppDispatch()
 
+    const authUser = useAppSelector(authUserIDSelector);
     const avatar = useAppSelector(authUserAvatarSelector);
+    const userName = useAppSelector(authUserNameSelector)
+    const profile = useAppSelector(profileSelector);
+    const appStatus = useAppSelector(appStatusSelector);
+    const loading = appStatus === 'loading'
 
     const maxSize = 3
     const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg']
@@ -35,25 +50,30 @@ export const EditProfile = () => {
             }
         } catch (error) {
             const message = handleServerError(error)
-            dispatch(setAppError(message))
+            dispatch(setNotification(noticeStatus.error, message));
         }
     }
 
-   const applyChanges = () => {
-      alert('Sending changes...')
-   }
+    const onSubmit = useCallback((data: UpdateExtraInfo) => {
+        void dispatch(updateMyProfileTC(data))
+    }, [dispatch]);
 
-   return (
-      <PageTemplate pageTitle="Profile Settings">
-         <div className={cls.header}>
-            <PhotoUploaderWithPreview name={'avatar'} image={avatar} onChange={onImageChange} />
-            <div className={cls.rightColumn}>
-               <Input title='Full Name' value={''} onChange={() => {}}/>
+    useEffect(() => {
+        if (!profile && authUser) {
+            void dispatch(setProfileTC(authUser));
+        }
+    }, [])
+
+    return (
+        <PageTemplate pageTitle="Profile Settings">
+            <div className={cls.header}>
+                <div className={cls.greeting}>
+                    <h3 className={cls.title}>Hello, {userName}</h3>
+                    <p className={cls.text}>Edit your profile info here</p>
+                </div>
+                <PhotoUploaderWithPreview name={'avatar'} image={avatar} onChange={onImageChange}/>
             </div>
-         </div>
-         <div className={cls.footer}>
-            <Button variant='main' size='large' onClick={applyChanges}>Apply <RiCheckFill size={'1.125rem'}/></Button>
-         </div>
-      </PageTemplate>
-   );
+            {profile && <EditExtraInfoForm onSubmit={onSubmit} profile={profile} disabled={loading}/>}
+        </PageTemplate>
+    );
 }

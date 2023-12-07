@@ -59,7 +59,7 @@ export const ExtraInfo: FC<Props> = (props) => {
                         {contacts.instagram || noInfo}
                     </p>
                     <p>
-                        <span className={cls.item}>Mail:</span>
+                        <span className={cls.item}>Main Link:</span>
                         {contacts.mainLink || noInfo}
                     </p>
                     <p>

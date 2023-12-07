@@ -5,7 +5,7 @@ import {authUserIDSelector} from "@/features/auth/selectors/authUserIDSelector";
 import {profileSelector} from "@/features/profile/selectors/profileSelector";
 import {PageTemplate} from "@/components/PageTemplate/PageTemplate.tsx";
 import {handleServerError} from "@/common/utils/handleServerError.ts";
-import {setAppError} from "@/features/service/service-reducer.ts";
+import {setNotification} from "@/features/service/service-reducer.ts";
 import {useAppDispatch} from "@/common/hooks/useAppDispatch.ts";
 import {useAppSelector} from "@/common/hooks/useAppSelector.ts";
 import {validateImage} from "@/common/utils/validateImage.ts";
@@ -20,6 +20,7 @@ import {
     EditExtraInfoForm,
     UpdateExtraInfo
 } from "@/features/profile/components/EditExtraInfoForm/EditExtraInfoForm.tsx";
+import {noticeStatus} from "@/common/const";
 
 export const EditProfile = () => {
     const dispatch = useAppDispatch()
@@ -46,7 +47,7 @@ export const EditProfile = () => {
             }
         } catch (error) {
             const message = handleServerError(error)
-            dispatch(setAppError(message))
+            dispatch(setNotification(noticeStatus.error, message));
         }
     }
 

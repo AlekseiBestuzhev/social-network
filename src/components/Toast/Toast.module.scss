@@ -9,9 +9,9 @@
   max-width: 25rem;
   padding: 2rem 3rem 2rem 1.5rem;
   border-radius: var(--radius);
-
-  background-color: var(--colors-error);
   box-shadow: var(--shadow-toast);
+
+  animation: slideInOut 6s;
 
   &::after {
     content: '';
@@ -26,6 +26,18 @@
     animation-name: widthChange;
     animation-timing-function: linear;
     animation-duration: 6s;
+  }
+
+  &.success {
+    background-color: var(--colors-success);
+  }
+
+  &.error {
+    background-color: var(--colors-error);
+  }
+
+  &.info {
+    background-color: var(--colors-ui-main);
   }
 
   .content {
@@ -50,5 +62,17 @@
   }
   100% {
     width: 0;
+  }
+}
+
+@keyframes slideInOut {
+  0% {
+    transform: translateX(-100%);
+  }
+  5%, 95% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
   }
 }

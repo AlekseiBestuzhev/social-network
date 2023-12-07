@@ -1,10 +1,12 @@
+import {UpdateExtraInfo} from "@/features/profile/components/EditExtraInfoForm/EditExtraInfoForm.tsx";
 import {handleResultCodeError} from "@/common/utils/handleResultCodeError.ts";
 import {handleServerError} from "@/common/utils/handleServerError.ts";
-import {setAppError} from "@/features/service/service-reducer.ts";
+import {setNotification} from "@/features/service/service-reducer.ts";
+import {AppDispatchType} from "@/common/hooks/useAppDispatch.ts";
 import {setPhotos} from "@/features/auth/auth-reducer.ts";
 import {followAPI, profileAPI} from "@/api/api.ts";
 import {AppRootStateType} from "@/app/store.ts";
-import {AppDispatchType} from "@/common/hooks/useAppDispatch.ts";
+import {noticeStatus} from "@/common/const";
 import {
     setStatus,
     setUserProfile,
@@ -12,7 +14,6 @@ import {
     unfollowOnProfile,
     setFollowingInProgressOnProfile, setUpdatedProfile
 } from "@/features/profile/profile-reducer.ts";
-import {UpdateExtraInfo} from "@/features/profile/components/EditExtraInfoForm/EditExtraInfoForm.tsx";
 
 export const setProfileTC = (id: number) =>
     async (dispatch: AppDispatchType, getState: () => AppRootStateType) => {
@@ -25,7 +26,7 @@ export const setProfileTC = (id: number) =>
             }
         } catch (error) {
             const message = handleServerError(error)
-            dispatch(setAppError(message))
+            dispatch(setNotification(noticeStatus.error, message));
         }
     }
 
@@ -62,11 +63,11 @@ export const updateMyStatusTC = (status: string, onClose: () => void) => async (
             onClose()
         } else {
             const message = handleResultCodeError(result)
-            dispatch(setAppError(message))
+            dispatch(setNotification(noticeStatus.error, message));
         }
     } catch (error) {
         const message = handleServerError(error)
-        dispatch(setAppError(message))
+        dispatch(setNotification(noticeStatus.error, message));
     }
 }
 
@@ -75,13 +76,14 @@ export const updateMyPhotoTC = (data: FormData) => async (dispatch: AppDispatchT
         const result = await profileAPI.updateMyPhoto(data)
         if (result.resultCode === 0) {
             dispatch(setPhotos(result.data.photos));
+            dispatch(setNotification(noticeStatus.success, 'Avatar updated successfully'));
         } else {
             const message = handleResultCodeError(result)
-            dispatch(setAppError(message))
+            dispatch(setNotification(noticeStatus.error, message));
         }
     } catch (error) {
         const message = handleServerError(error)
-        dispatch(setAppError(message))
+        dispatch(setNotification(noticeStatus.error, message));
     }
 }
 
@@ -90,12 +92,13 @@ export const updateMyProfileTC = (data: UpdateExtraInfo) => async (dispatch: App
         const result = await profileAPI.updateMyExtraInfo(data)
         if (result.resultCode === 0) {
             dispatch(setUpdatedProfile(data));
+            dispatch(setNotification(noticeStatus.success, 'Profile updated successfully'));
         } else {
             const message = handleResultCodeError(result)
-            dispatch(setAppError(message))
+            dispatch(setNotification(noticeStatus.error, message));
         }
     } catch (error) {
         const message = handleServerError(error)
-        dispatch(setAppError(message))
+        dispatch(setNotification(noticeStatus.error, message));
     }
 }

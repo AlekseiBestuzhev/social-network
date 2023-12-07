@@ -3,8 +3,11 @@ import {Button} from "@/components/Button/Button.tsx";
 import {Input} from "@/components/Input/Input.tsx";
 import cls from "./EditExtraInfoForm.module.scss";
 import {RiCheckFill} from "react-icons/ri";
-import {FC} from "react";
 import {useForm} from "react-hook-form";
+import {FC} from "react";
+import {setNotification} from "@/features/service/service-reducer.ts";
+import {noticeStatus} from "@/common/const";
+import {useAppDispatch} from "@/common/hooks/useAppDispatch.ts";
 
 type Props = {
     onSubmit: (data: UpdateExtraInfo) => void
@@ -14,9 +17,11 @@ type Props = {
 export type UpdateExtraInfo = Omit<UserProfileType, 'photos' | 'userId'>
 
 export const EditExtraInfoForm: FC<Props> = ({onSubmit, profile}) => {
+    const dispatch = useAppDispatch();
+
     const {contacts} = profile;
 
-    const {handleSubmit, register} = useForm<UpdateExtraInfo>({
+    const {handleSubmit, register, formState: {isDirty}} = useForm<UpdateExtraInfo>({
         defaultValues: {
             aboutMe: profile.aboutMe,
             lookingForAJobDescription: profile.lookingForAJobDescription,
@@ -34,8 +39,16 @@ export const EditExtraInfoForm: FC<Props> = ({onSubmit, profile}) => {
             }
         }
     })
-    const onClick = (data: UpdateExtraInfo) => {
-        onSubmit(data);
+    const onClick = async (data: UpdateExtraInfo) => {
+        if (isDirty) {
+            try {
+                await onSubmit(data)
+            } catch (error) {
+                console.log(error)
+            }
+        } else {
+            dispatch(setNotification(noticeStatus.info, 'Nothing to change'));
+        }
     }
     return (
         <form className={cls.form} onSubmit={handleSubmit(onClick)}>

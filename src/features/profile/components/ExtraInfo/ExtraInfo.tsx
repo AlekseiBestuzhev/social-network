@@ -46,38 +46,16 @@ export const ExtraInfo: FC<Props> = (props) => {
                         {lookingForAJobDescription || noInfo}
                     </p>
                     <h4 className={cls.contacts}>Contacts:</h4>
-                    <p>
-                        <span className={cls.item}>Github:</span>
-                        {contacts.github || noInfo}
-                    </p>
-                    <p>
-                        <span className={cls.item}>Website:</span>
-                        {contacts.website || noInfo}
-                    </p>
-                    <p>
-                        <span className={cls.item}>Instagram:</span>
-                        {contacts.instagram || noInfo}
-                    </p>
-                    <p>
-                        <span className={cls.item}>Main Link:</span>
-                        {contacts.mainLink || noInfo}
-                    </p>
-                    <p>
-                        <span className={cls.item}>Facebook:</span>
-                        {contacts.facebook || noInfo}
-                    </p>
-                    <p>
-                        <span className={cls.item}>Twitter:</span>
-                        {contacts.twitter || noInfo}
-                    </p>
-                    <p>
-                        <span className={cls.item}>YouTube:</span>
-                        {contacts.youtube || noInfo}
-                    </p>
-                    <p>
-                        <span className={cls.item}>VK:</span>
-                        {contacts.vk || noInfo}
-                    </p>
+                    <ul>
+                        {contacts && Object.entries(contacts).map(([key, value]) => {
+                            return value ? (
+                                <li key={key}>
+                                    <span className={cls.item}>{key}:</span>
+                                    <a href={value} target='_blank' rel='noreferrer'>{value}</a>
+                                </li>
+                            ) : null
+                        })}
+                    </ul>
                 </div>
             </div>
         </div>

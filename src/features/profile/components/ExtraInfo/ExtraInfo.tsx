@@ -3,6 +3,7 @@ import {RiArrowDownSLine} from "react-icons/ri";
 import {FC, useCallback, useState} from "react";
 import cls from "./ExtraInfo.module.scss";
 import classNames from "classnames";
+import {icons} from "@/common/const/icons.ts";
 
 type Props = {
     profile: UserProfileType
@@ -45,39 +46,21 @@ export const ExtraInfo: FC<Props> = (props) => {
                         <span className={cls.item}>Job description:</span>
                         {lookingForAJobDescription || noInfo}
                     </p>
-                    <h4 className={cls.contacts}>Contacts:</h4>
-                    <p>
-                        <span className={cls.item}>Github:</span>
-                        {contacts.github || noInfo}
-                    </p>
-                    <p>
-                        <span className={cls.item}>Website:</span>
-                        {contacts.website || noInfo}
-                    </p>
-                    <p>
-                        <span className={cls.item}>Instagram:</span>
-                        {contacts.instagram || noInfo}
-                    </p>
-                    <p>
-                        <span className={cls.item}>Main Link:</span>
-                        {contacts.mainLink || noInfo}
-                    </p>
-                    <p>
-                        <span className={cls.item}>Facebook:</span>
-                        {contacts.facebook || noInfo}
-                    </p>
-                    <p>
-                        <span className={cls.item}>Twitter:</span>
-                        {contacts.twitter || noInfo}
-                    </p>
-                    <p>
-                        <span className={cls.item}>YouTube:</span>
-                        {contacts.youtube || noInfo}
-                    </p>
-                    <p>
-                        <span className={cls.item}>VK:</span>
-                        {contacts.vk || noInfo}
-                    </p>
+                    <h4 className={cls.contactsTitle}>Contacts:</h4>
+                    <ul className={cls.contacts}>
+                        {contacts && Object.entries(contacts).map(([key, value]) => {
+                            return value ? (
+                                <li key={key}>
+                                    <a href={value} target='_blank' rel='noreferrer'>
+                                        <img src={icons[key as keyof typeof icons]}
+                                             className={cls.contactIcon}
+                                             alt={`${key} icon`}
+                                        />
+                                    </a>
+                                </li>
+                            ) : null
+                        })}
+                    </ul>
                 </div>
             </div>
         </div>

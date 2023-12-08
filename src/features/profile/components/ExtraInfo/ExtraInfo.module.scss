@@ -55,9 +55,32 @@
         list-style-type: none;
       }
 
-      .contacts {
+      .contactsTitle {
         font-size: var(--text-size-large);
         font-weight: var(--text-weight-md);
+      }
+
+      .contacts {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        gap: 0.5rem;
+
+        padding: 0;
+
+        >li {
+          list-style-type: none;
+
+          .contactIcon {
+            width: 3.5rem;
+            height: 3.5rem;
+            transition: 0.3s;
+
+            &:hover {
+              transform: scale(1.1);
+            }
+          }
+        }
       }
 
       .item {

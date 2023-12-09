@@ -3,7 +3,7 @@ import {RiArrowDownSLine} from "react-icons/ri";
 import {FC, useCallback, useState} from "react";
 import cls from "./ExtraInfo.module.scss";
 import classNames from "classnames";
-import {icons} from "@/common/const/icons.ts";
+import {icons} from "@/common/const";
 
 type Props = {
     profile: UserProfileType

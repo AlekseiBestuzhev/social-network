@@ -4,6 +4,7 @@ import { Avatar } from '@/components/Avatar/Avatar';
 import { NavLink } from 'react-router-dom';
 import classNames from "classnames";
 import {FC, memo} from 'react';
+import {routes} from "@/common/const";
 
 type DialogPropsType = DialogType & Record<'lastMessage' | 'lastDate', string>;
 
@@ -21,7 +22,7 @@ export const Dialog: FC<DialogPropsType> = memo(({ id, name, avatar, lastMessage
 	return (
 		<li className={cls.dialog}>
 			<NavLink
-				to={`/messages/${id}`}
+				to={`${routes.messages}/${id}`}
 				className={linkStyles}
 			>
 				<Avatar photo={avatar} size='3.5rem' />

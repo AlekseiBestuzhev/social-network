@@ -7,12 +7,13 @@ import {Button} from "@/components/Button/Button";
 import {RiLogoutBoxLine} from "react-icons/ri";
 import {useAppDispatch} from "@/common/hooks/useAppDispatch.ts";
 import logo from "@/assets/images/logo.svg";
+import {routes} from "@/common/const";
 
 export const Header = () => {
 
    const {authUserID, authUserName, authUserAvatar} = useAuth();
 
-   const match = useMatch('/login');
+   const match = useMatch(routes.login);
 
    const dispatch = useAppDispatch();
 
@@ -23,7 +24,7 @@ export const Header = () => {
    }
 
    const navigateToLoginHandler = () => {
-      navigate('/login');
+      navigate(routes.login);
    }
 
    return (
@@ -38,7 +39,7 @@ export const Header = () => {
                authUserID
                   ? <div className={cls.controls}>
                      <Button variant="white" onClick={logoutHandler}> Logout <RiLogoutBoxLine size={'1.125rem'}/> </Button>
-                     <NavLink to={'/profile'}>
+                     <NavLink to={routes.profile}>
                         <div className={cls.userInfo}>
                            <p>{authUserName}</p>
                            <Avatar size='2.5rem' photo={authUserAvatar}/>

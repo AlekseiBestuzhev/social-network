@@ -2,6 +2,7 @@ import {authUserIDSelector} from "@/features/auth/selectors/authUserIDSelector";
 import {useAppSelector} from "@/common/hooks/useAppSelector.ts";
 import {Navigate} from "react-router-dom"
 import {ComponentType} from "react";
+import {routes} from "@/common/const";
 
 export const withAuthRedirect = <T, >(Component: ComponentType<T>) => {
 
@@ -12,7 +13,7 @@ export const withAuthRedirect = <T, >(Component: ComponentType<T>) => {
       return (
          isAuth
             ? <Component {...props as T & object} />
-            : <Navigate to='/login'/>
+            : <Navigate to={routes.login}/>
       )
    }
 }

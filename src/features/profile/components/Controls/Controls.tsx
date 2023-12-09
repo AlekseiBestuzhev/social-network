@@ -7,6 +7,7 @@ import {useAppDispatch} from "@/common/hooks/useAppDispatch.ts";
 import {RiChat3Line} from "react-icons/ri";
 import {useNavigate} from "react-router-dom";
 import {FC, memo} from 'react';
+import {routes} from "@/common/const";
 
 type ControlsPropsType = {
     userID: number,
@@ -26,7 +27,7 @@ export const Controls: FC<ControlsPropsType> = memo((props) => {
     }
 
     const toProfileSettings = () => {
-        navigate('/profile-settings');
+        navigate(routes.profileSettings);
     }
 
     const followTextHandler = followed ? 'Unfollow' : 'Follow';

@@ -6,6 +6,7 @@ import {UserType} from '@/features/users/users-reducer.ts';
 import {useAppDispatch} from "@/common/hooks/useAppDispatch.ts";
 import {NavLink} from 'react-router-dom';
 import {FC, memo} from 'react';
+import {routes} from "@/common/const";
 
 type UserItemListType = UserType & {
    followingInProgress: number[]
@@ -34,7 +35,7 @@ export const User: FC<UserItemListType> = memo(({
    return (
       <li className={cls.body}>
          <div className={cls.imgBtn}>
-            <NavLink to={`/profile/${id}`}>
+            <NavLink to={`${routes.profile}/${id}`}>
                <Avatar photo={photos.large}/>
             </NavLink>
             <Button
@@ -48,7 +49,7 @@ export const User: FC<UserItemListType> = memo(({
          </div>
          <div className={cls.info}>
             <div className={cls.nameStatus}>
-               <NavLink to={`/profile/${id}`}>
+               <NavLink to={`${routes.profile}/${id}`}>
                   <h3 className={cls.name} data-url={uniqueUrlName}>{name}</h3>
                </NavLink>
                {status && <p className={cls.status}>"{status}"</p>}

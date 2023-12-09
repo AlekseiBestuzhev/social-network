@@ -8,6 +8,7 @@ import {Music} from "@/pages/Music/Music.tsx";
 import {Login} from "@/pages/Login/Login.tsx";
 import {News} from "@/pages/News/News.tsx";
 import {lazy, Suspense} from "react";
+import {routes} from "@/common/const";
 
 const Users = lazy(
     () => import("@/pages/Users/Users.tsx").then(module => ({default: module.Users}))
@@ -24,27 +25,27 @@ export const AppRouting = () => {
 
     return (
         <Routes>
-            <Route path='/login' element={authUser ? <Navigate to={'/profile'}/> : <Login />}/>
-            <Route path='/' element={<Navigate to={'/profile'}/>}/>
-            <Route path='/profile-settings' element={<EditProfile/>}/>
-            <Route path='/profile/:userID?' element={(
+            <Route path={routes.login} element={authUser ? <Navigate to={routes.profile}/> : <Login />}/>
+            <Route path={routes.base} element={<Navigate to={routes.profile}/>}/>
+            <Route path={routes.profileSettings} element={<EditProfile/>}/>
+            <Route path={`${routes.profile}/:userID?`} element={(
                 <Suspense fallback={<Loading/>}>
                     <Profile/>
                 </Suspense>
             )}/>
-            <Route path='/messages/:userID?' element={(
+            <Route path={`${routes.messages}/:userID?`} element={(
                 <Suspense fallback={<Loading/>}>
                     <Messages/>
                 </Suspense>
             )}/>
-            <Route path='/users' element={(
+            <Route path={routes.users} element={(
                 <Suspense fallback={<Loading/>}>
                     <Users/>
                 </Suspense>
             )}/>
-            <Route path='/news' element={<News/>}/>
-            <Route path='/music' element={<Music/>}/>
-            <Route path='/settings' element={<Settings/>}/>
+            <Route path={routes.news} element={<News/>}/>
+            <Route path={routes.music} element={<Music/>}/>
+            <Route path={routes.settings} element={<Settings/>}/>
         </Routes>
     )
 }

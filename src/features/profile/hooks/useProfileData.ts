@@ -4,6 +4,7 @@ import {followedSelector} from "@/features/profile/selectors/followedSelector";
 import {profileSelector} from "@/features/profile/selectors/profileSelector";
 import {statusSelector} from "@/features/profile/selectors/statusSelector";
 import {useAppSelector} from "@/common/hooks/useAppSelector.ts";
+import {appStatusSelector} from "@/features/service/selectors/appStatusSelector";
 
 export const useProfileData = (userID: string | undefined) => {
 
@@ -13,6 +14,8 @@ export const useProfileData = (userID: string | undefined) => {
    const profile = useAppSelector(profileSelector);
    const followed = useAppSelector(followedSelector);
    const followingInProgress = useAppSelector(followingInProgressSelector);
+   const appStatus = useAppSelector(appStatusSelector);
+   const loading = appStatus === 'loading';
 
-   return {currentUser, status, profile, followed, followingInProgress};
+   return {currentUser, status, profile, followed, followingInProgress, loading};
 }

@@ -1,26 +1,17 @@
-import {ComponentPropsWithoutRef, FC} from 'react';
+import {ComponentPropsWithoutRef, ElementType} from 'react';
 import cls from '@/components/Button/Button.module.scss'
 import classNames from "classnames";
 
-type ButtonType = {
+type ButtonType<T extends ElementType> = {
     variant?: 'default' | 'main' | 'green' | 'white' | 'submit',
     size?: 'small' | 'normal' | 'large'
-} & ComponentPropsWithoutRef<'button'>
+    as?: T
+} & ComponentPropsWithoutRef<T>
 
-export const Button: FC<ButtonType> = ({variant, size, children, ...restProps}) => {
+export const Button = <T extends ElementType>(props: ButtonType<T>) => {
+    const {as: Element = 'button', variant = 'default', size = 'normal', className, ...restProps} = props;
 
-    const styles = classNames(cls.button,
-        variant && cls[variant] || cls.Default,
-        size && cls[size] || cls.normal,
-        restProps.className
-    );
+    const styles = classNames(cls.button, cls[variant], cls[size], className);
 
-    return (
-        <button
-            {...restProps}
-            className={styles}
-        >
-            {children}
-        </button>
-    );
+    return <Element {...restProps} className={styles}/>;
 }

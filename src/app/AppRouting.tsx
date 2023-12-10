@@ -9,6 +9,7 @@ import {Login} from "@/pages/Login/Login.tsx";
 import {News} from "@/pages/News/News.tsx";
 import {lazy, Suspense} from "react";
 import {routes} from "@/common/const";
+import PageNotFound from "@/pages/PageNotFound/PageNotFound.tsx";
 
 const Users = lazy(
     () => import("@/pages/Users/Users.tsx").then(module => ({default: module.Users}))
@@ -46,6 +47,7 @@ export const AppRouting = () => {
             <Route path={routes.news} element={<News/>}/>
             <Route path={routes.music} element={<Music/>}/>
             <Route path={routes.settings} element={<Settings/>}/>
+            <Route path={routes.pageNotFound} element={<PageNotFound/>}/>
         </Routes>
     )
 }

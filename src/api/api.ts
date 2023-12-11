@@ -28,7 +28,7 @@ export const followAPI = {
   switchFollow: async (id: number, followed: boolean) => {
     const response = followed ? await instance.delete(`follow/${id}`) : await instance.post(`follow/${id}`);
 
-    return response.data.resultCode;
+    return response.data;
   },
 };
 

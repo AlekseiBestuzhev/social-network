@@ -35,27 +35,49 @@ export const setProfileTC =
 
 export const getFollowingOnProfileTC = (id: number) => async (dispatch: AppDispatchType) => {
   dispatch(setFollowingInProgressOnProfile(true));
-  const result = await followAPI.getFollowingStatus(id);
+  try {
+    const result = await followAPI.getFollowingStatus(id);
 
-  result ? dispatch(followOnProfile()) : dispatch(unfollowOnProfile());
+    result ? dispatch(followOnProfile()) : dispatch(unfollowOnProfile());
+  } catch (error) {
+    const message = handleServerError(error);
+
+    dispatch(setNotification(noticeStatus.error, message));
+  }
   dispatch(setFollowingInProgressOnProfile(false));
 };
 
 export const switchFollowingOnProfileTC =
   (id: number, followed: boolean) => async (dispatch: AppDispatchType) => {
     dispatch(setFollowingInProgressOnProfile(true));
-    const result = await followAPI.switchFollow(id, followed);
+    try {
+      const result = await followAPI.switchFollow(id, followed);
 
-    if (result === 0) {
-      followed ? dispatch(unfollowOnProfile()) : dispatch(followOnProfile());
+      if (result.resultCode === 0) {
+        followed ? dispatch(unfollowOnProfile()) : dispatch(followOnProfile());
+      } else {
+        const message = handleServerError(result);
+
+        dispatch(setNotification(noticeStatus.error, message));
+      }
+    } catch (error) {
+      const message = handleServerError(error);
+
+      dispatch(setNotification(noticeStatus.error, message));
     }
     dispatch(setFollowingInProgressOnProfile(false));
   };
 
 export const getUserStatusTC = (id: number) => async (dispatch: AppDispatchType) => {
-  const result = await profileAPI.getUserStatus(id);
+  try {
+    const result = await profileAPI.getUserStatus(id);
 
-  dispatch(setStatus(result));
+    dispatch(setStatus(result));
+  } catch (error) {
+    const message = handleServerError(error);
+
+    dispatch(setNotification(noticeStatus.error, message));
+  }
 };
 
 export const updateMyStatusTC =

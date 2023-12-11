@@ -1,3 +1,4 @@
-import { AppRootStateType } from "@/app/store.ts";
+import { AppRootStateType } from '@/app/store.ts';
 
-export const followingInProgressUserListSelector = (state: AppRootStateType): number[] => state.usersPage.followingInProgress;
+export const followingInProgressUserListSelector = (state: AppRootStateType): number[] =>
+  state.usersPage.followingInProgress;

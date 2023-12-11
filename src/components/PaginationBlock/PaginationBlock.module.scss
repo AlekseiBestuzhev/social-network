@@ -1,33 +1,33 @@
 .wrapper {
-	display: flex;
-	column-gap: 0.3rem;
-	padding: 0;
+  display: flex;
+  column-gap: 0.3rem;
+  padding: 0;
 
-	li {
-		list-style-type: none;
-		border-radius: 0.4rem;
-		border: var(--border);
-		background-color: var(--colors-bg);
+  li {
+    list-style-type: none;
+    border-radius: 0.4rem;
+    border: var(--border);
+    background-color: var(--colors-bg);
 
-		a {
-			display: inline-block;
-			padding: 0.4rem 0.8rem;
-			line-height: 1;
-		}
+    a {
+      display: inline-block;
+      padding: 0.4rem 0.8rem;
+      line-height: 1;
+    }
 
-		&:hover {
-			border: 1px solid var(--colors-ui-main);
-			cursor: pointer;
-		}
-	}
+    &:hover {
+      border: 1px solid var(--colors-ui-main);
+      cursor: pointer;
+    }
+  }
 
-	.item {
-		background-color: transparent;
-	}
+  .item {
+    background-color: transparent;
+  }
 
-	.active {
-		border-color: transparent;
-		background-color: var(--colors-ui-main);
-		color: #fff;
-	}
+  .active {
+    border-color: transparent;
+    background-color: var(--colors-ui-main);
+    color: #fff;
+  }
 }

@@ -1,64 +1,61 @@
-import {setFollowingThunkCreator} from "@/features/users/users-thunks.ts";
+import { FC, memo } from 'react';
+
+import { NavLink } from 'react-router-dom';
+
+import { routes } from '@/common/const';
+import { useAppDispatch } from '@/common/hooks/useAppDispatch.ts';
+import { Avatar } from '@/components/Avatar/Avatar.tsx';
+import { Button } from '@/components/Button/Button.tsx';
 import cls from '@/features/users/components/User/User.module.scss';
-import {Button} from '@/components/Button/Button.tsx';
-import {Avatar} from '@/components/Avatar/Avatar.tsx';
-import {UserType} from '@/features/users/users-reducer.ts';
-import {useAppDispatch} from "@/common/hooks/useAppDispatch.ts";
-import {NavLink} from 'react-router-dom';
-import {FC, memo} from 'react';
-import {routes} from "@/common/const";
+import { UserType } from '@/features/users/users-reducer.ts';
+import { setFollowingThunkCreator } from '@/features/users/users-thunks.ts';
 
 type UserItemListType = UserType & {
-   followingInProgress: number[]
-}
+  followingInProgress: number[];
+};
 
-export const User: FC<UserItemListType> = memo(({
-                                              id,
-                                              photos,
-                                              name,
-                                              uniqueUrlName,
-                                              followed,
-                                              status,
-                                              followingInProgress
-                                           }) => {
+export const User: FC<UserItemListType> = memo(
+  ({ id, photos, name, uniqueUrlName, followed, status, followingInProgress }) => {
+    const dispatch = useAppDispatch();
 
-   const dispatch = useAppDispatch();
-
-   const followHandler = (id: number, followed: boolean) => () => {
+    const followHandler = (id: number, followed: boolean) => () => {
       dispatch(setFollowingThunkCreator(id, followed));
-   }
+    };
 
-   const followBtnText = followed ? 'unfollow' : 'follow';
+    const followBtnText = followed ? 'unfollow' : 'follow';
 
-   const buttonVariant = followBtnText === 'follow' ? 'green' : 'default';
+    const buttonVariant = followBtnText === 'follow' ? 'green' : 'default';
 
-   return (
+    return (
       <li className={cls.body}>
-         <div className={cls.imgBtn}>
+        <div className={cls.imgBtn}>
+          <NavLink to={`${routes.profile}/${id}`}>
+            <Avatar photo={photos.large} />
+          </NavLink>
+          <Button
+            disabled={followingInProgress.some(elemID => elemID === id)}
+            variant={buttonVariant}
+            size="small"
+            onClick={followHandler(id, followed)}
+          >
+            {followBtnText}
+          </Button>
+        </div>
+        <div className={cls.info}>
+          <div className={cls.nameStatus}>
             <NavLink to={`${routes.profile}/${id}`}>
-               <Avatar photo={photos.large}/>
+              <h3 className={cls.name} data-url={uniqueUrlName}>
+                {name}
+              </h3>
             </NavLink>
-            <Button
-               disabled={followingInProgress.some(elemID => elemID === id)}
-               variant={buttonVariant}
-               size='small'
-               onClick={followHandler(id, followed)}
-            >
-               {followBtnText}
-            </Button>
-         </div>
-         <div className={cls.info}>
-            <div className={cls.nameStatus}>
-               <NavLink to={`${routes.profile}/${id}`}>
-                  <h3 className={cls.name} data-url={uniqueUrlName}>{name}</h3>
-               </NavLink>
-               {status && <p className={cls.status}>"{status}"</p>}
-            </div>
-            <div className={cls.location}>
-               <p className={cls.city}>City</p>
-               <p className={cls.country}>Country</p>
-            </div>
-         </div>
+            {status && <p className={cls.status}>"{status}"</p>}
+          </div>
+          <div className={cls.location}>
+            <p className={cls.city}>City</p>
+            <p className={cls.country}>Country</p>
+          </div>
+        </div>
       </li>
-   );
-})
+    );
+  },
+);

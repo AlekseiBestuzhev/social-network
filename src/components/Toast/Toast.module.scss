@@ -70,7 +70,8 @@
   0% {
     transform: translateX(-100%);
   }
-  5%, 95% {
+  5%,
+  95% {
     opacity: 1;
     transform: translateX(0);
   }

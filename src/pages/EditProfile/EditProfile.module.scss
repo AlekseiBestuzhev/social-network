@@ -11,7 +11,7 @@
   background: linear-gradient(137deg, var(--colors-bg-status) 0%, var(--colors-bg-status-secondary) 100%);
 
   &:before {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     right: 0;
@@ -39,8 +39,6 @@
     }
 
     .text {
-
     }
   }
-
 }

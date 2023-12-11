@@ -1,3 +1,4 @@
-import { AppRootStateType } from "@/app/store.ts";
+import { AppRootStateType } from '@/app/store.ts';
 
-export const followingInProgressSelector = (state: AppRootStateType): boolean => state.profile.followingInProgress;
+export const followingInProgressSelector = (state: AppRootStateType): boolean =>
+  state.profile.followingInProgress;

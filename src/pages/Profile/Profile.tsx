@@ -10,20 +10,22 @@ import {useParams} from "react-router-dom";
 import {useEffect} from "react";
 
 export const Profile = withAuthRedirect(() => {
-
    const dispatch = useAppDispatch();
 
    const {userID} = useParams();
 
-   const {currentUser, status, profile, followed, followingInProgress} = useProfileData(userID);
+   const {currentUser, status, profile, followed, followingInProgress, loading} = useProfileData(userID);
 
    useEffect(() => {
       void dispatch(setProfileTC(currentUser));
    }, [currentUser]);
 
+   if (!profile) return null
+
    return (
-      profile
-         ? <>
+      loading
+         ? <Loading/>
+         : <>
             <Person profile={profile} isMe={!userID} status={status}>
                <Controls
                   isMe={!userID}
@@ -34,6 +36,5 @@ export const Profile = withAuthRedirect(() => {
             </Person>
             <PostsBlock user={userID ? `${profile.fullName}'s ` : 'My '}/>
          </>
-         : <Loading/>
    )
 })

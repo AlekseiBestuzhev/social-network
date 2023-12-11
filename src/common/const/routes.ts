@@ -8,4 +8,5 @@ export const routes = {
     news: '/news',
     music: '/music',
     settings: '/settings',
+    pageNotFound: '/*',
 } as const

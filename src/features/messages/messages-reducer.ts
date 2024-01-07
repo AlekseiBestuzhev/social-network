@@ -1,5 +1,5 @@
 import { v1 } from 'uuid';
-
+import devChat from '@/assets/images/chat.png';
 import badman from '@/assets/images/localUsers/bad-man.jpg';
 import heisenberg from '@/assets/images/localUsers/heisenberg.jpg';
 import meladze from '@/assets/images/localUsers/meladze.jpg';
@@ -8,10 +8,7 @@ import { userLoggedOut } from '@/features/auth/auth-reducer.ts';
 
 // _____ types
 
-export type MessagesActionsType =
-  | ReturnType<typeof updateMessageTextAC>
-  | ReturnType<typeof setCurrentDialog>
-  | ReturnType<typeof addMessageAC>;
+export type MessagesActionsType = ReturnType<typeof updateMessageTextAC> | ReturnType<typeof addMessageAC>;
 
 type HandlingActions = MessagesActionsType | ReturnType<typeof userLoggedOut>;
 
@@ -39,13 +36,17 @@ export type MessagesPageType = {
   dialogsData: DialogType[];
   messagesData: MessagesDataType;
   newMessageText: string;
-  currentDialog: string;
 };
 
 // _____ reducer
 
 const initState: MessagesPageType = {
   dialogsData: [
+    {
+      id: 'dev_chat',
+      name: 'Dev Chat',
+      avatar: devChat,
+    },
     {
       id: 'local_meladze',
       name: 'В. Меладзе',
@@ -73,6 +74,7 @@ const initState: MessagesPageType = {
     },
   ],
   messagesData: {
+    dev_chat: [],
     local_meladze: [
       {
         id: v1(),
@@ -155,7 +157,6 @@ const initState: MessagesPageType = {
     'local_t-shelby': [],
   },
   newMessageText: '',
-  currentDialog: '',
 };
 
 export const MessagesReducer = (
@@ -185,14 +186,8 @@ export const MessagesReducer = (
         newMessageText: '',
         messagesData: {
           ...state.messagesData,
-          [state.currentDialog]: [...state.messagesData[state.currentDialog], newMessage],
+          [action.payload.toUser]: [...state.messagesData[action.payload.toUser], newMessage],
         },
-      };
-    }
-    case 'SET-CURRENT-DIALOG': {
-      return {
-        ...state,
-        currentDialog: action.payload.userID,
       };
     }
     case 'USER-LOGGED-OUT':
@@ -210,7 +205,7 @@ export const updateMessageTextAC = (newText: string) =>
     changedMessageText: newText,
   }) as const;
 
-export const addMessageAC = (userID: string, name: string, photo: string | null) => {
+export const addMessageAC = (userID: string, name: string, photo: string | null, toUser: string) => {
   const formatter = new Intl.DateTimeFormat('ru', {
     hour: 'numeric',
     minute: 'numeric',
@@ -231,12 +226,7 @@ export const addMessageAC = (userID: string, name: string, photo: string | null)
       userID,
       name,
       photo,
+      toUser,
     },
   } as const;
 };
-
-export const setCurrentDialog = (userID: string) =>
-  ({
-    type: 'SET-CURRENT-DIALOG',
-    payload: { userID },
-  }) as const;

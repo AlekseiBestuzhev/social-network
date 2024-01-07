@@ -16,7 +16,7 @@
     "lint": "eslint src --ext .jsx,.js,.tsx,.ts  --no-error-on-unmatched-pattern --fix"
   },
   "dependencies": {
-    "axios": "1.4.0",
+    "axios": "1.6.5",
     "classnames": "2.3.2",
     "gh-pages": "^6.0.0",
     "react": "^18.2.0",
@@ -41,8 +41,8 @@
     "@types/uuid": "^9.0.2",
     "@typescript-eslint/eslint-plugin": "^6.1.0",
     "@typescript-eslint/parser": "^6.1.0",
-    "@vitejs/plugin-react-swc": "^3.3.2",
-    "eslint": "^8.45.0",
+    "@vitejs/plugin-react-swc": "^3.5.0",
+    "eslint": "^8.56.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.29.0",
@@ -52,7 +52,7 @@
     "prettier": "^3.1.1",
     "sass": "^1.64.0",
     "typescript": "^5.1.6",
-    "vite": "^4.4.4",
+    "vite": "^5.0.11",
     "vitest": "^0.34.4"
   }
 }

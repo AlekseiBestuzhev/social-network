@@ -1,24 +1,15 @@
-import { useEffect } from 'react';
-
 import { useParams } from 'react-router-dom';
 
 import picture from '@/assets/animate-images/messages.gif';
 import pictureWebp from '@/assets/animate-images/messages.webp';
 import { withAuthRedirect } from '@/common/hoc/withAuthRedirect.tsx';
-import { useAppDispatch } from '@/common/hooks/useAppDispatch.ts';
 import { SectionInfo } from '@/components/SectionInfo/SectionInfo';
 import { CurrentDialog } from '@/features/messages/components/CurrentDialog/CurrentDialog.tsx';
 import { DialogList } from '@/features/messages/components/DialogList/DialogList.tsx';
-import { setCurrentDialog } from '@/features/messages/messages-reducer.ts';
 import cls from '@/pages/Messages/Messages.module.scss';
 
 export const Messages = withAuthRedirect(() => {
-  const dispatch = useAppDispatch();
   const { userID } = useParams();
-
-  useEffect(() => {
-    dispatch(setCurrentDialog(userID || ''));
-  }, [userID]);
 
   return (
     <div className={cls.page}>

@@ -1,4 +1,5 @@
 /* eslint-env node */
+const path = require('path');
 
 module.exports = {
   root: true,
@@ -19,7 +20,7 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
     project: './tsconfig.json',
-    tsconfigRootDir: __dirname,
+    tsconfigRootDir: path.resolve(__dirname),
   },
   plugins: ['react-refresh'],
   rules: {

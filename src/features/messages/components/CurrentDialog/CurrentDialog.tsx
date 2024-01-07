@@ -5,8 +5,8 @@ import { RiSendPlaneFill, RiAlignRight } from 'react-icons/ri';
 import { useAppSelector } from '@/common/hooks/useAppSelector.ts';
 import cls from '@/features/messages/components/CurrentDialog/CurrentDialog.module.scss';
 import { DialogWindow } from '@/features/messages/components/CurrentDialog/DialogWindow/DialogWindow.tsx';
-import { NewMessageContainer } from '@/features/messages/components/CurrentDialog/NewMessage/NewMessageContainer.tsx';
 import { dialogsDataSelector } from '@/features/messages/selectors/dialogsDataSelector';
+import { AddItemForm } from '@/components/AddItemForm/AddItemForm.tsx';
 
 type PropsType = {
   userID: string;
@@ -29,9 +29,9 @@ export const CurrentDialog: FC<PropsType> = memo(({ userID }) => {
       </div>
       <DialogWindow userID={userID} />
       <div className={cls.formWrapper}>
-        <NewMessageContainer placeholder="Enter a message...">
+        <AddItemForm placeholder="Enter a message..." onSubmit={() => {}}>
           Send <RiSendPlaneFill />
-        </NewMessageContainer>
+        </AddItemForm>
       </div>
     </div>
   );

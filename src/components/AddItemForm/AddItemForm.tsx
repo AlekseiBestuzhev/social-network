@@ -1,124 +1,76 @@
-import { ChangeEvent, Component, ReactNode, KeyboardEvent, createRef } from 'react';
-
-import { connect } from 'react-redux';
-
-import { AppRootStateType } from '@/app/store.ts';
+import { PropsWithChildren, useEffect, useRef, KeyboardEvent } from 'react';
+import { useController, useForm } from 'react-hook-form';
 import cls from '@/components/AddItemForm/AddItemForm.module.scss';
 import { Button } from '@/components/Button/Button';
 
-export type AddItemFormType = MapStateToPropsType & {
+type Form = {
+  message: string;
+};
+
+type Props = {
   placeholder: string;
-  children: ReactNode;
-  currentText: string;
-  updateCurrentText: (text: string) => void;
-  addText: (userID: string, name: string, photo: string | null) => void;
-  userID: number | null;
-  name: string | null;
-  avatar: string | null;
-};
+  onSubmit: (data: Form) => void;
+} & PropsWithChildren;
 
-export type AddItemFormState = {
-  error: string;
-};
+export const AddItemForm = ({ placeholder, onSubmit, children }: Props) => {
+  const { control, handleSubmit, watch } = useForm<Form>();
 
-export class AddItemFormContainer extends Component<AddItemFormType, AddItemFormState> {
-  private textareaRef: React.RefObject<HTMLTextAreaElement>;
+  const messageText = watch('message');
 
-  constructor(props: AddItemFormType) {
-    super(props);
-    this.state = { error: '' };
-    this.textareaRef = createRef();
-  }
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  componentDidMount() {
-    this.adjustTextareaHeight();
-  }
+  const adjustTextareaHeight = () => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = '0px';
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
 
-  componentDidUpdate(prevProps: AddItemFormType) {
-    if (prevProps.currentText !== this.props.currentText) {
-      this.adjustTextareaHeight();
-    }
-  }
+      const maxHeight = 200;
 
-  adjustTextareaHeight() {
-    if (this.textareaRef.current) {
-      this.textareaRef.current.style.height = '0px';
-      this.textareaRef.current.style.height = `${this.textareaRef.current.scrollHeight}px`; // addind on shift + enter
-
-      const maxHeight = 200; // in px
-
-      if (this.textareaRef.current.scrollHeight > maxHeight) {
-        this.textareaRef.current.style.overflowY = 'scroll';
-        this.textareaRef.current.style.height = `${maxHeight}px`;
+      if (textareaRef.current.scrollHeight > maxHeight) {
+        textareaRef.current.style.overflowY = 'scroll';
+        textareaRef.current.style.height = `${maxHeight}px`;
       } else {
-        this.textareaRef.current.style.overflowY = 'hidden';
+        textareaRef.current.style.overflowY = 'hidden';
       }
     }
-  }
-
-  onChangeHandler(e: ChangeEvent<HTMLTextAreaElement>): void {
-    if (this.state.error) {
-      this.setState({ error: '' });
-    }
-    this.props.updateCurrentText(e.currentTarget.value);
-  }
-
-  onKeyDownAdd(e: KeyboardEvent<HTMLTextAreaElement>): void {
-    if (e.key === 'Enter') {
-      if (!e.shiftKey) {
-        e.preventDefault();
-        this.addTextHandler();
-      }
-    }
-  }
-
-  addTextHandler() {
-    const trimmedText = this.props.currentText.trim();
-
-    if (!trimmedText) {
-      this.setState({ error: 'Text is required' });
-      this.props.updateCurrentText('');
-    } else {
-      this.props.updateCurrentText(trimmedText);
-      this.state.error && this.setState({ error: '' });
-      const senderID = `${this.props.userID}` || 'unknown';
-      const senderName = this.props.name || 'unknown';
-
-      this.props.addText(senderID, senderName, this.props.avatar);
-    }
-  }
-
-  render() {
-    return (
-      <div className={cls.wrapper}>
-        <textarea
-          className={`${cls.textarea} ${this.state.error && cls.errorMessage}`}
-          value={this.props.currentText}
-          placeholder={this.state.error || this.props.placeholder}
-          onKeyDown={this.onKeyDownAdd.bind(this)}
-          onChange={this.onChangeHandler.bind(this)}
-          ref={this.textareaRef}
-        />
-        <Button onClick={this.addTextHandler.bind(this)} disabled={!this.props.currentText} variant="submit">
-          {this.props.children}
-        </Button>
-      </div>
-    );
-  }
-}
-
-type MapStateToPropsType = {
-  userID: number | null;
-  name: string | null;
-  avatar: string | null;
-};
-
-const mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
-  return {
-    userID: state.auth.id,
-    name: state.auth.fullName,
-    avatar: state.auth.photos.large,
   };
-};
 
-export const AddItemForm = connect(mapStateToProps)(AddItemFormContainer);
+  const onKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      if (messageText?.trim()) {
+        handleSubmit(onSubmitForm);
+        alert('enter');
+      }
+    }
+  };
+
+  const onSubmitForm = (data: Form) => {
+    onSubmit(data);
+    alert(JSON.stringify(data));
+  };
+
+  const {
+    field: { ref, ...rest },
+    fieldState: { error },
+  } = useController({ name: 'message', control });
+
+  useEffect(() => {
+    adjustTextareaHeight();
+  }, [messageText]);
+
+  return (
+    <form onSubmit={handleSubmit(onSubmitForm)} className={cls.wrapper}>
+      <textarea
+        className={`${cls.textarea} ${error && cls.errorMessage}`}
+        placeholder={error ? error.message : placeholder}
+        onKeyDown={onKeyDown}
+        ref={textareaRef}
+        {...rest}
+      />
+      <Button variant="submit" disabled={!messageText?.trim()}>
+        {children}
+      </Button>
+    </form>
+  );
+};

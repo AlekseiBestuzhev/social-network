@@ -1,12 +1,13 @@
 import axios from 'axios';
 
-import { API_KEY } from './API-KEY';
-
 import { LoginFormType } from '@/features/auth/components/LoginForm/LoginForm.tsx';
 import { UpdateExtraInfo } from '@/features/profile/components/EditExtraInfoForm/EditExtraInfoForm.tsx';
 
+const API_KEY = '9fa7e363-e84b-405a-8fe0-3ad1172b0bcd';
+const BASE_URL = 'https://social-network.samuraijs.com/api/1.0/';
+
 const instance = axios.create({
-  baseURL: `https://social-network.samuraijs.com/api/1.0/`,
+  baseURL: BASE_URL,
   headers: { 'API-KEY': API_KEY },
   withCredentials: true,
 });

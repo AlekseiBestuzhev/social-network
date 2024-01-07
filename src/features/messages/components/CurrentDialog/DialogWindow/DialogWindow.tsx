@@ -30,7 +30,7 @@ export const DialogWindow: FC<DialogWindowPropsType> = memo(({ userID }) => {
       <Message
         key={el.id}
         id={el.id}
-        text={el.text}
+        message={el.message}
         userID={el.userID}
         userName={el.userName}
         avatar={el.avatar}
@@ -46,7 +46,7 @@ export const DialogWindow: FC<DialogWindowPropsType> = memo(({ userID }) => {
   return (
     <div className={cls.dialogMessages}>
       {dialogMessagesList}
-      <div ref={messagesEndRef} />
+      <div ref={messagesEndRef} className={cls.scrollAnchor} />
     </div>
   );
 });

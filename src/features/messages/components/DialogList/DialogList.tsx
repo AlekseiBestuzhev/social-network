@@ -11,7 +11,7 @@ export const DialogList = () => {
   const dialogsList = dialogsData.length ? (
     dialogsData.map(el => {
       const lm = messagesData[el.id][messagesData[el.id].length - 1];
-      const lastText = lm?.text || '';
+      const lastText = lm?.message || '';
       const lastDate = lm?.date || '';
 
       return (

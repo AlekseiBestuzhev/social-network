@@ -1,4 +1,5 @@
 import { v1 } from 'uuid';
+
 import devChat from '@/assets/images/chat.png';
 import badman from '@/assets/images/localUsers/bad-man.jpg';
 import heisenberg from '@/assets/images/localUsers/heisenberg.jpg';
@@ -8,19 +9,24 @@ import { userLoggedOut } from '@/features/auth/auth-reducer.ts';
 
 // _____ types
 
-export type MessagesActionsType = ReturnType<typeof updateMessageTextAC> | ReturnType<typeof addMessageAC>;
+export type MessagesActionsType = ReturnType<typeof addMessageAC>;
 
 type HandlingActions = MessagesActionsType | ReturnType<typeof userLoggedOut>;
 
 export type MessageType = {
   id: string;
-  text: string;
+  message: string;
   userID: string;
   userName: string;
   avatar: string | null;
   time: string;
   date: string;
 };
+
+export type AddMessageData = {
+  message: string;
+  toUser: string;
+} & Pick<MessageType, 'userID' | 'userName' | 'avatar'>;
 
 export type MessagesDataType = {
   [key: string]: MessageType[];
@@ -35,7 +41,6 @@ export type DialogType = {
 export type MessagesPageType = {
   dialogsData: DialogType[];
   messagesData: MessagesDataType;
-  newMessageText: string;
 };
 
 // _____ reducer
@@ -78,7 +83,7 @@ const initState: MessagesPageType = {
     local_meladze: [
       {
         id: v1(),
-        text: 'Но я тысячу раз обрывал провода',
+        message: 'Но я тысячу раз обрывал провода',
         userID: 'local_meladze',
         userName: 'В. Меладзе',
         avatar: meladze,
@@ -87,7 +92,7 @@ const initState: MessagesPageType = {
       },
       {
         id: v1(),
-        text: 'Сам себе кричал: «Ухожу навсегда»',
+        message: 'Сам себе кричал: «Ухожу навсегда»',
         userID: 'local_meladze',
         userName: 'В. Меладзе',
         avatar: meladze,
@@ -96,7 +101,7 @@ const initState: MessagesPageType = {
       },
       {
         id: v1(),
-        text: 'Непонятно, как доживал до утра',
+        message: 'Непонятно, как доживал до утра',
         userID: 'local_meladze',
         userName: 'В. Меладзе',
         avatar: meladze,
@@ -105,7 +110,7 @@ const initState: MessagesPageType = {
       },
       {
         id: v1(),
-        text: 'Салют...',
+        message: 'Салют...',
         userID: 'local_meladze',
         userName: 'В. Меладзе',
         avatar: meladze,
@@ -116,7 +121,7 @@ const initState: MessagesPageType = {
     'local_the-badman': [
       {
         id: v1(),
-        text: 'ХАРВИ ДЭНТ',
+        message: 'ХАРВИ ДЭНТ',
         userID: 'local_the-badman',
         userName: 'The Badman',
         avatar: meladze,
@@ -125,7 +130,7 @@ const initState: MessagesPageType = {
       },
       {
         id: v1(),
-        text: 'Что?',
+        message: 'Что?',
         userID: 'authUser',
         userName: 'authUser',
         avatar: null,
@@ -134,7 +139,7 @@ const initState: MessagesPageType = {
       },
       {
         id: v1(),
-        text: 'Можем ли мы доверять ему?',
+        message: 'Можем ли мы доверять ему?',
         userID: 'local_the-badman',
         userName: 'The Badman',
         avatar: meladze,
@@ -145,7 +150,7 @@ const initState: MessagesPageType = {
     local_heisenberg: [
       {
         id: v1(),
-        text: 'Say my name',
+        message: 'Say my name',
         userID: 'local_heisenberg',
         userName: 'Heisenberg',
         avatar: heisenberg,
@@ -156,7 +161,6 @@ const initState: MessagesPageType = {
     'local_user-987454': [],
     'local_t-shelby': [],
   },
-  newMessageText: '',
 };
 
 export const MessagesReducer = (
@@ -164,29 +168,18 @@ export const MessagesReducer = (
   action: HandlingActions,
 ): MessagesPageType => {
   switch (action.type) {
-    case 'UPDATE-MESSAGE-TEXT': {
-      return {
-        ...state,
-        newMessageText: action.changedMessageText,
-      };
-    }
     case 'ADD-MESSAGE': {
+      const { toUser, ...rest } = action.payload;
       const newMessage: MessageType = {
+        ...rest,
         id: v1(),
-        text: state.newMessageText,
-        userID: action.payload.userID,
-        userName: action.payload.name,
-        avatar: action.payload.photo,
-        time: action.payload.time,
-        date: action.payload.date,
       };
 
       return {
         ...state,
-        newMessageText: '',
         messagesData: {
           ...state.messagesData,
-          [action.payload.toUser]: [...state.messagesData[action.payload.toUser], newMessage],
+          [toUser]: [...state.messagesData[toUser], newMessage],
         },
       };
     }
@@ -199,18 +192,13 @@ export const MessagesReducer = (
 
 // _____ actions
 
-export const updateMessageTextAC = (newText: string) =>
-  ({
-    type: 'UPDATE-MESSAGE-TEXT',
-    changedMessageText: newText,
-  }) as const;
-
-export const addMessageAC = (userID: string, name: string, photo: string | null, toUser: string) => {
+export const addMessageAC = (args: AddMessageData) => {
   const formatter = new Intl.DateTimeFormat('ru', {
     hour: 'numeric',
     minute: 'numeric',
   });
   const time = `${formatter.format(new Date())}`;
+
   const dateFormatter = new Intl.DateTimeFormat('en-GB', {
     day: 'numeric',
     month: 'short',
@@ -221,12 +209,9 @@ export const addMessageAC = (userID: string, name: string, photo: string | null,
   return {
     type: 'ADD-MESSAGE',
     payload: {
+      ...args,
       time,
       date,
-      userID,
-      name,
-      photo,
-      toUser,
     },
   } as const;
 };

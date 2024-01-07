@@ -9,12 +9,12 @@ type MessagePropsType = MessageType & {
   iSender: boolean;
 };
 
-export const Message: FC<MessagePropsType> = memo(({ text, iSender, time }) => {
+export const Message: FC<MessagePropsType> = memo(({ message, iSender, time }) => {
   const classes = classNames(cls.wrapper, { [cls.iSender]: iSender });
 
   return (
     <div className={classes}>
-      <div className={cls.message}>{text}</div>
+      <div className={cls.message}>{message}</div>
       <p className={cls.time}>{time}</p>
     </div>
   );

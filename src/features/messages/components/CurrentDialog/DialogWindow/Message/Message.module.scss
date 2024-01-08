@@ -3,6 +3,16 @@
   align-items: flex-end;
   column-gap: 1rem;
   width: 100%;
+  position: relative;
+
+  .name {
+    font-size: var(--text-size-sm);
+    color: var(--colors-ui-main);
+
+    position: absolute;
+    bottom: -1.5rem;
+    left: 0;
+  }
 
   .message {
     padding: 1rem;
@@ -37,6 +47,11 @@
 
 .iSender {
   flex-direction: row-reverse;
+
+  .name {
+    left: auto;
+    right: 0;
+  }
 
   .message {
     align-self: flex-end;

@@ -1,4 +1,4 @@
-import { FC, memo } from 'react';
+import { memo } from 'react';
 
 import { RiSendPlaneFill, RiAlignRight } from 'react-icons/ri';
 
@@ -13,14 +13,15 @@ import { DialogWindow } from '@/features/messages/components/CurrentDialog/Dialo
 import { addMessageAC, AddMessageData } from '@/features/messages/messages-reducer.ts';
 import { dialogsDataSelector } from '@/features/messages/selectors/dialogsDataSelector';
 
-type PropsType = {
+export type CurrentDialogProps = {
   userID: string;
+  socket: WebSocket | null;
 };
 
-export const CurrentDialog: FC<PropsType> = memo(({ userID }) => {
+export const CurrentDialog = memo(({ userID, socket }: CurrentDialogProps) => {
   const authUserName = useAppSelector(authUserNameSelector);
-  const authUserID = useAppSelector(authUserIDSelector);
-  const avatar = useAppSelector(authUserAvatarSelector);
+  const authUserID = useAppSelector(authUserIDSelector)?.toString() || '';
+  const photo = useAppSelector(authUserAvatarSelector);
 
   const dialogsData = useAppSelector(dialogsDataSelector);
   const user = dialogsData.find(el => el.id === userID);
@@ -29,14 +30,14 @@ export const CurrentDialog: FC<PropsType> = memo(({ userID }) => {
   const dispatch = useAppDispatch();
 
   const onSubmit = ({ message }: AddItemFormData) => {
-    if (userID === 'dev_chat') {
+    if (userID === 'dev_chat' && socket) {
       alert(message);
-    } else if (typeof authUserID === 'number' && authUserName) {
+    } else if (authUserID && authUserName) {
       const messageData: AddMessageData = {
         message,
-        userID: authUserID.toString(),
+        userId: authUserID.toString(),
         userName: authUserName,
-        avatar,
+        photo,
         toUser: userID,
       };
 
@@ -50,7 +51,7 @@ export const CurrentDialog: FC<PropsType> = memo(({ userID }) => {
         <h4 className={cls.name}>{currentUserName}</h4>
         <RiAlignRight className={cls.menuIcon} onClick={() => alert('There will be a drop-down list')} />
       </div>
-      <DialogWindow userID={userID} />
+      <DialogWindow userID={userID} authUserId={authUserID} />
       <div className={cls.formWrapper}>
         <AddItemForm placeholder="Enter a message..." onSubmit={onSubmit}>
           Send <RiSendPlaneFill />

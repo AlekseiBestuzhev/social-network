@@ -15,13 +15,13 @@ export type LinkProps = {
   isPending: boolean;
 };
 
-export const Dialog: FC<DialogPropsType> = memo(({ id, name, avatar, lastMessage, lastDate }) => {
+export const Dialog: FC<DialogPropsType> = memo(({ id, name, photo, lastMessage, lastDate }) => {
   const linkStyles = ({ isActive }: LinkProps) => classNames(cls.link, { [cls.activeLink]: isActive });
 
   return (
     <li className={cls.dialog}>
       <NavLink to={`${routes.messages}/${id}`} className={linkStyles}>
-        <Avatar photo={avatar} size="3.5rem" />
+        <Avatar photo={photo} size="3.5rem" />
         <div className={cls.textBlock}>
           <div className={cls.topLine}>
             <p className={cls.name}>{name}</p>

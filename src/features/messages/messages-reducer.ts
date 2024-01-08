@@ -6,19 +6,20 @@ import heisenberg from '@/assets/images/localUsers/heisenberg.jpg';
 import meladze from '@/assets/images/localUsers/meladze.jpg';
 import shelby from '@/assets/images/localUsers/shelby.jpg';
 import { userLoggedOut } from '@/features/auth/auth-reducer.ts';
+import { getCurrentData } from '@/common/utils/getCurrentData.ts';
 
 // _____ types
 
-export type MessagesActionsType = ReturnType<typeof addMessageAC>;
+export type MessagesActionsType = ReturnType<typeof setDevChatMessages> | ReturnType<typeof addMessageAC>;
 
 type HandlingActions = MessagesActionsType | ReturnType<typeof userLoggedOut>;
 
 export type MessageType = {
   id: string;
   message: string;
-  userID: string;
+  userId: string;
   userName: string;
-  avatar: string | null;
+  photo: string | null;
   time: string;
   date: string;
 };
@@ -26,7 +27,9 @@ export type MessageType = {
 export type AddMessageData = {
   message: string;
   toUser: string;
-} & Pick<MessageType, 'userID' | 'userName' | 'avatar'>;
+} & Pick<MessageType, 'userId' | 'userName' | 'photo'>;
+
+export type WebSocketMessage = Omit<AddMessageData, 'toUser'>;
 
 export type MessagesDataType = {
   [key: string]: MessageType[];
@@ -35,7 +38,7 @@ export type MessagesDataType = {
 export type DialogType = {
   id: string;
   name: string;
-  avatar: string | null;
+  photo: string | null;
 };
 
 export type MessagesPageType = {
@@ -50,32 +53,32 @@ const initState: MessagesPageType = {
     {
       id: 'dev_chat',
       name: 'Dev Chat',
-      avatar: devChat,
+      photo: devChat,
     },
     {
       id: 'local_meladze',
       name: 'В. Меладзе',
-      avatar: meladze,
+      photo: meladze,
     },
     {
       id: 'local_the-badman',
       name: 'The Badman',
-      avatar: badman,
+      photo: badman,
     },
     {
       id: 'local_heisenberg',
       name: 'Heisenberg',
-      avatar: heisenberg,
+      photo: heisenberg,
     },
     {
       id: 'local_user-987454',
       name: 'user 987454',
-      avatar: null,
+      photo: null,
     },
     {
       id: 'local_t-shelby',
       name: 'T. Shelby',
-      avatar: shelby,
+      photo: shelby,
     },
   ],
   messagesData: {
@@ -84,36 +87,36 @@ const initState: MessagesPageType = {
       {
         id: v1(),
         message: 'Но я тысячу раз обрывал провода',
-        userID: 'local_meladze',
+        userId: 'local_meladze',
         userName: 'В. Меладзе',
-        avatar: meladze,
+        photo: meladze,
         time: '20:53',
         date: '15 Jun 2023',
       },
       {
         id: v1(),
         message: 'Сам себе кричал: «Ухожу навсегда»',
-        userID: 'local_meladze',
+        userId: 'local_meladze',
         userName: 'В. Меладзе',
-        avatar: meladze,
+        photo: meladze,
         time: '20:53',
         date: '15 Jun 2023',
       },
       {
         id: v1(),
         message: 'Непонятно, как доживал до утра',
-        userID: 'local_meladze',
+        userId: 'local_meladze',
         userName: 'В. Меладзе',
-        avatar: meladze,
+        photo: meladze,
         time: '20:54',
         date: '15 Jun 2023',
       },
       {
         id: v1(),
         message: 'Салют...',
-        userID: 'local_meladze',
+        userId: 'local_meladze',
         userName: 'В. Меладзе',
-        avatar: meladze,
+        photo: meladze,
         time: '20:54',
         date: '15 Jun 2023',
       },
@@ -122,27 +125,27 @@ const initState: MessagesPageType = {
       {
         id: v1(),
         message: 'ХАРВИ ДЭНТ',
-        userID: 'local_the-badman',
+        userId: 'local_the-badman',
         userName: 'The Badman',
-        avatar: meladze,
+        photo: meladze,
         time: '20:53',
         date: '11 May 2023',
       },
       {
         id: v1(),
         message: 'Что?',
-        userID: 'authUser',
+        userId: 'authUser',
         userName: 'authUser',
-        avatar: null,
+        photo: null,
         time: '20:53',
         date: '11 May 2023',
       },
       {
         id: v1(),
         message: 'Можем ли мы доверять ему?',
-        userID: 'local_the-badman',
+        userId: 'local_the-badman',
         userName: 'The Badman',
-        avatar: meladze,
+        photo: meladze,
         time: '20:54',
         date: '11 May 2023',
       },
@@ -151,9 +154,9 @@ const initState: MessagesPageType = {
       {
         id: v1(),
         message: 'Say my name',
-        userID: 'local_heisenberg',
+        userId: 'local_heisenberg',
         userName: 'Heisenberg',
-        avatar: heisenberg,
+        photo: heisenberg,
         time: '05:32',
         date: '17 Mar 2023',
       },
@@ -183,6 +186,15 @@ export const MessagesReducer = (
         },
       };
     }
+    case 'SET-DEV-CHAT-MESSAGES': {
+      return {
+        ...state,
+        messagesData: {
+          ...state.messagesData,
+          dev_chat: [...state.messagesData.dev_chat, ...action.payload.messages],
+        },
+      };
+    }
     case 'USER-LOGGED-OUT':
       return initState;
     default:
@@ -193,18 +205,7 @@ export const MessagesReducer = (
 // _____ actions
 
 export const addMessageAC = (args: AddMessageData) => {
-  const formatter = new Intl.DateTimeFormat('ru', {
-    hour: 'numeric',
-    minute: 'numeric',
-  });
-  const time = `${formatter.format(new Date())}`;
-
-  const dateFormatter = new Intl.DateTimeFormat('en-GB', {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-  });
-  const date = `${dateFormatter.format(new Date())}`;
+  const { time, date } = getCurrentData();
 
   return {
     type: 'ADD-MESSAGE',
@@ -212,6 +213,25 @@ export const addMessageAC = (args: AddMessageData) => {
       ...args,
       time,
       date,
+    },
+  } as const;
+};
+
+export const setDevChatMessages = (messages: WebSocketMessage[]) => {
+  const { time, date } = getCurrentData();
+  const handledTime = messages.length === 1 ? time : '';
+
+  const handledMessages = messages.map(el => ({
+    ...el,
+    id: v1(),
+    time: handledTime,
+    date,
+  }));
+
+  return {
+    type: 'SET-DEV-CHAT-MESSAGES',
+    payload: {
+      messages: handledMessages,
     },
   } as const;
 };

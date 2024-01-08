@@ -19,7 +19,7 @@ export const DialogList = () => {
           key={el.id}
           id={el.id}
           name={el.name}
-          avatar={el.avatar}
+          photo={el.photo}
           lastMessage={lastText}
           lastDate={lastDate}
         />

@@ -5,12 +5,15 @@ import badman from '@/assets/images/localUsers/bad-man.jpg';
 import heisenberg from '@/assets/images/localUsers/heisenberg.jpg';
 import meladze from '@/assets/images/localUsers/meladze.jpg';
 import shelby from '@/assets/images/localUsers/shelby.jpg';
-import { userLoggedOut } from '@/features/auth/auth-reducer.ts';
 import { getCurrentData } from '@/common/utils/getCurrentData.ts';
+import { userLoggedOut } from '@/features/auth/auth-reducer.ts';
 
 // _____ types
 
-export type MessagesActionsType = ReturnType<typeof setDevChatMessages> | ReturnType<typeof addMessageAC>;
+export type MessagesActionsType =
+  | ReturnType<typeof clearDevChatMessages>
+  | ReturnType<typeof setDevChatMessages>
+  | ReturnType<typeof addMessageAC>;
 
 type HandlingActions = MessagesActionsType | ReturnType<typeof userLoggedOut>;
 
@@ -186,7 +189,7 @@ export const MessagesReducer = (
         },
       };
     }
-    case 'SET-DEV-CHAT-MESSAGES': {
+    case 'SET-DEV-CHAT-MESSAGES':
       return {
         ...state,
         messagesData: {
@@ -194,7 +197,14 @@ export const MessagesReducer = (
           dev_chat: [...state.messagesData.dev_chat, ...action.payload.messages],
         },
       };
-    }
+    case 'CLEAR-DEV-CHAT-MESSAGES':
+      return {
+        ...state,
+        messagesData: {
+          ...state.messagesData,
+          dev_chat: [],
+        },
+      };
     case 'USER-LOGGED-OUT':
       return initState;
     default:
@@ -231,8 +241,10 @@ export const setDevChatMessages = (messages: WebSocketMessage[]) => {
 
   return {
     type: 'SET-DEV-CHAT-MESSAGES',
-    payload: {
-      messages: handledMessages,
-    },
+    payload: { messages: handledMessages },
   } as const;
+};
+
+export const clearDevChatMessages = () => {
+  return { type: 'CLEAR-DEV-CHAT-MESSAGES' } as const;
 };

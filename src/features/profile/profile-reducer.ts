@@ -6,6 +6,7 @@ import { userLoggedOut } from '@/features/auth/auth-reducer.ts';
 import { UpdateExtraInfo } from '@/features/profile/components/EditExtraInfoForm/EditExtraInfoForm.tsx';
 import { PostType } from '@/features/profile/components/PostsBlock/Posts/Post/Post.tsx';
 import { UserPhotosType } from '@/features/users/users-reducer.ts';
+import { getCurrentData } from '@/common/utils/getCurrentData.ts';
 
 // _____ types
 
@@ -14,7 +15,6 @@ export type ProfileActionsType =
   | ReturnType<typeof setUpdatedProfile>
   | ReturnType<typeof unfollowOnProfile>
   | ReturnType<typeof followOnProfile>
-  | ReturnType<typeof updatePostTexAC>
   | ReturnType<typeof setUserProfile>
   | ReturnType<typeof removeLike>
   | ReturnType<typeof addPostAC>
@@ -22,6 +22,13 @@ export type ProfileActionsType =
   | ReturnType<typeof setLike>;
 
 type HandlingActions = ProfileActionsType | ReturnType<typeof userLoggedOut>;
+
+export type AddPostData = {
+  message: string;
+  userID: string;
+  name: string;
+  photo: string | null;
+};
 
 export type ContactsType = {
   facebook: string;
@@ -47,7 +54,6 @@ export type UserProfileType = {
 export type ProfilePageType = {
   profile: UserProfileType | null;
   postsData: PostType[];
-  newPostText: string;
   followingInProgress: boolean;
   followed: boolean;
   status: string;
@@ -92,7 +98,6 @@ const initState: ProfilePageType = {
       photo: '',
     },
   ],
-  newPostText: '',
   followingInProgress: false,
   followed: false,
   status: '',
@@ -103,15 +108,10 @@ export const ProfileReducer = (
   action: HandlingActions,
 ): ProfilePageType => {
   switch (action.type) {
-    case 'UPDATE-POST-TEXT':
-      return {
-        ...state,
-        newPostText: action.payload.changedPostText,
-      };
     case 'ADD-POST':
       const newPost: PostType = {
         id: v1(),
-        text: state.newPostText,
+        text: action.payload.message,
         likes: 0,
         myLike: false,
         time: action.payload.time,
@@ -123,7 +123,6 @@ export const ProfileReducer = (
 
       return {
         ...state,
-        newPostText: '',
         postsData: [newPost, ...state.postsData],
       };
     case 'SET-USER-PROFILE':
@@ -196,33 +195,15 @@ export const ProfileReducer = (
 
 // _____ actions
 
-export const updatePostTexAC = (changedPostText: string) =>
-  ({
-    type: 'UPDATE-POST-TEXT',
-    payload: { changedPostText },
-  }) as const;
-
-export const addPostAC = (userID: string, name: string, photo: string | null) => {
-  const formatter = new Intl.DateTimeFormat('ru', {
-    hour: 'numeric',
-    minute: 'numeric',
-  });
-  const time = `${formatter.format(new Date())}`;
-  const dateFormatter = new Intl.DateTimeFormat('en-GB', {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-  });
-  const date = `${dateFormatter.format(new Date())}`;
+export const addPostAC = (args: AddPostData) => {
+  const { time, date } = getCurrentData();
 
   return {
     type: 'ADD-POST',
     payload: {
       time,
       date,
-      userID,
-      name,
-      photo,
+      ...args,
     },
   } as const;
 };

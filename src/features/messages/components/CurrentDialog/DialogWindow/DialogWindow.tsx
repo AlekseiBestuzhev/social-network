@@ -1,14 +1,15 @@
 import { memo, useEffect, useRef } from 'react';
 
+import classNames from 'classnames';
+
 import picture from '@/assets/animate-images/dialog.gif';
 import pictureWebp from '@/assets/animate-images/dialog.webp';
 import { useAppSelector } from '@/common/hooks/useAppSelector.ts';
 import { SectionInfo } from '@/components/SectionInfo/SectionInfo';
+import { CurrentDialogProps } from '@/features/messages/components/CurrentDialog/CurrentDialog.tsx';
 import cls from '@/features/messages/components/CurrentDialog/DialogWindow/DialogWindow.module.scss';
 import { Message } from '@/features/messages/components/CurrentDialog/DialogWindow/Message/Message.tsx';
 import { messagesDataSelector } from '@/features/messages/selectors/messagesDataSelector';
-import { CurrentDialogProps } from '@/features/messages/components/CurrentDialog/CurrentDialog.tsx';
-import classNames from 'classnames';
 
 export type DialogWindowProps = {
   authUserId: string;
@@ -36,6 +37,7 @@ export const DialogWindow = memo(({ authUserId, userID }: DialogWindowProps) => 
       {messagesData.length ? (
         messagesData.map(({ id, ...rest }) => {
           const iSender = rest.userId === 'authUser' || rest.userId === authUserId;
+
           return <Message key={id} id={id} {...rest} iSender={iSender} chat={isChat} />;
         })
       ) : (

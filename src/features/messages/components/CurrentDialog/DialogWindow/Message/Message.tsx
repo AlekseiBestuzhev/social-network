@@ -2,9 +2,9 @@ import { memo } from 'react';
 
 import classNames from 'classnames';
 
+import { Avatar } from '@/components/Avatar/Avatar.tsx';
 import cls from '@/features/messages/components/CurrentDialog/DialogWindow/Message/Message.module.scss';
 import { MessageType } from '@/features/messages/messages-reducer';
-import { Avatar } from '@/components/Avatar/Avatar.tsx';
 
 type MessageProps = MessageType & {
   iSender: boolean;

@@ -3,7 +3,6 @@ import { describe, expect, test, beforeEach } from 'vitest';
 import {
   ProfilePageType,
   ProfileReducer,
-  updatePostTexAC,
   addPostAC,
   setUserProfile,
   setLike,
@@ -40,7 +39,6 @@ beforeEach(() => {
         photo: 'badman',
       },
     ],
-    newPostText: 'fff',
     followingInProgress: false,
     followed: false,
     status: '',
@@ -49,19 +47,19 @@ beforeEach(() => {
 
 describe('Profile Reducer', function () {
   test('new post should be added to start', () => {
-    const action = addPostAC('userID', 'name', 'photo');
+    const message = 'message text';
+    const authUser = 'auth_user';
+    const name = 'В. Меладзе';
+    const photo = null;
+
+    const action = addPostAC({ message, userID: authUser, name, photo });
     const newState = ProfileReducer(initialState, action);
 
-    expect(newState.postsData.length).toBe(3);
-    expect(newState.postsData[0].text).toBe(initialState.newPostText);
-    expect(newState.newPostText).toBe('');
-  });
-
-  test('new post text should be updated', () => {
-    const action = updatePostTexAC('Post text');
-    const newState = ProfileReducer(initialState, action);
-
-    expect(newState.newPostText).toBe(action.payload.changedPostText);
+    expect(newState.postsData).toHaveLength(3);
+    expect(newState.postsData[0].userID).toBe(authUser);
+    expect(newState.postsData[0].text).toBe(message);
+    expect(newState.postsData[0].name).toBe(name);
+    expect(newState.postsData[0].likes).toBe(0);
   });
 
   test('user profile should be set', () => {

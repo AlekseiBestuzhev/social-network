@@ -1,12 +1,6 @@
 import { describe, expect, it, beforeEach } from 'vitest';
 
-import {
-  addMessageAC,
-  MessagesReducer,
-  MessagesPageType,
-  setCurrentDialog,
-  updateMessageTextAC,
-} from './messages-reducer.ts';
+import { addMessageAC, MessagesReducer, MessagesPageType } from './messages-reducer.ts';
 
 let initialState: MessagesPageType;
 
@@ -16,63 +10,36 @@ beforeEach(() => {
       {
         id: 'local_meladze',
         name: 'В. Меладзе',
-        avatar: null,
+        photo: null,
       },
       {
         id: 'local_the-badman',
         name: 'The Badman',
-        avatar: null,
+        photo: null,
       },
     ],
     messagesData: {
       local_meladze: [],
       'local_the-badman': [],
     },
-    newMessageText: '',
-    currentDialog: 'local_meladze',
   };
 });
 
 describe('Messages Reducer', function () {
-  it('should update the message text', () => {
-    const newText = 'New message';
-
-    const action = updateMessageTextAC(newText);
-    const newState = MessagesReducer(initialState, action);
-
-    expect(newState.newMessageText).toBe(newText);
-    expect(newState.dialogsData).toEqual(initialState.dialogsData);
-    expect(newState.messagesData).toEqual(initialState.messagesData);
-    expect(newState.currentDialog).toEqual(initialState.currentDialog);
-  });
-
   it('should add a new message to the messages data', () => {
-    const userID = 'local_meladze';
-    const name = 'В. Меладзе';
+    const message = 'message text';
+    const authUser = 'auth_user';
+    const toUser = 'local_meladze';
+    const userName = 'В. Меладзе';
     const photo = null;
 
-    const action = addMessageAC(userID, name, photo);
+    const action = addMessageAC({ message, userId: authUser, userName, toUser, photo });
     const newState = MessagesReducer(initialState, action);
 
-    expect(newState.messagesData[userID]).toHaveLength(1);
-    expect(newState.messagesData[userID][0].userID).toBe(userID);
-    expect(newState.messagesData[userID][0].userName).toBe(name);
-    expect(newState.messagesData[userID][0].avatar).toBe(photo);
-
+    expect(newState.messagesData[toUser]).toHaveLength(1);
+    expect(newState.messagesData[toUser][0].id).toBe(toUser);
+    expect(newState.messagesData[toUser][0].userName).toBe(authUser);
+    expect(newState.messagesData[toUser][0].photo).toBe(photo);
     expect(newState.dialogsData).toEqual(initialState.dialogsData);
-    expect(newState.newMessageText).toEqual(initialState.newMessageText);
-    expect(newState.currentDialog).toEqual(initialState.currentDialog);
-  });
-
-  it('should set the current dialog', () => {
-    const userID = 'local_the-badman';
-
-    const action = setCurrentDialog(userID);
-    const newState = MessagesReducer(initialState, action);
-
-    expect(newState.currentDialog).toBe(userID);
-    expect(newState.dialogsData).toEqual(initialState.dialogsData);
-    expect(newState.messagesData).toEqual(initialState.messagesData);
-    expect(newState.newMessageText).toEqual(initialState.newMessageText);
   });
 });

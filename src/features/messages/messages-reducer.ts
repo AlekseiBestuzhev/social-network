@@ -223,6 +223,7 @@ export const setDevChatMessages = (messages: WebSocketMessage[]) => {
 
   const handledMessages = messages.map(el => ({
     ...el,
+    userId: el.userId.toString(),
     id: v1(),
     time: handledTime,
     date,

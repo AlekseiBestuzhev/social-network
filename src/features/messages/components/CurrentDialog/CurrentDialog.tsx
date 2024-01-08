@@ -30,8 +30,8 @@ export const CurrentDialog = memo(({ userID, socket }: CurrentDialogProps) => {
   const dispatch = useAppDispatch();
 
   const onSubmit = ({ message }: AddItemFormData) => {
-    if (userID === 'dev_chat' && socket) {
-      alert(message);
+    if (userID === 'dev_chat' && socket instanceof WebSocket) {
+      socket.send(message);
     } else if (authUserID && authUserName) {
       const messageData: AddMessageData = {
         message,

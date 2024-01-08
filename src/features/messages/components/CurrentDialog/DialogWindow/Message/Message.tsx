@@ -11,7 +11,7 @@ type MessageProps = MessageType & {
   chat: boolean;
 };
 
-export const Message = memo(({ message, iSender, time, chat, photo, userName, date }: MessageProps) => {
+export const Message = memo(({ message, iSender, time, chat, photo, userName }: MessageProps) => {
   const classes = classNames(cls.wrapper, { [cls.iSender]: iSender });
 
   return (
@@ -19,7 +19,7 @@ export const Message = memo(({ message, iSender, time, chat, photo, userName, da
       {chat && <Avatar photo={photo} size="3.2rem" />}
       {chat && <p className={cls.name}>{userName}</p>}
       <div className={cls.message}>{message}</div>
-      <p className={cls.time}>{time || date}</p>
+      <p className={cls.time}>{time}</p>
     </div>
   );
 });

@@ -12,18 +12,28 @@ import { useAppDispatch } from '@/common/hooks/useAppDispatch.ts';
 import { setDevChatMessages } from '@/features/messages/messages-reducer.ts';
 
 export const Messages = withAuthRedirect(() => {
-  const dispatch = useAppDispatch();
-  const { userID } = useParams();
-
   const [socket, setSocket] = useState<WebSocket | null>(null);
 
+  const dispatch = useAppDispatch();
+
+  const { userID } = useParams();
+
   useEffect(() => {
-    const socket = new WebSocket(`wss://social-network.samuraijs.com/handlers/ChatHandler.ashx`);
-    setSocket(socket);
+    if (!socket) {
+      const socket = new WebSocket(`wss://social-network.samuraijs.com/handlers/ChatHandler.ashx`);
+      setSocket(socket);
+    }
+
+    return () => {
+      if (socket) {
+        socket.close();
+        setSocket(null);
+      }
+    };
   }, []);
 
   if (socket instanceof WebSocket) {
-    socket.onmessage = (e: any) => {
+    socket.onmessage = (e: MessageEvent<string>) => {
       const messages = JSON.parse(e.data);
       dispatch(setDevChatMessages(messages));
     };
